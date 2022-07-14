@@ -38,10 +38,10 @@ const App: () => Node = () => {
 
   const showMenuDelayed=()=>{
     setTimeout(function(){
-      this.overlay.openMenu()
+      this.overlay.openLeaderboard()
       console.log("OPEN MENU")
       console.warn("OPEN MENU")
-    }, 5000);
+    }, 8000);
   }
 
   useEffect(() => {

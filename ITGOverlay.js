@@ -109,6 +109,13 @@ export default class ITGOverlay extends Component {
       [...args]
     );
   };
+  openLeaderboard = (...args) => {
+    UIManager.dispatchViewManagerCommand(
+      findNodeHandle(this.ref),
+      UIManager[COMPONENT_NAME].Commands.openLeaderboard,
+      [...args]
+    );
+  };
 }
 const itgStyles = StyleSheet.create({
   overlay: {
