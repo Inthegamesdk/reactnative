@@ -58,9 +58,10 @@ const App: () => Node = () => {
              }}                                      // Store reference
              onBuffer={this.onBuffer}                // Callback when remote video is buffering
              onError={this.videoError}               // Callback when video cannot be loaded
-             style={styles.video} />
+             style={styles.video}
+             resizeMode={"contain"} />
 
-             <ITGOverlay style={styles.video}
+             <ITGOverlay style={styles.overlay}
               accountName={"demos"}
               channelId={"soccer_predictions"}
               environment={"prod"}
@@ -83,14 +84,16 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "#000000",
     flex: 1,
+    width:'100%',
     // height: 100%
   },
   video: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    bottom: 0,
-    right: 0,
+    flex: 1,
+  },
+  overlay: {
+    flex: 1,
+    width: "30%",
+    margin: "100px"
   },
   highlight: {
     fontWeight: '700',
