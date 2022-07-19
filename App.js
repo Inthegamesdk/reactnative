@@ -38,15 +38,14 @@ const App: () => Node = () => {
 
   const showMenuDelayed=()=>{
     setTimeout(function(){
-      this.overlay.openLeaderboard()
       console.log("OPEN MENU")
-      console.warn("OPEN MENU")
-    }, 8000);
+      this.overlay.openLeaderboard()
+    }, 10000);
   }
 
   useEffect(() => {
     console.log("COMPONENT START")
-    // showMenuDelayed()
+    showMenuDelayed()
   }, []);
 
   return (
@@ -92,8 +91,6 @@ const styles = StyleSheet.create({
   },
   overlay: {
     flex: 1,
-    width: "30%",
-    margin: "100px"
   },
   highlight: {
     fontWeight: '700',

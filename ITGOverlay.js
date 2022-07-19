@@ -105,14 +105,21 @@ export default class ITGOverlay extends Component {
   openMenu = (...args) => {
     UIManager.dispatchViewManagerCommand(
       findNodeHandle(this.ref),
-      UIManager[COMPONENT_NAME].Commands.openMenu,
+      "openMenu",
       [...args]
     );
   };
   openLeaderboard = (...args) => {
     UIManager.dispatchViewManagerCommand(
       findNodeHandle(this.ref),
-      UIManager[COMPONENT_NAME].Commands.openLeaderboard,
+      "openLeaderboard",
+      [...args]
+    );
+  };
+  openAccount = (...args) => {
+    UIManager.dispatchViewManagerCommand(
+      findNodeHandle(this.ref),
+      "openAccount",
       [...args]
     );
   };
