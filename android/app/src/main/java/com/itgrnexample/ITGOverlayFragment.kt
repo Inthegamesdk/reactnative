@@ -15,6 +15,7 @@ import com.syncedapps.inthegametv.network.ITGEnvironment
 
 class ITGOverlayFragment: Fragment(), ITGOverlayView.ITGOverlayListener {
     var overlay: ITGOverlayView? = null
+    var settings = ITGOverlaySettings()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -23,34 +24,25 @@ class ITGOverlayFragment: Fragment(), ITGOverlayView.ITGOverlayListener {
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         val view = ITGOverlayView(requireContext())
-        view.load("soccer_predictions", "demos", ITGEnvironment.productionDefault)
+        view.load(settings.channelId,
+            settings.accountName,
+            settings.getEnvironment(),
+            settings.language,
+            settings.userBroadcasterForeignID,
+            settings.userInitialName)
+
         view.listener = this
+        view.blockMenu = settings.blockMenu
+        view.blockNotifications = settings.blockNotifications
+        view.blockSlip = settings.blockSlip
+        view.blockSidebar = settings.blockSidebar
+        view.injectionDelay = settings.injectionDelay
         overlay = view
 
         Handler(Looper.getMainLooper()).postDelayed({
             view.findViewById<LinearLayout>(R.id.menu)?.setBackgroundColor(parseColor("#66FF0000"))
             view.findViewById<LinearLayout>(R.id.sidebar)?.setBackgroundColor(parseColor("#550088FF"))
             view.findViewById<LinearLayout>(R.id.container)?.setBackgroundColor(parseColor("#44FFFF00"))
-
-//            val textView = TextView(reactContext)
-//            textView.text = "TEST TEST TEST TEST"
-//            textView.setTextColor(parseColor("#FFFFFF"))
-//            textView.setBackgroundColor(parseColor("#000000"))
-//            textView.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT)
-////            overlay.addView(textView)
-//            overlay.findViewById<LinearLayout>(R.id.container)?.addView(textView)
-//            overlay.findViewById<LinearLayout>(R.id.container)?.invalidate()
-//            textView.bringToFront()
-//            textView.visibility = View.VISIBLE
-//            textView.requestLayout()
-//            textView.post {
-//                textView.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT)
-//            }
-//            Log.i("OVERLAY", "ADDED TEXT VIEW")
-//
-//            Handler(Looper.getMainLooper()).postDelayed({
-//                Log.i("OVERLAY", "SIZE ${textView.measuredWidth}")
-//            }, 3000)
         }, 1000)
         return view
     }

@@ -67,7 +67,7 @@ const App: () => Node = () => {
               environment={"prod"}
               language={"en"}
               ref={e => this.overlay = e}
-              blockSidebar={false} />
+              blockSlip={false} />
 
     </SafeAreaView>
   );

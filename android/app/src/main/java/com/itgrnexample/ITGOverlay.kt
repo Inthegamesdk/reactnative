@@ -17,7 +17,29 @@ import com.facebook.react.uimanager.ViewManager
 import com.facebook.react.uimanager.annotations.ReactProp
 import com.syncedapps.inthegametv.ITGOverlayView
 import com.syncedapps.inthegametv.network.CloseOption
+import com.syncedapps.inthegametv.network.ITGEnvironment
 
+data class ITGOverlaySettings(
+    var accountName: String = "",
+    var channelId: String = "",
+    var language: String? = null,
+    var environment: String? = null,
+    var userBroadcasterForeignID: String? = null,
+    var userInitialName: String? = null,
+    var blockMenu: Boolean = false,
+    var blockNotifications: Boolean = false,
+    var blockSlip: Boolean = false,
+    var blockSidebar: Boolean = false,
+    var injectionDelay: Int? = null,
+) {
+    fun getEnvironment(): ITGEnvironment {
+        return when(environment) {
+            "prod" -> ITGEnvironment.productionDefault
+            "test" -> ITGEnvironment.testDefault
+            else -> ITGEnvironment.devDefault
+        }
+    }
+}
 
 class ITGOverlayPackage : ReactPackage {
     override fun createNativeModules(reactContext: ReactApplicationContext): MutableList<NativeModule> {
@@ -52,90 +74,54 @@ class ITGOverlayManager : ViewGroupManager<FrameLayout> {//, ITGOverlayView.ITGO
 //        return MapBuilder.of("create", COMMAND_CREATE)
 //    }
 
-    /**
-     * Handle "create" command (called from JS) and call createFragment method
-     */
-
-//    override fun createViewInstance(reactContext: ThemedReactContext): ITGOverlayView {
-//        val overlay = ITGOverlayView(reactContext!!, DesignType.DEFAULT)
-//        overlay.load("soccer_predictions", "demos", ITGEnvironment.productionDefault)
-//        overlay.listener = this
-//        overlayView = overlay
-//
-//        Handler(Looper.getMainLooper()).postDelayed({
-//            overlay.findViewById<LinearLayout>(R.id.menu)?.setBackgroundColor(parseColor("#66FF0000"))
-//            overlay.findViewById<LinearLayout>(R.id.sidebar)?.setBackgroundColor(parseColor("#550088FF"))
-//            overlay.findViewById<LinearLayout>(R.id.container)?.setBackgroundColor(parseColor("#44FFFF00"))
-//
-//            val textView = TextView(reactContext)
-//            textView.text = "TEST TEST TEST TEST"
-//            textView.setTextColor(parseColor("#FFFFFF"))
-//            textView.setBackgroundColor(parseColor("#000000"))
-//            textView.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT)
-////            overlay.addView(textView)
-//            overlay.findViewById<LinearLayout>(R.id.container)?.addView(textView)
-//            overlay.findViewById<LinearLayout>(R.id.container)?.invalidate()
-//            textView.bringToFront()
-//            textView.visibility = View.VISIBLE
-//            textView.requestLayout()
-//            textView.post {
-//                textView.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT)
-//            }
-//            Log.i("OVERLAY", "ADDED TEXT VIEW")
-//
-//            Handler(Looper.getMainLooper()).postDelayed({
-//                Log.i("OVERLAY", "SIZE ${textView.measuredWidth}")
-//            }, 3000)
-//        }, 1000)
-//
-//        return overlay
-//    }
+    var settings = ITGOverlaySettings()
 
     @ReactProp(name = "accountName")
-    fun FrameLayout.setAccountName(value: String = "") {
-//        broadcasterName = value
-    }
-    @ReactProp(name = "channelId")
-    fun FrameLayout.setChannelId(value: String = "") {
-//        broadcasterName = value
-    }
-    @ReactProp(name = "language")
-    fun FrameLayout.setLanguage(value: String = "") {
-//        broadcasterName = value
-    }
-    @ReactProp(name = "environment")
-    fun FrameLayout.setEnvironment(value: String = "") {
-//        broadcasterName = value
-    }
-    @ReactProp(name = "userBroadcasterForeignID")
-    fun FrameLayout.setUserBroadcasterForeignID(value: String = "") {
-//        broadcasterName = value
-    }
-    @ReactProp(name = "userInitialName")
-    fun FrameLayout.setUserInitialName(value: String = "") {
-//        broadcasterName = value
+    fun setAccountName(view: FrameLayout, value: String = "") {
+        settings.accountName = value
     }
 
-//    @ReactProp(name = "blockMenu")
-//    fun ITGOverlayView.setBlockMenu(value: Boolean = false) {
-//        blockMenu = value
-//    }
-//    @ReactProp(name = "blockNotifications")
-//    fun ITGOverlayView.setBlockNotifications(value: Boolean = false) {
-//        blockNotifications = value
-//    }
-//    @ReactProp(name = "blockSlip")
-//    fun ITGOverlayView.setBlockSlip(value: Boolean = false) {
-//        blockSlip = value
-//    }
-//    @ReactProp(name = "blockSidebar")
-//    fun ITGOverlayView.setBlockSidebar(value: Boolean = false) {
-//        blockSidebar = value
-//    }
-//    @ReactProp(name = "injectionDelay")
-//    fun ITGOverlayView.setInjectionDelay(value: Int = 0) {
-//        injectionDelay = value
-//    }
+    @ReactProp(name = "channelId")
+    fun setChannelId(view: FrameLayout, value: String = "") {
+        settings.channelId = value
+    }
+    @ReactProp(name = "language")
+    fun setLanguage(view: FrameLayout, value: String = "") {
+        settings.language = value
+    }
+    @ReactProp(name = "environment")
+    fun setEnvironment(view: FrameLayout, value: String = "") {
+        settings.environment = value
+    }
+    @ReactProp(name = "userBroadcasterForeignID")
+    fun setUserBroadcasterForeignID(view: FrameLayout, value: String = "") {
+        settings.userBroadcasterForeignID = value
+    }
+    @ReactProp(name = "userInitialName")
+    fun setUserInitialName(view: FrameLayout, value: String = "") {
+        settings.userInitialName = value
+    }
+
+    @ReactProp(name = "blockMenu")
+    fun setBlockMenu(view: FrameLayout, value: Boolean = false) {
+        settings.blockMenu = value
+    }
+    @ReactProp(name = "blockNotifications")
+    fun setBlockNotifications(view: FrameLayout, value: Boolean = false) {
+        settings.blockNotifications = value
+    }
+    @ReactProp(name = "blockSlip")
+    fun setBlockSlip(view: FrameLayout, value: Boolean = false) {
+        settings.blockSlip = value
+    }
+    @ReactProp(name = "blockSidebar")
+    fun setBlockSidebar(view: FrameLayout, value: Boolean = false) {
+        settings.blockSidebar = value
+    }
+    @ReactProp(name = "injectionDelay")
+    fun setInjectionDelay(view: FrameLayout, value: Int = 0) {
+        settings.injectionDelay = value
+    }
 
 //    @ReactMethod
 //    fun openLeaderboard() {
@@ -153,13 +139,14 @@ class ITGOverlayManager : ViewGroupManager<FrameLayout> {//, ITGOverlayView.ITGO
     override fun receiveCommand(root: FrameLayout, commandId: String?, args: ReadableArray?) {
         super.receiveCommand(root, commandId, args)
         when (commandId) {
+            "openLeaderboard" -> overlayView?.openLeaderboard()
+            "openMenu" -> overlayView?.openMenu()
+            "openAccount" -> overlayView?.openAccount()
             COMMAND_CREATE -> {
                 val viewID = args?.getInt(0) ?: 0
                 createFragment(root, viewID)
             }
-//            "openLeaderboard" -> root.openLeaderboard()
-//            "openMenu" -> root.openMenu()
-//            "openAccount" -> root.openAccount()
+
 
         }
     }
@@ -176,11 +163,13 @@ class ITGOverlayManager : ViewGroupManager<FrameLayout> {//, ITGOverlayView.ITGO
     fun createFragment(root: FrameLayout, viewID: Int) {
         val parentView: ViewGroup = root.findViewById<View>(viewID) as ViewGroup
         setupLayout(parentView, root)
-        val myFragment = ITGOverlayFragment()
+        val fragment = ITGOverlayFragment()
+        fragment.settings = settings
+        overlayView = fragment.overlay
         val activity: FragmentActivity = reactContext!!.getCurrentActivity() as FragmentActivity
         activity.getSupportFragmentManager()
             .beginTransaction()
-            .replace(viewID, myFragment, viewID.toString())
+            .replace(viewID, fragment, viewID.toString())
             .commit()
     }
 
