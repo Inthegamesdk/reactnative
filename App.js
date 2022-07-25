@@ -45,6 +45,7 @@ const App: () => Node = () => {
 
   useEffect(() => {
     console.log("COMPONENT START")
+    this.overlay.createFragment()
     showMenuDelayed()
   }, []);
 

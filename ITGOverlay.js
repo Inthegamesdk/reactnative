@@ -80,6 +80,7 @@ export default class ITGOverlay extends Component {
     }
   };
 
+
   render() {
     console.log("OVERLAY RENDER")
     const { accountName, channelId, language, environment, userBroadcasterForeignID, userInitialName, blockSlip, blockMenu, blockSidebar, blockNotifications, injectionDelay, style } = this.props;
@@ -102,6 +103,14 @@ export default class ITGOverlay extends Component {
       />
     );
   }
+
+  createFragment = (...args) =>
+  UIManager.dispatchViewManagerCommand(
+    findNodeHandle(this.ref),
+    "create",
+    [findNodeHandle(this.ref)]
+  );
+
   openMenu = (...args) => {
     UIManager.dispatchViewManagerCommand(
       findNodeHandle(this.ref),
