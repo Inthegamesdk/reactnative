@@ -39,13 +39,21 @@ const App: () => Node = () => {
   const showMenuDelayed=()=>{
     setTimeout(function(){
       console.log("OPEN MENU")
-      this.overlay.openLeaderboard()
-    }, 10000);
+      this.overlay.openMenu()
+    }, 8000);
+      setTimeout(function(){
+        console.log("OPEN SHOP")
+        this.overlay.openShop()
+      }, 10000);
+        setTimeout(function(){
+          console.log("CLOSE SHOP")
+          this.overlay.closeShop()
+        }, 14000);
   }
 
   useEffect(() => {
     console.log("COMPONENT START")
-    this.overlay.createFragment()
+    this.overlay.setup()
     showMenuDelayed()
   }, []);
 
@@ -66,8 +74,8 @@ const App: () => Node = () => {
               channelId={"soccer_predictions"}
               environment={"prod"}
               language={"en"}
-              ref={e => this.overlay = e}
-              blockSlip={false} />
+              blockSlip={false}
+              ref={e => this.overlay = e}/>
 
     </SafeAreaView>
   );

@@ -51,28 +51,15 @@ class ITGOverlayPackage : ReactPackage {
     }
 }
 
-class ITGOverlayManager : ViewGroupManager<FrameLayout> {//, ITGOverlayView.ITGOverlayListener {
+class ITGOverlayManager : ViewGroupManager<FrameLayout>, ITGOverlayView.ITGOverlayListener {
 
     override fun getName() = "ITGOverlay"
-    val COMMAND_CREATE = "create"
 
     private var overlayView: ITGOverlayView? = null
-//    private var videoId: String? = null
-
-//    @ReactProp(name = "videoId")
-//    fun setVideoId(view: ITGOverlayView, newId: String?) {
-//        if (newId == null || newId == videoId) return
-//        videoId = newId
-//        ytPlayerView?.loadVideo(newId, 0f)
-//    }
 
     override fun createViewInstance(reactContext: ThemedReactContext): FrameLayout {
         return FrameLayout(reactContext!!)
     }
-
-//    override fun getCommandsMap(): Map<String?, Int?>? {
-//        return MapBuilder.of("create", COMMAND_CREATE)
-//    }
 
     var settings = ITGOverlaySettings()
 
@@ -123,31 +110,28 @@ class ITGOverlayManager : ViewGroupManager<FrameLayout> {//, ITGOverlayView.ITGO
         settings.injectionDelay = value
     }
 
-//    @ReactMethod
-//    fun openLeaderboard() {
-//        overlayView?.openLeaderboard()
-//    }
-
-//    override fun receiveCommand(root: FrameLayout, commandId: Int, args: ReadableArray?) {
-//        super.receiveCommand(root, commandId, args)
-//        val commandIdInt = commandId?.toInt()
-//        if (commandIdInt == COMMAND_CREATE) {
-//            val viewID = args?.getInt(0) ?: 0
-//            createFragment(root, viewID)
-//        }
-//    }
     override fun receiveCommand(root: FrameLayout, commandId: String?, args: ReadableArray?) {
         super.receiveCommand(root, commandId, args)
         when (commandId) {
-            "openLeaderboard" -> overlayView?.openLeaderboard()
             "openMenu" -> overlayView?.openMenu()
             "openAccount" -> overlayView?.openAccount()
-            COMMAND_CREATE -> {
+            "openLeaderboard" -> overlayView?.openLeaderboard()
+            "openShop" -> overlayView?.openShop()
+            "openChat" -> overlayView?.openAccount()
+            "openPredictions " -> overlayView?.openAccount()
+            "closeMenu" -> overlayView?.closeMenu()
+            "closeAccount" -> overlayView?.closeAccount()
+            "closeLeaderboard" -> overlayView?.closeLeaderboard()
+            "closePredictions" -> overlayView?.closePredictions()
+            "closeShop" -> overlayView?.closeShop()
+            "closeChat" -> overlayView?.closeChat()
+            "videoPlaying" -> overlayView?.videoPlaying((args?.getInt(0) ?: 0).toLong())
+            "videoPaused" -> overlayView?.videoPaused()
+            "setLiveMode" -> overlayView?.setLiveMode(args?.getBoolean(0) ?: true)
+            "setup" -> {
                 val viewID = args?.getInt(0) ?: 0
                 createFragment(root, viewID)
             }
-
-
         }
     }
 
@@ -165,12 +149,17 @@ class ITGOverlayManager : ViewGroupManager<FrameLayout> {//, ITGOverlayView.ITGO
         setupLayout(parentView, root)
         val fragment = ITGOverlayFragment()
         fragment.settings = settings
-        overlayView = fragment.overlay
+        fragment.tempManagerRef = this
+
         val activity: FragmentActivity = reactContext!!.getCurrentActivity() as FragmentActivity
         activity.getSupportFragmentManager()
             .beginTransaction()
             .replace(viewID, fragment, viewID.toString())
             .commit()
+    }
+
+    fun setOverlay(overlay: ITGOverlayView) {
+        overlayView = overlay
     }
 
     fun setupLayout(view: View, root: FrameLayout?) {
@@ -197,63 +186,50 @@ class ITGOverlayManager : ViewGroupManager<FrameLayout> {//, ITGOverlayView.ITGO
         view.layout(0, 0, width, height)
     }
 
-//    override fun receiveCommand(
-//        view: ITGOverlayView,
-//        commandId: String?,
-//        args: ReadableArray?
-//    ) {
-//        super.receiveCommand(view, commandId, args)
-//
-//    }
     //add methods!!!
-//    override fun overlayClickedUserArea() {
-//    }
-//
-//    override fun overlayClosedByUser(type: CloseOption, timestamp: Long) {
-//    }
-//
-//    override fun overlayDidHideSidebar() {
-//    }
-//
-//    override fun overlayDidShowSidebar() {
-//    }
-//
-//    override fun overlayDidTapVideo() {
-//    }
-//
-//    override fun overlayReleasedFocus(popMessage: Boolean) {
-//    }
-//
-//    override fun overlayRequestedFocus(focusView: View) {
-//    }
-//
-//    override fun overlayRequestedPause() {
-//    }
-//
-//    override fun overlayRequestedPlay() {
-//    }
-//
-//    override fun overlayRequestedPortraitTopGap(): Int {
-//        return 0
-//    }
-//
-//    override fun overlayRequestedVideoTime() {
-//    }
-//
-//    override fun overlayResetVideoHeight() {
-//    }
-//
-//    override fun overlayResetVideoWidth() {
-//    }
-//
-//    override fun overlayResizeVideoHeight(activityHeight: Float) {
-//    }
-//
-//    override fun overlayResizeVideoWidth(activityWidth: Float) {
-//    }
+    override fun overlayClickedUserArea() {
+    }
 
+    override fun overlayClosedByUser(type: CloseOption, timestamp: Long) {
+    }
+
+    override fun overlayDidHideSidebar() {
+    }
+
+    override fun overlayDidShowSidebar() {
+    }
+
+    override fun overlayDidTapVideo() {
+    }
+
+    override fun overlayReleasedFocus(popMessage: Boolean) {
+    }
+
+    override fun overlayRequestedFocus(focusView: View) {
+    }
+
+    override fun overlayRequestedPause() {
+    }
+
+    override fun overlayRequestedPlay() {
+    }
+
+    override fun overlayRequestedPortraitTopGap(): Int {
+        return 0
+    }
+
+    override fun overlayRequestedVideoTime() {
+    }
+
+    override fun overlayResetVideoHeight() {
+    }
+
+    override fun overlayResetVideoWidth() {
+    }
+
+    override fun overlayResizeVideoHeight(activityHeight: Float) {
+    }
+
+    override fun overlayResizeVideoWidth(activityWidth: Float) {
+    }
 }
-
-//class ITGOverlay(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {
-//    override fun getName() = "ITGOverlay"
-//}

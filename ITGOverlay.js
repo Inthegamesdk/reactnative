@@ -104,10 +104,10 @@ export default class ITGOverlay extends Component {
     );
   }
 
-  createFragment = (...args) =>
+  setup = (...args) =>
   UIManager.dispatchViewManagerCommand(
     findNodeHandle(this.ref),
-    "create",
+    "setup",
     [findNodeHandle(this.ref)]
   );
 
@@ -118,13 +118,6 @@ export default class ITGOverlay extends Component {
       [...args]
     );
   };
-  openLeaderboard = (...args) => {
-    UIManager.dispatchViewManagerCommand(
-      findNodeHandle(this.ref),
-      "openLeaderboard",
-      [...args]
-    );
-  };
   openAccount = (...args) => {
     UIManager.dispatchViewManagerCommand(
       findNodeHandle(this.ref),
@@ -132,6 +125,99 @@ export default class ITGOverlay extends Component {
       [...args]
     );
   };
+  openLeaderboard = (...args) => {
+    UIManager.dispatchViewManagerCommand(
+      findNodeHandle(this.ref),
+      "openLeaderboard",
+      [...args]
+    );
+  };
+  openShop = (...args) => {
+    UIManager.dispatchViewManagerCommand(
+      findNodeHandle(this.ref),
+      "openShop",
+      [...args]
+    );
+  };
+  openChat = (...args) => {
+    UIManager.dispatchViewManagerCommand(
+      findNodeHandle(this.ref),
+      "openChat",
+      [...args]
+    );
+  };
+  openPredictions = (...args) => {
+    UIManager.dispatchViewManagerCommand(
+      findNodeHandle(this.ref),
+      "openPredictions",
+      [...args]
+    );
+  };
+  closeMenu = (...args) => {
+    UIManager.dispatchViewManagerCommand(
+      findNodeHandle(this.ref),
+      "closeMenu",
+      [...args]
+    );
+  };
+  closeAccount = (...args) => {
+    UIManager.dispatchViewManagerCommand(
+      findNodeHandle(this.ref),
+      "closeAccount",
+      [...args]
+    );
+  };
+  closeLeaderboard = (...args) => {
+    UIManager.dispatchViewManagerCommand(
+      findNodeHandle(this.ref),
+      "closeLeaderboard",
+      [...args]
+    );
+  };
+  closePredictions = (...args) => {
+    UIManager.dispatchViewManagerCommand(
+      findNodeHandle(this.ref),
+      "closePredictions",
+      [...args]
+    );
+  };
+  closeShop = (...args) => {
+    UIManager.dispatchViewManagerCommand(
+      findNodeHandle(this.ref),
+      "closeShop",
+      [...args]
+    );
+  };
+  closeChat = (...args) => {
+    UIManager.dispatchViewManagerCommand(
+      findNodeHandle(this.ref),
+      "closeChat",
+      [...args]
+    );
+  };
+  videoPlaying = (time) => {
+    UIManager.dispatchViewManagerCommand(
+      findNodeHandle(this.ref),
+      "videoPlaying",
+      [time]
+    );
+  };
+  videoPaused = (...args) => {
+    UIManager.dispatchViewManagerCommand(
+      findNodeHandle(this.ref),
+      "videoPaused",
+      [...args]
+    );
+  };
+  setLiveMode = (enabled) => {
+    UIManager.dispatchViewManagerCommand(
+      findNodeHandle(this.ref),
+      "setLiveMode",
+      [enabled]
+    );
+  };
+
+
 }
 const itgStyles = StyleSheet.create({
   overlay: {
