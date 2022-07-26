@@ -23,60 +23,60 @@ export default class ITGOverlay extends Component {
     blockSlip: PropTypes.bool,
     blockSidebar: PropTypes.bool,
     injectionDelay: PropTypes.number,
-    overlayRequestedVideoTime: PropTypes.func,
-    overlayRequestedPause: PropTypes.func,
-    overlayRequestedPlay: PropTypes.func,
-    overlayRequestedFocus: PropTypes.func,
-    overlayReleasedFocus: PropTypes.func,
-    overlayResizeVideoWidth: PropTypes.func,
-    overlayResetVideoWidth: PropTypes.func,
-    overlayResizeVideoHeight: PropTypes.func,
-    overlayResetVideoHeight: PropTypes.func
+    onOverlayRequestedVideoTime: PropTypes.func,
+    onOverlayRequestedPause: PropTypes.func,
+    onOverlayRequestedPlay: PropTypes.func,
+    onOverlayRequestedFocus: PropTypes.func,
+    onOverlayReleasedFocus: PropTypes.func,
+    onOverlayResizeVideoWidth: PropTypes.func,
+    onOverlayResetVideoWidth: PropTypes.func,
+    onOverlayResizeVideoHeight: PropTypes.func,
+    onOverlayResetVideoHeight: PropTypes.func
   };
 
-  _overlayRequestedVideoTime = event => {
-    if (this.props.overlayRequestedVideoTime) {
-      this.props.overlayRequestedVideoTime(event.nativeEvent);
+  _onOverlayRequestedVideoTime = event => {
+    if (this.props.onOverlayRequestedVideoTime) {
+      this.props.onOverlayRequestedVideoTime(event.nativeEvent);
     }
   };
-  _overlayRequestedPause = event => {
-    if (this.props.overlayRequestedPause) {
-      this.props.overlayRequestedPause(event.nativeEvent);
+  _onOverlayRequestedPause = event => {
+    if (this.props.onOverlayRequestedPause) {
+      this.props.onOverlayRequestedPause(event.nativeEvent);
     }
   };
-  _overlayRequestedPlay = event => {
-    if (this.props.overlayRequestedPlay) {
-      this.props.overlayRequestedPlay(event.nativeEvent);
+  _onOverlayRequestedPlay = event => {
+    if (this.props.onOverlayRequestedPlay) {
+      this.props.onOverlayRequestedPlay(event.nativeEvent);
     }
   };
-  _overlayRequestedFocus = event => {
-    if (this.props.overlayRequestedFocus) {
-      this.props.overlayRequestedFocus(event.nativeEvent);
+  _onOverlayRequestedFocus = event => {
+    if (this.props.onOverlayRequestedFocus) {
+      this.props.onOverlayRequestedFocus(event.nativeEvent);
     }
   };
-  _overlayReleasedFocus = event => {
-    if (this.props.overlayReleasedFocus) {
-      this.props.overlayReleasedFocus(event.nativeEvent);
+  _onOverlayReleasedFocus = event => {
+    if (this.props.onOverlayReleasedFocus) {
+      this.props.onOverlayReleasedFocus(event.nativeEvent);
     }
   };
-  _overlayResizeVideoWidth = event => {
-    if (this.props.overlayResizeVideoWidth) {
-      this.props.overlayResizeVideoWidth(event.nativeEvent);
+  _onOverlayResizeVideoWidth = event => {
+    if (this.props.onOverlayResizeVideoWidth) {
+      this.props.onOverlayResizeVideoWidth(event.nativeEvent);
     }
   };
-  _overlayResetVideoWidth = event => {
-    if (this.props.overlayResetVideoWidth) {
-      this.props.overlayResetVideoWidth(event.nativeEvent);
+  _onOverlayResetVideoWidth = event => {
+    if (this.props.onOverlayResetVideoWidth) {
+      this.props.onOverlayResetVideoWidth(event.nativeEvent);
     }
   };
-  _overlayResizeVideoHeight = event => {
-    if (this.props.overlayResizeVideoHeight) {
-      this.props.overlayResizeVideoHeight(event.nativeEvent);
+  _onOverlayResizeVideoHeight = event => {
+    if (this.props.onOverlayResizeVideoHeight) {
+      this.props.onOverlayResizeVideoHeight(event.nativeEvent);
     }
   };
-  _overlayResetVideoHeight = event => {
-    if (this.props.overlayResetVideoHeight) {
-      this.props.overlayResetVideoHeight(event.nativeEvent);
+  _onOverlayResetVideoHeight = event => {
+    if (this.props.onOverlayResetVideoHeight) {
+      this.props.onOverlayResetVideoHeight(event.nativeEvent);
     }
   };
 
@@ -99,7 +99,15 @@ export default class ITGOverlay extends Component {
       blockNotifications={blockNotifications}
       injectionDelay={injectionDelay}
       ref={ref => this.ref = ref}
-      overlayRequestedVideoTime={this._overlayRequestedVideoTime}
+      onOverlayRequestedVideoTime={this._onOverlayRequestedVideoTime}
+      onOverlayRequestedPause={this._onOverlayRequestedPause}
+      onOverlayRequestedPlay={this._onOverlayRequestedPlay}
+      onOverlayRequestedFocus={this._onOverlayRequestedFocus}
+      onOverlayReleasedFocus={this._onOverlayReleasedFocus}
+      onOverlayResizeVideoWidth={this._onOverlayResizeVideoWidth}
+      onOverlayResetVideoWidth={this._onOverlayResetVideoWidth}
+      onOverlayResizeVideoHeight={this._onOverlayResizeVideoHeight}
+      onOverlayResetVideoHeight={this._onOverlayResetVideoHeight}
       />
     );
   }

@@ -57,6 +57,32 @@ const App: () => Node = () => {
     showMenuDelayed()
   }, []);
 
+
+  onOverlayRequestedVideoTime = e => {
+    console.log("REQUEST VIDEO TIME")
+    // this.overlay.time
+  }
+  onOverlayRequestedPlay = e => {
+  }
+  onOverlayRequestedPause = e => {
+  }
+  onOverlayRequestedFocus = e => {
+  }
+  onOverlayReleasedFocus = e => {
+  }
+  onOverlayResizeVideoWidth = e => {
+    console.log("RESIZE VIDEO WIDTH " + e.activityWidth.toString())
+  }
+  onOverlayResetVideoWidth = e => {
+    console.log("RESET VIDEO WIDTH")
+  }
+  onOverlayResizeVideoHeight = e => {
+    console.log("RESIZE VIDEO HEIGHT " + e.activityHeight.toString())
+  }
+  onOverlayResetVideoHeight = e => {
+    console.log("RESET VIDEO HEIGHT")
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle={'light-content'} />
@@ -75,7 +101,16 @@ const App: () => Node = () => {
               environment={"prod"}
               language={"en"}
               blockSlip={false}
-              ref={e => this.overlay = e}/>
+              ref={e => this.overlay = e}
+              onOverlayRequestedVideoTime={this.onOverlayRequestedVideoTime}
+              onOverlayRequestedPlay={this.onOverlayRequestedPlay}
+              onOverlayRequestedPause={this.onOverlayRequestedPause}
+              onOverlayRequestedFocus={this.onOverlayRequestedFocus}
+              onOverlayReleasedFocus={this.onOverlayReleasedFocus}
+              onOverlayResizeVideoWidth={this.onOverlayResizeVideoWidth}
+              onOverlayResetVideoWidth={this.onOverlayResetVideoWidth}
+              onOverlayResizeVideoHeight={this.onOverlayResizeVideoHeight}
+              onOverlayResetVideoHeight={this.onOverlayResetVideoHeight}/>
 
     </SafeAreaView>
   );

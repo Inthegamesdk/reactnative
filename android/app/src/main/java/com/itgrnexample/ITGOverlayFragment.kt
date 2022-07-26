@@ -48,7 +48,6 @@ class ITGOverlayFragment: Fragment() {
         view.listener = tempManagerRef
         tempManagerRef?.setOverlay(view)
         tempManagerRef = null
-
         return view
     }
 

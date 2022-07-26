@@ -6,15 +6,13 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.fragment.app.FragmentActivity
 import com.facebook.react.ReactPackage
-import com.facebook.react.bridge.NativeModule
-import com.facebook.react.bridge.ReactApplicationContext
-import com.facebook.react.bridge.ReadableArray
+import com.facebook.react.bridge.*
 import com.facebook.react.common.MapBuilder
-import com.facebook.react.uimanager.ReactShadowNode
-import com.facebook.react.uimanager.ThemedReactContext
-import com.facebook.react.uimanager.ViewGroupManager
-import com.facebook.react.uimanager.ViewManager
+import com.facebook.react.modules.core.DeviceEventManagerModule
+import com.facebook.react.uimanager.*
 import com.facebook.react.uimanager.annotations.ReactProp
+import com.facebook.react.uimanager.events.RCTEventEmitter
+import com.facebook.react.uimanager.events.RCTModernEventEmitter
 import com.syncedapps.inthegametv.ITGOverlayView
 import com.syncedapps.inthegametv.network.CloseOption
 import com.syncedapps.inthegametv.network.ITGEnvironment
@@ -61,6 +59,7 @@ class ITGOverlayManager : ViewGroupManager<FrameLayout>, ITGOverlayView.ITGOverl
         return FrameLayout(reactContext!!)
     }
 
+    var viewID: Int = 0
     var settings = ITGOverlaySettings()
 
     @ReactProp(name = "accountName")
@@ -72,18 +71,22 @@ class ITGOverlayManager : ViewGroupManager<FrameLayout>, ITGOverlayView.ITGOverl
     fun setChannelId(view: FrameLayout, value: String = "") {
         settings.channelId = value
     }
+
     @ReactProp(name = "language")
     fun setLanguage(view: FrameLayout, value: String = "") {
         settings.language = value
     }
+
     @ReactProp(name = "environment")
     fun setEnvironment(view: FrameLayout, value: String = "") {
         settings.environment = value
     }
+
     @ReactProp(name = "userBroadcasterForeignID")
     fun setUserBroadcasterForeignID(view: FrameLayout, value: String = "") {
         settings.userBroadcasterForeignID = value
     }
+
     @ReactProp(name = "userInitialName")
     fun setUserInitialName(view: FrameLayout, value: String = "") {
         settings.userInitialName = value
@@ -93,18 +96,22 @@ class ITGOverlayManager : ViewGroupManager<FrameLayout>, ITGOverlayView.ITGOverl
     fun setBlockMenu(view: FrameLayout, value: Boolean = false) {
         settings.blockMenu = value
     }
+
     @ReactProp(name = "blockNotifications")
     fun setBlockNotifications(view: FrameLayout, value: Boolean = false) {
         settings.blockNotifications = value
     }
+
     @ReactProp(name = "blockSlip")
     fun setBlockSlip(view: FrameLayout, value: Boolean = false) {
         settings.blockSlip = value
     }
+
     @ReactProp(name = "blockSidebar")
     fun setBlockSidebar(view: FrameLayout, value: Boolean = false) {
         settings.blockSidebar = value
     }
+
     @ReactProp(name = "injectionDelay")
     fun setInjectionDelay(view: FrameLayout, value: Int = 0) {
         settings.injectionDelay = value
@@ -141,6 +148,7 @@ class ITGOverlayManager : ViewGroupManager<FrameLayout>, ITGOverlayView.ITGOverl
     constructor(reactContext: ReactApplicationContext?) {
         this.reactContext = reactContext
     }
+
     /**
      * Replace your React Native view with a custom fragment
      */
@@ -150,12 +158,12 @@ class ITGOverlayManager : ViewGroupManager<FrameLayout>, ITGOverlayView.ITGOverl
         val fragment = ITGOverlayFragment()
         fragment.settings = settings
         fragment.tempManagerRef = this
-
         val activity: FragmentActivity = reactContext!!.getCurrentActivity() as FragmentActivity
         activity.getSupportFragmentManager()
             .beginTransaction()
             .replace(viewID, fragment, viewID.toString())
             .commit()
+        this.viewID = viewID
     }
 
     fun setOverlay(overlay: ITGOverlayView) {
@@ -186,50 +194,102 @@ class ITGOverlayManager : ViewGroupManager<FrameLayout>, ITGOverlayView.ITGOverl
         view.layout(0, 0, width, height)
     }
 
+
+    override fun getExportedCustomDirectEventTypeConstants(): MutableMap<String, Any>? {
+        var map = super.getExportedCustomDirectEventTypeConstants() ?: mutableMapOf()
+        map["onOverlayDidHideSidebar"] =
+            MapBuilder.of("registrationName", "onOverlayDidHideSidebar")
+        map["onOverlayDidShowSidebar"] =
+            MapBuilder.of("registrationName", "onOverlayDidShowSidebar")
+        map["onOverlayDidTapVideo"] =
+            MapBuilder.of("registrationName", "onOverlayDidTapVideo")
+        map["onOverlayReleasedFocus"] =
+            MapBuilder.of("registrationName", "onOverlayReleasedFocus")
+        map["onOverlayRequestedFocus"] =
+            MapBuilder.of("registrationName", "onOverlayRequestedFocus")
+        map["onOverlayRequestedPause"] =
+            MapBuilder.of("registrationName", "onOverlayRequestedPause")
+        map["onOverlayRequestedPlay"] =
+            MapBuilder.of("registrationName", "onOverlayRequestedPlay")
+        map["onOverlayRequestedVideoTime"] =
+            MapBuilder.of("registrationName", "onOverlayRequestedVideoTime")
+        map["onOverlayResizeVideoHeight"] =
+            MapBuilder.of("registrationName", "onOverlayResizeVideoHeight")
+        map["onOverlayResizeVideoWidth"] =
+            MapBuilder.of("registrationName", "onOverlayResizeVideoWidth")
+        map["onOverlayResetVideoHeight"] =
+            MapBuilder.of("registrationName", "onOverlayResetVideoHeight")
+        map["onOverlayResetVideoWidth"] =
+            MapBuilder.of("registrationName", "onOverlayResetVideoWidth")
+        return map
+    }
+
+    private fun sendEvent(reactContext: ReactContext?, eventName: String, params: WritableMap?) {
+        val context = reactContext ?: return
+//        context
+//            .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
+//            .emit(eventName, params)
+        context
+            .getJSModule(RCTEventEmitter::class.java)
+            ?.receiveEvent(viewID, eventName, params)
+//        val dispatcher = UIManagerHelper.getEventDispatcher(context, viewID)
+//        dispatcher.dispat
+    }
+
     //add methods!!!
-    override fun overlayClickedUserArea() {
-    }
-
-    override fun overlayClosedByUser(type: CloseOption, timestamp: Long) {
-    }
-
     override fun overlayDidHideSidebar() {
+        sendEvent(reactContext, "onOverlayDidHideSidebar", Arguments.createMap())
     }
 
     override fun overlayDidShowSidebar() {
+        sendEvent(reactContext, "onOverlayDidShowSidebar", Arguments.createMap())
     }
 
     override fun overlayDidTapVideo() {
+        sendEvent(reactContext, "onOverlayDidTapVideo", Arguments.createMap())
     }
 
     override fun overlayReleasedFocus(popMessage: Boolean) {
+        sendEvent(reactContext, "onOverlayReleasedFocus", Arguments.createMap())
     }
 
     override fun overlayRequestedFocus(focusView: View) {
+        sendEvent(reactContext, "onOverlayRequestedFocus", Arguments.createMap())
     }
 
     override fun overlayRequestedPause() {
+        sendEvent(reactContext, "onOverlayRequestedPause", Arguments.createMap())
     }
 
     override fun overlayRequestedPlay() {
-    }
-
-    override fun overlayRequestedPortraitTopGap(): Int {
-        return 0
+        sendEvent(reactContext, "onOverlayRequestedPlay", Arguments.createMap())
     }
 
     override fun overlayRequestedVideoTime() {
+        sendEvent(reactContext, "onOverlayRequestedVideoTime", Arguments.createMap())
     }
 
     override fun overlayResetVideoHeight() {
+        sendEvent(reactContext, "onOverlayResetVideoHeight", Arguments.createMap())
     }
 
     override fun overlayResetVideoWidth() {
+        sendEvent(reactContext, "onOverlayResetVideoWidth", Arguments.createMap())
     }
 
     override fun overlayResizeVideoHeight(activityHeight: Float) {
+        var params = Arguments.createMap()
+        params.putDouble("activityHeight", activityHeight.toDouble())
+        sendEvent(reactContext, "onOverlayResizeVideoHeight", params)
     }
 
     override fun overlayResizeVideoWidth(activityWidth: Float) {
+        var params = Arguments.createMap()
+        params.putDouble("activityWidth", activityWidth.toDouble())
+        sendEvent(reactContext, "onOverlayResizeVideoWidth", params)
     }
+
+    override fun overlayClickedUserArea() {}
+    override fun overlayClosedByUser(type: CloseOption, timestamp: Long) {}
+    override fun overlayRequestedPortraitTopGap(): Int { return 0 }
 }
