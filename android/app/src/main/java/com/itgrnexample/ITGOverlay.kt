@@ -180,9 +180,6 @@ class ITGOverlayManager : ViewGroupManager<FrameLayout>, ITGOverlayView.ITGOverl
         })
     }
 
-    /**
-     * Layout all children properly
-     */
     fun manuallyLayoutChildren(view: View, root: FrameLayout?) {
         // propWidth and propHeight coming from react-native props
         val width: Int = root?.width ?: root?.measuredWidth ?: 100
@@ -232,8 +229,6 @@ class ITGOverlayManager : ViewGroupManager<FrameLayout>, ITGOverlayView.ITGOverl
         context
             .getJSModule(RCTEventEmitter::class.java)
             ?.receiveEvent(viewID, eventName, params)
-//        val dispatcher = UIManagerHelper.getEventDispatcher(context, viewID)
-//        dispatcher.dispat
     }
 
     //add methods!!!

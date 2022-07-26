@@ -57,19 +57,17 @@ const App: () => Node = () => {
     showMenuDelayed()
   }, []);
 
-
+  //on this call you should return the current playback time in seconds
   onOverlayRequestedVideoTime = e => {
     console.log("REQUEST VIDEO TIME")
-    // this.overlay.time
+    this.overlay.videoPlaying(0)
   }
-  onOverlayRequestedPlay = e => {
-  }
-  onOverlayRequestedPause = e => {
-  }
-  onOverlayRequestedFocus = e => {
-  }
-  onOverlayReleasedFocus = e => {
-  }
+
+  onOverlayRequestedPlay = e => { this.player.paused = true }
+  onOverlayRequestedPause = e => { this.player.paused = false }
+  onOverlayRequestedFocus = e => {}
+  onOverlayReleasedFocus = e => {}
+
   onOverlayResizeVideoWidth = e => {
     console.log("RESIZE VIDEO WIDTH " + e.activityWidth.toString())
   }
@@ -83,16 +81,21 @@ const App: () => Node = () => {
     console.log("RESET VIDEO HEIGHT")
   }
 
+  onSeek = e => {
+    console.log("VIDEO SEEK " + e.currentTime);
+    this.overlay.videoPlaying(e.currentTime)
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle={'light-content'} />
       <Video source={{uri: "https://media2.inthegame.io/uploads/videos/streamers/278dee276f8d43d11dad3030d0aa449e.a4ef1c02ad73f7b5ed0a6df3809abf12.mp4"}}   // Can be a URL or a local file.
-             ref={(ref) => {
-               this.player = ref
-             }}                                      // Store reference
+             ref={(ref) => { this.player = ref }}    // Store reference
              onBuffer={this.onBuffer}                // Callback when remote video is buffering
-             onError={this.videoError}               // Callback when video cannot be loaded
+             onError={this.videoError}
+             onSeek={this.onSeek}
              style={styles.video}
+             controls={false}
              resizeMode={"contain"} />
 
              <ITGOverlay style={styles.overlay}
@@ -107,6 +110,9 @@ const App: () => Node = () => {
               onOverlayRequestedPause={this.onOverlayRequestedPause}
               onOverlayRequestedFocus={this.onOverlayRequestedFocus}
               onOverlayReleasedFocus={this.onOverlayReleasedFocus}
+              onOverlayDidTapVideo={this.onOverlayDidTapVideo}
+              onOverlayDidShowSidebar={this.onOverlayDidShowSidebar}
+              onOverlayDidHideSidebar={this.onOverlayDidHideSidebar}
               onOverlayResizeVideoWidth={this.onOverlayResizeVideoWidth}
               onOverlayResetVideoWidth={this.onOverlayResetVideoWidth}
               onOverlayResizeVideoHeight={this.onOverlayResizeVideoHeight}

@@ -28,6 +28,9 @@ export default class ITGOverlay extends Component {
     onOverlayRequestedPlay: PropTypes.func,
     onOverlayRequestedFocus: PropTypes.func,
     onOverlayReleasedFocus: PropTypes.func,
+    onOverlayDidTapVideo: PropTypes.func,
+    onOverlayDidShowSidebar: PropTypes.func,
+    onOverlayDidHideSidebar: PropTypes.func,
     onOverlayResizeVideoWidth: PropTypes.func,
     onOverlayResetVideoWidth: PropTypes.func,
     onOverlayResizeVideoHeight: PropTypes.func,
@@ -57,6 +60,21 @@ export default class ITGOverlay extends Component {
   _onOverlayReleasedFocus = event => {
     if (this.props.onOverlayReleasedFocus) {
       this.props.onOverlayReleasedFocus(event.nativeEvent);
+    }
+  };
+  _onOverlayDidTapVideo = event => {
+    if (this.props.onOverlayDidTapVideo) {
+      this.props.onOverlayDidTapVideo(event.nativeEvent);
+    }
+  };
+  _onOverlayDidShowSidebar = event => {
+    if (this.props.onOverlayDidShowSidebar) {
+      this.props.onOverlayDidShowSidebar(event.nativeEvent);
+    }
+  };
+  _onOverlayDidHideSidebar = event => {
+    if (this.props.onOverlayDidHideSidebar) {
+      this.props.onOverlayDidHideSidebar(event.nativeEvent);
     }
   };
   _onOverlayResizeVideoWidth = event => {
@@ -104,6 +122,9 @@ export default class ITGOverlay extends Component {
       onOverlayRequestedPlay={this._onOverlayRequestedPlay}
       onOverlayRequestedFocus={this._onOverlayRequestedFocus}
       onOverlayReleasedFocus={this._onOverlayReleasedFocus}
+      onOverlayDidTapVideo={this._onOverlayDidTapVideo}
+      onOverlayDidShowSidebar={this._onOverlayDidShowSidebar}
+      onOverlayDidHideSidebar={this._onOverlayDidHideSidebar}
       onOverlayResizeVideoWidth={this._onOverlayResizeVideoWidth}
       onOverlayResetVideoWidth={this._onOverlayResetVideoWidth}
       onOverlayResizeVideoHeight={this._onOverlayResizeVideoHeight}
