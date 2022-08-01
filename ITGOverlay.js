@@ -34,7 +34,8 @@ export default class ITGOverlay extends Component {
     onOverlayResizeVideoWidth: PropTypes.func,
     onOverlayResetVideoWidth: PropTypes.func,
     onOverlayResizeVideoHeight: PropTypes.func,
-    onOverlayResetVideoHeight: PropTypes.func
+    onOverlayResetVideoHeight: PropTypes.func,
+    onOverlayBackPressResult: PropTypes.func
   };
 
   _onOverlayRequestedVideoTime = event => {
@@ -97,6 +98,11 @@ export default class ITGOverlay extends Component {
       this.props.onOverlayResetVideoHeight(event.nativeEvent);
     }
   };
+  _onOverlayBackPressResult = event => {
+    if (this.props.onOverlayBackPressResult) {
+      this.props.onOverlayBackPressResult(event.nativeEvent);
+    }
+  };
 
 
   render() {
@@ -129,6 +135,7 @@ export default class ITGOverlay extends Component {
       onOverlayResetVideoWidth={this._onOverlayResetVideoWidth}
       onOverlayResizeVideoHeight={this._onOverlayResizeVideoHeight}
       onOverlayResetVideoHeight={this._onOverlayResetVideoHeight}
+      onOverlayBackPressResult={this._onOverlayBackPressResult}
       />
     );
   }
@@ -246,7 +253,14 @@ export default class ITGOverlay extends Component {
     );
   };
 
-
+  handleBackPressIfNeeded = (...args) => {
+    // this.ref.handleBackPressIfNeeded((handled)=> callback(handled));
+    UIManager.dispatchViewManagerCommand(
+      findNodeHandle(this.ref),
+      "handleBackPressIfNeeded",
+      [...args]
+    );
+  };
 }
 const itgStyles = StyleSheet.create({
   overlay: {

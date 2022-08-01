@@ -19,6 +19,7 @@ import ReactNative, {
   View,
   Image,
   Button,
+  BackHandler,
 } from 'react-native';
 
 import Video from 'react-native-video';
@@ -51,10 +52,19 @@ const App: () => Node = () => {
         }, 14000);
   }
 
+  const backAction = () => {
+    this.overlay.handleBackPressIfNeeded()
+    return true;
+  };
+
   useEffect(() => {
     console.log("COMPONENT START")
     this.overlay.setup()
     showMenuDelayed()
+
+    BackHandler.addEventListener("hardwareBackPress", backAction);
+    return () =>
+      BackHandler.removeEventListener("hardwareBackPress", backAction);
   }, []);
 
   //on this call you should return the current playback time in seconds
@@ -80,7 +90,11 @@ const App: () => Node = () => {
   onOverlayResetVideoHeight = e => {
     console.log("RESET VIDEO HEIGHT")
   }
-
+  onOverlayBackPressResult = e => {
+    if (!e.handled) {
+      BackHandler.exitApp()
+    }
+  }
   onSeek = e => {
     console.log("VIDEO SEEK " + e.currentTime);
     this.overlay.videoPlaying(e.currentTime)
@@ -116,7 +130,8 @@ const App: () => Node = () => {
               onOverlayResizeVideoWidth={this.onOverlayResizeVideoWidth}
               onOverlayResetVideoWidth={this.onOverlayResetVideoWidth}
               onOverlayResizeVideoHeight={this.onOverlayResizeVideoHeight}
-              onOverlayResetVideoHeight={this.onOverlayResetVideoHeight}/>
+              onOverlayResetVideoHeight={this.onOverlayResetVideoHeight}
+              onOverlayBackPressResult={this.onOverlayBackPressResult}/>
 
     </SafeAreaView>
   );

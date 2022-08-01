@@ -8,14 +8,13 @@ import androidx.fragment.app.FragmentActivity
 import com.facebook.react.ReactPackage
 import com.facebook.react.bridge.*
 import com.facebook.react.common.MapBuilder
-import com.facebook.react.modules.core.DeviceEventManagerModule
 import com.facebook.react.uimanager.*
 import com.facebook.react.uimanager.annotations.ReactProp
 import com.facebook.react.uimanager.events.RCTEventEmitter
-import com.facebook.react.uimanager.events.RCTModernEventEmitter
 import com.syncedapps.inthegametv.ITGOverlayView
 import com.syncedapps.inthegametv.network.CloseOption
 import com.syncedapps.inthegametv.network.ITGEnvironment
+
 
 data class ITGOverlaySettings(
     var accountName: String = "",
@@ -125,7 +124,7 @@ class ITGOverlayManager : ViewGroupManager<FrameLayout>, ITGOverlayView.ITGOverl
             "openLeaderboard" -> overlayView?.openLeaderboard()
             "openShop" -> overlayView?.openShop()
             "openChat" -> overlayView?.openAccount()
-            "openPredictions " -> overlayView?.openAccount()
+            "openPredictions" -> overlayView?.openAccount()
             "closeMenu" -> overlayView?.closeMenu()
             "closeAccount" -> overlayView?.closeAccount()
             "closeLeaderboard" -> overlayView?.closeLeaderboard()
@@ -135,6 +134,7 @@ class ITGOverlayManager : ViewGroupManager<FrameLayout>, ITGOverlayView.ITGOverl
             "videoPlaying" -> overlayView?.videoPlaying((args?.getInt(0) ?: 0).toLong())
             "videoPaused" -> overlayView?.videoPaused()
             "setLiveMode" -> overlayView?.setLiveMode(args?.getBoolean(0) ?: true)
+            "handleBackPressIfNeeded" -> this.handleBackPressIfNeeded()
             "setup" -> {
                 val viewID = args?.getInt(0) ?: 0
                 createFragment(root, viewID)
@@ -142,6 +142,12 @@ class ITGOverlayManager : ViewGroupManager<FrameLayout>, ITGOverlayView.ITGOverl
         }
     }
 
+    fun handleBackPressIfNeeded() {
+        val handled = this.overlayView?.handleBackPressIfNeeded() ?: false
+        var params = Arguments.createMap()
+        params.putBoolean("handled", handled)
+        sendEvent(reactContext, "onOverlayBackPressResult", params)
+    }
 
     var reactContext: ReactApplicationContext? = null
 
@@ -218,6 +224,8 @@ class ITGOverlayManager : ViewGroupManager<FrameLayout>, ITGOverlayView.ITGOverl
             MapBuilder.of("registrationName", "onOverlayResetVideoHeight")
         map["onOverlayResetVideoWidth"] =
             MapBuilder.of("registrationName", "onOverlayResetVideoWidth")
+        map["onOverlayBackPressResult"] =
+            MapBuilder.of("registrationName", "onOverlayBackPressResult")
         return map
     }
 
