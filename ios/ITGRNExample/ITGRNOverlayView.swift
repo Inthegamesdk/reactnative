@@ -17,15 +17,19 @@ import Inthegametv
   @objc var userInitialName: String?
   private var didLoad = false
   
-  @objc var overlayRequestedVideoTime: RCTDirectEventBlock?
-  @objc var overlayRequestedPause: RCTDirectEventBlock?
-  @objc var overlayRequestedPlay: RCTDirectEventBlock?
-  @objc var overlayRequestedFocus: RCTDirectEventBlock?
-  @objc var overlayReleasedFocus: RCTDirectEventBlock?
-  @objc var overlayResizeVideoWidth: RCTDirectEventBlock?
-  @objc var overlayResetVideoWidth: RCTDirectEventBlock?
-  @objc var overlayResizeVideoHeight: RCTDirectEventBlock?
-  @objc var overlayResetVideoHeight: RCTDirectEventBlock?
+  @objc var onOverlayRequestedVideoTime: RCTDirectEventBlock?
+  @objc var onOverlayRequestedPause: RCTDirectEventBlock?
+  @objc var onOverlayRequestedPlay: RCTDirectEventBlock?
+  @objc var onOverlayRequestedFocus: RCTDirectEventBlock?
+  @objc var onOverlayReleasedFocus: RCTDirectEventBlock?
+  @objc var onOverlayResizeVideoWidth: RCTDirectEventBlock?
+  @objc var onOverlayResetVideoWidth: RCTDirectEventBlock?
+  @objc var onOverlayResizeVideoHeight: RCTDirectEventBlock?
+  @objc var onOverlayResetVideoHeight: RCTDirectEventBlock?
+  @objc var onOverlayDidTapVideo: RCTDirectEventBlock?
+  @objc var onOverlayDidShowSidebar: RCTDirectEventBlock?
+  @objc var onOverlayDidHideSidebar: RCTDirectEventBlock?
+  @objc var onOverlayBackPressResult: RCTDirectEventBlock?
   
   @objc func setBlockSlip(_ val: Bool) {
     blockSlip = val

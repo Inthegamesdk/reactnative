@@ -121,42 +121,66 @@ import Inthegametv
         self.getOverlay(node: node).setLiveMode(enabled: enabled.boolValue)
       }
   }
+  @objc func handleBackPressIfNeeded(_ node: NSNumber) {
+      DispatchQueue.main.async {
+        let handled = self.getOverlay(node: node).closeInteractionIfNeeded()
+        self.overlayBackPressResult(handled: handled)
+      }
+  }
+  @objc func setup(_ node: NSNumber, viewID: NSNumber) {
+  }
 }
 
 extension ITGOverlayManager: ITGOverlayDelegate {
   public func overlayRequestedVideoTime() {
-    getOverlay()?.overlayRequestedVideoTime?(nil)
+    getOverlay()?.onOverlayRequestedVideoTime?(nil)
   }
   
   public func overlayRequestedPause() {
-    getOverlay()?.overlayRequestedPause?(nil)
+    getOverlay()?.onOverlayRequestedPause?(nil)
   }
   
   public func overlayRequestedPlay() {
-    getOverlay()?.overlayRequestedPlay?(nil)
+    getOverlay()?.onOverlayRequestedPlay?(nil)
   }
   
   public func overlayRequestedFocus() {
-    getOverlay()?.overlayRequestedFocus?(nil)
+    getOverlay()?.onOverlayRequestedFocus?(nil)
   }
   
   public func overlayReleasedFocus() {
-    getOverlay()?.overlayReleasedFocus?(nil)
+    getOverlay()?.onOverlayReleasedFocus?(nil)
   }
   
   public func overlayResizeVideoWidth(activityWidth: CGFloat) {
-    getOverlay()?.overlayResizeVideoWidth?(["width": activityWidth])
+    getOverlay()?.onOverlayResizeVideoWidth?(["activityWidth": activityWidth])
   }
   
   public func overlayResetVideoWidth() {
-    getOverlay()?.overlayResetVideoWidth?(nil)
+    getOverlay()?.onOverlayResetVideoWidth?(nil)
   }
   
   public func overlayResizeVideoHeight(activityHeight: CGFloat) {
-    getOverlay()?.overlayResizeVideoHeight?(["height": activityHeight])
+    getOverlay()?.onOverlayResizeVideoHeight?(["activityHeight": activityHeight])
   }
   
   public func overlayResetVideoHeight() {
-    getOverlay()?.overlayResetVideoHeight?(nil)
+    getOverlay()?.onOverlayResetVideoHeight?(nil)
+  }
+  
+  public func overlayDidTapVideo() {
+    getOverlay()?.onOverlayDidTapVideo?(nil)
+  }
+  
+  public func overlayDidShowSidebar() {
+    getOverlay()?.onOverlayDidShowSidebar?(nil)
+  }
+  
+  public func overlayDidHideSidebar() {
+    getOverlay()?.onOverlayDidHideSidebar?(nil)
+  }
+  
+  public func overlayBackPressResult(handled: Bool) {
+    getOverlay()?.onOverlayBackPressResult?(["handled": handled])
   }
 }

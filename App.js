@@ -20,6 +20,7 @@ import ReactNative, {
   Image,
   Button,
   BackHandler,
+  TVMenuControl,
 } from 'react-native';
 
 import Video from 'react-native-video';
@@ -62,6 +63,7 @@ const App: () => Node = () => {
     this.overlay.setup()
     showMenuDelayed()
 
+    TVMenuControl.enableTVMenuKey();
     BackHandler.addEventListener("hardwareBackPress", backAction);
     return () =>
       BackHandler.removeEventListener("hardwareBackPress", backAction);
