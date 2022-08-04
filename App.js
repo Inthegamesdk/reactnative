@@ -39,18 +39,18 @@ const App: () => Node = () => {
   const isDarkMode = useColorScheme() === 'dark';
 
   const showMenuDelayed=()=>{
-    setTimeout(function(){
-      console.log("OPEN MENU")
-      this.overlay.openMenu()
-    }, 8000);
+    // setTimeout(function(){
+    //   console.log("OPEN MENU")
+    //   this.overlay.openMenu()
+    // }, 8000);
       setTimeout(function(){
         console.log("OPEN SHOP")
         this.overlay.openShop()
       }, 10000);
-        setTimeout(function(){
-          console.log("CLOSE SHOP")
-          this.overlay.closeShop()
-        }, 14000);
+        // setTimeout(function(){
+        //   console.log("CLOSE SHOP")
+        //   this.overlay.closeShop()
+        // }, 14000);
   }
 
   const backAction = () => {

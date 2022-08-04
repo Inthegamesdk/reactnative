@@ -326,21 +326,23 @@ SWIFT_CLASS("_TtC11Inthegametv11ITGInfoView")
 SWIFT_CLASS("_TtC11Inthegametv9ITGNotice")
 @interface ITGNotice : UIView
 - (void)awakeFromNib;
-- (IBAction)actionClose:(id _Nonnull)sender;
+- (void)didMoveToSuperview;
+- (IBAction)actionClose:(id _Nullable)sender;
 - (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
 
+@class UIEvent;
 
 SWIFT_CLASS("_TtC11Inthegametv14ITGOverlayView")
 @interface ITGOverlayView : UIView
+- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent * _Nullable)event SWIFT_WARN_UNUSED_RESULT;
 - (void)layoutSubviews;
 - (void)didMoveToWindow;
 @property (nonatomic, readonly, copy) NSArray<id <UIFocusEnvironment>> * _Nonnull preferredFocusEnvironments;
 - (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
-
 
 
 
@@ -363,7 +365,6 @@ SWIFT_CLASS("_TtC11Inthegametv11ITGPollView")
 @interface ITGPollView : ITGInteractionView
 @property (nonatomic, readonly, copy) NSArray<id <UIFocusEnvironment>> * _Nonnull preferredFocusEnvironments;
 - (void)didUpdateFocusInContext:(UIFocusUpdateContext * _Nonnull)context withAnimationCoordinator:(UIFocusAnimationCoordinator * _Nonnull)coordinator;
-- (void)layoutSubviews;
 - (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
@@ -371,18 +372,10 @@ SWIFT_CLASS("_TtC11Inthegametv11ITGPollView")
 
 SWIFT_CLASS("_TtC11Inthegametv14ITGProductView")
 @interface ITGProductView : ITGInteractionView
-- (void)traitCollectionDidChange:(UITraitCollection * _Nullable)previousTraitCollection;
-- (void)layoutSubviews;
 @property (nonatomic, readonly, copy) NSArray<id <UIFocusEnvironment>> * _Nonnull preferredFocusEnvironments;
+- (void)layoutSubviews;
 - (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
-@end
-
-@class UITextField;
-
-@interface ITGProductView (SWIFT_EXTENSION(Inthegametv)) <UITextFieldDelegate>
-- (void)textFieldDidBeginEditing:(UITextField * _Nonnull)textField;
-- (void)textFieldDidEndEditing:(UITextField * _Nonnull)textField;
 @end
 
 
@@ -443,7 +436,6 @@ SWIFT_CLASS("_TtC11Inthegametv19ITGTriviaAnswerView")
 
 SWIFT_CLASS("_TtC11Inthegametv13ITGTriviaView")
 @interface ITGTriviaView : ITGInteractionView
-- (void)traitCollectionDidChange:(UITraitCollection * _Nullable)previousTraitCollection;
 - (void)layoutSubviews;
 - (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
@@ -474,9 +466,14 @@ SWIFT_CLASS("_TtC11Inthegametv15ITGUserAreaView")
 SWIFT_CLASS("_TtC11Inthegametv11ITGWikiView")
 @interface ITGWikiView : ITGInteractionView
 @property (nonatomic, readonly, copy) NSArray<id <UIFocusEnvironment>> * _Nonnull preferredFocusEnvironments;
-- (void)didUpdateFocusInContext:(UIFocusUpdateContext * _Nonnull)context withAnimationCoordinator:(UIFocusAnimationCoordinator * _Nonnull)coordinator;
 - (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+@interface ITGWikiView (SWIFT_EXTENSION(Inthegametv)) <UITextViewDelegate>
+- (void)scrollViewDidScroll:(UIScrollView * _Nonnull)scrollView;
+- (void)scrollViewDidEndDecelerating:(UIScrollView * _Nonnull)scrollView;
 @end
 
 
@@ -820,21 +817,23 @@ SWIFT_CLASS("_TtC11Inthegametv11ITGInfoView")
 SWIFT_CLASS("_TtC11Inthegametv9ITGNotice")
 @interface ITGNotice : UIView
 - (void)awakeFromNib;
-- (IBAction)actionClose:(id _Nonnull)sender;
+- (void)didMoveToSuperview;
+- (IBAction)actionClose:(id _Nullable)sender;
 - (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
 
+@class UIEvent;
 
 SWIFT_CLASS("_TtC11Inthegametv14ITGOverlayView")
 @interface ITGOverlayView : UIView
+- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent * _Nullable)event SWIFT_WARN_UNUSED_RESULT;
 - (void)layoutSubviews;
 - (void)didMoveToWindow;
 @property (nonatomic, readonly, copy) NSArray<id <UIFocusEnvironment>> * _Nonnull preferredFocusEnvironments;
 - (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
-
 
 
 
@@ -857,7 +856,6 @@ SWIFT_CLASS("_TtC11Inthegametv11ITGPollView")
 @interface ITGPollView : ITGInteractionView
 @property (nonatomic, readonly, copy) NSArray<id <UIFocusEnvironment>> * _Nonnull preferredFocusEnvironments;
 - (void)didUpdateFocusInContext:(UIFocusUpdateContext * _Nonnull)context withAnimationCoordinator:(UIFocusAnimationCoordinator * _Nonnull)coordinator;
-- (void)layoutSubviews;
 - (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
@@ -865,18 +863,10 @@ SWIFT_CLASS("_TtC11Inthegametv11ITGPollView")
 
 SWIFT_CLASS("_TtC11Inthegametv14ITGProductView")
 @interface ITGProductView : ITGInteractionView
-- (void)traitCollectionDidChange:(UITraitCollection * _Nullable)previousTraitCollection;
-- (void)layoutSubviews;
 @property (nonatomic, readonly, copy) NSArray<id <UIFocusEnvironment>> * _Nonnull preferredFocusEnvironments;
+- (void)layoutSubviews;
 - (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
-@end
-
-@class UITextField;
-
-@interface ITGProductView (SWIFT_EXTENSION(Inthegametv)) <UITextFieldDelegate>
-- (void)textFieldDidBeginEditing:(UITextField * _Nonnull)textField;
-- (void)textFieldDidEndEditing:(UITextField * _Nonnull)textField;
 @end
 
 
@@ -937,7 +927,6 @@ SWIFT_CLASS("_TtC11Inthegametv19ITGTriviaAnswerView")
 
 SWIFT_CLASS("_TtC11Inthegametv13ITGTriviaView")
 @interface ITGTriviaView : ITGInteractionView
-- (void)traitCollectionDidChange:(UITraitCollection * _Nullable)previousTraitCollection;
 - (void)layoutSubviews;
 - (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
@@ -968,9 +957,14 @@ SWIFT_CLASS("_TtC11Inthegametv15ITGUserAreaView")
 SWIFT_CLASS("_TtC11Inthegametv11ITGWikiView")
 @interface ITGWikiView : ITGInteractionView
 @property (nonatomic, readonly, copy) NSArray<id <UIFocusEnvironment>> * _Nonnull preferredFocusEnvironments;
-- (void)didUpdateFocusInContext:(UIFocusUpdateContext * _Nonnull)context withAnimationCoordinator:(UIFocusAnimationCoordinator * _Nonnull)coordinator;
 - (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+@interface ITGWikiView (SWIFT_EXTENSION(Inthegametv)) <UITextViewDelegate>
+- (void)scrollViewDidScroll:(UIScrollView * _Nonnull)scrollView;
+- (void)scrollViewDidEndDecelerating:(UIScrollView * _Nonnull)scrollView;
 @end
 
 
