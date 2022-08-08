@@ -3,6 +3,10 @@ package com.itgrnexample;
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
 import com.facebook.react.ReactRootView;
+import android.view.KeyEvent; // <--- import
+
+import com.github.kevinejohn.keyevent.KeyEventModule;
+import com.github.kevinejohn.keyevent.KeyEventPackage;
 
 public class MainActivity extends ReactActivity {
 
@@ -36,5 +40,11 @@ public class MainActivity extends ReactActivity {
       reactRootView.setIsFabric(BuildConfig.IS_NEW_ARCHITECTURE_ENABLED);
       return reactRootView;
     }
+  }
+
+  @Override  // <--- Add this method if you want to react to keyDown
+  public boolean onKeyDown(int keyCode, KeyEvent event) {
+    KeyEventModule.getInstance().onKeyDownEvent(keyCode, event);
+    return super.onKeyDown(keyCode, event);
   }
 }

@@ -1,6 +1,7 @@
 package com.itgrnexample
 
 import android.view.Choreographer
+import android.view.KeyEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
@@ -135,6 +136,7 @@ class ITGOverlayManager : ViewGroupManager<FrameLayout>, ITGOverlayView.ITGOverl
             "videoPaused" -> overlayView?.videoPaused()
             "setLiveMode" -> overlayView?.setLiveMode(args?.getBoolean(0) ?: true)
             "handleBackPressIfNeeded" -> this.handleBackPressIfNeeded()
+            "receivedKeyEvent" -> overlayView?.receivedKeyEvent(KeyEvent(0, (args?.getInt(0) ?: 0)))
             "setup" -> {
                 val viewID = args?.getInt(0) ?: 0
                 createFragment(root, viewID)

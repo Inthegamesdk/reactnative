@@ -10,6 +10,8 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import com.syncedapps.inthegametv.ITGOverlayView
+import com.syncedapps.inthegametv.ITGSettings
+import com.syncedapps.inthegametv.ITGTools
 import com.syncedapps.inthegametv.network.CloseOption
 import com.syncedapps.inthegametv.network.ITGEnvironment
 
@@ -24,6 +26,10 @@ class ITGOverlayFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
+
+        val config = ITGSettings(requireContext())
+        config.clearUserToken()
+
         val view = ITGOverlayView(requireContext())
         view.load(settings.channelId,
             settings.accountName,

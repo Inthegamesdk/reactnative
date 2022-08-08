@@ -24,6 +24,7 @@ import ReactNative, {
 } from 'react-native';
 
 import Video from 'react-native-video';
+import KeyEvent from 'react-native-keyevent';
 import ITGOverlay from './ITGOverlay.js';
 
 import {
@@ -64,6 +65,12 @@ const App: () => Node = () => {
     showMenuDelayed()
 
     TVEventControl.enableTVMenuKey();
+
+    if (Platform.OS == "android") {
+      KeyEvent.onKeyDownListener((keyEvent) => {
+        this.overlay.receivedKeyEvent(keyEvent.keyCode)
+      });
+    };
     BackHandler.addEventListener("hardwareBackPress", backAction);
     return () =>
       BackHandler.removeEventListener("hardwareBackPress", backAction);

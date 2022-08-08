@@ -260,7 +260,13 @@ export default class ITGOverlay extends Component {
       [...args]
     );
   };
-}
+  receivedKeyEvent = (keyCode) => {
+    UIManager.dispatchViewManagerCommand(
+      findNodeHandle(this.ref),
+      "receivedKeyEvent",
+      [keyCode]
+    );
+  };}
 const itgStyles = StyleSheet.create({
   overlay: {
     position: 'absolute',

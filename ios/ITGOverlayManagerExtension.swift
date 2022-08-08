@@ -127,8 +127,8 @@ import Inthegametv
         self.overlayBackPressResult(handled: handled)
       }
   }
-  @objc func setup(_ node: NSNumber, viewID: NSNumber) {
-  }
+  @objc func setup(_ node: NSNumber, viewID: NSNumber) {}
+  @objc func receivedKeyEvent(_ node: NSNumber, keyCode: NSNumber) {}
 }
 
 extension ITGOverlayManager: ITGOverlayDelegate {
