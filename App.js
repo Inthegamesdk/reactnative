@@ -20,7 +20,7 @@ import ReactNative, {
   Image,
   Button,
   BackHandler,
-  TVMenuControl,
+  TVEventControl,
 } from 'react-native';
 
 import Video from 'react-native-video';
@@ -63,7 +63,7 @@ const App: () => Node = () => {
     this.overlay.setup()
     showMenuDelayed()
 
-    TVMenuControl.enableTVMenuKey();
+    TVEventControl.enableTVMenuKey();
     BackHandler.addEventListener("hardwareBackPress", backAction);
     return () =>
       BackHandler.removeEventListener("hardwareBackPress", backAction);
@@ -103,7 +103,7 @@ const App: () => Node = () => {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <StatusBar barStyle={'light-content'} />
       <Video source={{uri: "https://media2.inthegame.io/uploads/videos/streamers/278dee276f8d43d11dad3030d0aa449e.a4ef1c02ad73f7b5ed0a6df3809abf12.mp4"}}   // Can be a URL or a local file.
              ref={(ref) => { this.player = ref }}    // Store reference
@@ -116,7 +116,7 @@ const App: () => Node = () => {
 
              <ITGOverlay style={styles.overlay}
               accountName={"demos"}
-              channelId={"soccer_predictions"}
+              channelId={"testings2"}
               environment={"prod"}
               language={"en"}
               blockSlip={false}
@@ -135,7 +135,7 @@ const App: () => Node = () => {
               onOverlayResetVideoHeight={this.onOverlayResetVideoHeight}
               onOverlayBackPressResult={this.onOverlayBackPressResult}/>
 
-    </SafeAreaView>
+    </View>
   );
 };
 // <Image source={require('./img/logo_wide.png')} />

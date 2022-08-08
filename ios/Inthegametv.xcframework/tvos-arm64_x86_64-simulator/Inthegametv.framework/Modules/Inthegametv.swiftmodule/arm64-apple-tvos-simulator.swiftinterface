@@ -82,6 +82,10 @@ public enum ITGContent {
   @_Concurrency.MainActor(unsafe) public var canOpenMenuFromRemote: Swift.Bool {
     get
   }
+  @_Concurrency.MainActor(unsafe) public class var reactCompatMode: Swift.Bool {
+    get
+    set
+  }
   @_Concurrency.MainActor(unsafe) @objc override dynamic public func point(inside point: CoreGraphics.CGPoint, with event: UIKit.UIEvent?) -> Swift.Bool
   @_Concurrency.MainActor(unsafe) public func load(channelID: Swift.String, broadcasterName: Swift.String, environment: Inthegametv.ITGEnvironment, delegate: Inthegametv.ITGOverlayDelegate?, language: Swift.String = "en", userBroadcasterForeignID: Swift.String? = nil, userInitialName: Swift.String? = nil, appleFont: Swift.String? = "TitilliumWeb-Bold")
   @_Concurrency.MainActor(unsafe) public func resetUser()

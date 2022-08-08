@@ -20,8 +20,8 @@ import Inthegametv
   }
   
   @objc func createOverlay() -> ITGOverlayView {
+    ITGOverlayView.reactCompatMode = true
     let overlay = ITGRNOverlayView(frame: CGRect(x: 0, y: 0, width: 600, height: 400))
-//    overlay.load(channelID: "test1111", broadcasterName: "demos", environment: .productionDefault, delegate: self)
     self.overlayView = overlay
     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
       overlay.start(delegate: self)
