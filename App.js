@@ -37,18 +37,10 @@ const App: () => Node = () => {
   const isDarkMode = useColorScheme() === 'dark';
 
   const showMenuDelayed=()=>{
-    // setTimeout(function(){
-    //   console.log("OPEN MENU")
-    //   this.overlay.openMenu()
-    // }, 8000);
       setTimeout(function(){
         console.log("OPEN SHOP")
         this.overlay.openShop()
       }, 10000);
-        // setTimeout(function(){
-        //   console.log("CLOSE SHOP")
-        //   this.overlay.closeShop()
-        // }, 14000);
   }
 
   const backAction = () => {
@@ -57,7 +49,6 @@ const App: () => Node = () => {
   };
 
   useEffect(() => {
-
     console.log("COMPONENT START")
     this.overlay.setup()
     showMenuDelayed()
@@ -119,9 +110,9 @@ const App: () => Node = () => {
              controls={false}
              resizeMode={"contain"} />
 
-             <ITGOverlay style={styles.overlay}
+      <ITGOverlay style={styles.overlay}
               accountName={"demos"}
-              channelId={"testings2"}
+              channelId={"soccer_predictions"}
               environment={"prod"}
               language={"en"}
               blockSlip={false}
@@ -143,12 +134,6 @@ const App: () => Node = () => {
     </View>
   );
 };
-// <Image source={require('./img/logo_wide.png')} />
-// <Button title="START"
-//         style={styles.button}
-//         color="#FFFFFF"
-//         containerStyle={styles.buttonContainer} />
-
 export default App;
 
 const styles = StyleSheet.create({
@@ -156,7 +141,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#000000",
     flex: 1,
     width:'100%',
-    // height: 100%
   },
   video: {
     flex: 1,

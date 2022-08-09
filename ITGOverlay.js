@@ -254,7 +254,6 @@ export default class ITGOverlay extends Component {
     );
   };
   handleBackPressIfNeeded = (...args) => {
-    // this.ref.handleBackPressIfNeeded((handled)=> callback(handled));
     UIManager.dispatchViewManagerCommand(
       findNodeHandle(this.ref),
       "handleBackPressIfNeeded",

@@ -23,9 +23,6 @@ import Inthegametv
     ITGOverlayView.reactCompatMode = true
     let overlay = ITGRNOverlayView(frame: CGRect(x: 0, y: 0, width: 600, height: 400))
     self.overlayView = overlay
-    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-      overlay.start(delegate: self)
-    }
     return overlay
   }
   
@@ -95,17 +92,6 @@ import Inthegametv
         self.getOverlay(node: node).closeChat()
       }
   }
-//  @objc func isDisplayingInteraction(_ node: NSNumber) {
-//      DispatchQueue.main.async {
-//        self.getOverlay(node: node).isDisplayingInteraction()
-//      }
-//  }
-  
-//  @objc func closeCurrentInteraction(_ node: NSNumber) {
-//      DispatchQueue.main.async {
-//        self.getOverlay(node: node).closeCurrentInteraction()
-//      }
-//  }
   @objc func videoPlaying(_ node: NSNumber, time: NSNumber) {
       DispatchQueue.main.async {
         self.getOverlay(node: node).videoPlaying(time: time.doubleValue)
@@ -127,7 +113,11 @@ import Inthegametv
         self.overlayBackPressResult(handled: handled)
       }
   }
-  @objc func setup(_ node: NSNumber, viewID: NSNumber) {}
+  @objc func setup(_ node: NSNumber, viewID: NSNumber) {
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+      self.getOverlay(node: node).start(delegate: self)
+    }
+  }
   @objc func receivedKeyEvent(_ node: NSNumber, keyCode: NSNumber) {}
 }
 

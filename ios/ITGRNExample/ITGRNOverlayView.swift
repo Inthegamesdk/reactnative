@@ -47,11 +47,6 @@ import Inthegametv
     injectionDelay = val
   }
   
-//  public override func awakeFromNib() {
-//    super.awakeFromNib()
-//    start(delegate: nil)
-//  }
-  
   public func start(delegate: ITGOverlayDelegate?) {
     if !didLoad {
       didLoad = true
@@ -74,5 +69,4 @@ import Inthegametv
            userInitialName: self.userInitialName)
     }
   }
-  
 }
