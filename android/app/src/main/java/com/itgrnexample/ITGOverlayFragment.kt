@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
+import com.syncedapps.inthegametv.ITGKey
 import com.syncedapps.inthegametv.ITGOverlayView
 import com.syncedapps.inthegametv.ITGSettings
 import com.syncedapps.inthegametv.ITGTools
@@ -44,12 +45,6 @@ class ITGOverlayFragment: Fragment() {
         view.blockSidebar = settings.blockSidebar
         view.injectionDelay = settings.injectionDelay
         overlay = view
-
-//        Handler(Looper.getMainLooper()).postDelayed({
-//            view.findViewById<LinearLayout>(R.id.menu)?.setBackgroundColor(parseColor("#66FF0000"))
-//            view.findViewById<LinearLayout>(R.id.sidebar)?.setBackgroundColor(parseColor("#550088FF"))
-//            view.findViewById<LinearLayout>(R.id.container)?.setBackgroundColor(parseColor("#44FFFF00"))
-//        }, 1000)
 
         view.listener = tempManagerRef
         tempManagerRef?.setOverlay(view)

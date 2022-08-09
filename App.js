@@ -21,20 +21,17 @@ import ReactNative, {
   Button,
   BackHandler,
   TVEventControl,
+  LogBox,
 } from 'react-native';
 
 import Video from 'react-native-video';
 import KeyEvent from 'react-native-keyevent';
 import ITGOverlay from './ITGOverlay.js';
 
-import {
-  Colors,
-//   DebugInstructions,
-//   Header,
-//   LearnMoreLinks,
-//   ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
+LogBox.ignoreLogs([
+"ViewPropTypes will be removed",
+"ColorPropType will be removed",
+])
 
 const App: () => Node = () => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -60,6 +57,7 @@ const App: () => Node = () => {
   };
 
   useEffect(() => {
+
     console.log("COMPONENT START")
     this.overlay.setup()
     showMenuDelayed()

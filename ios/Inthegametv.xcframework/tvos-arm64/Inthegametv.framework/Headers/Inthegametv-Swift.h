@@ -247,11 +247,13 @@ SWIFT_CLASS("_TtC11Inthegametv13FocusTvButton")
 - (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
 - (void)awakeFromNib;
+- (void)layoutSubviews;
 - (void)didUpdateFocusInContext:(UIFocusUpdateContext * _Nonnull)context withAnimationCoordinator:(UIFocusAnimationCoordinator * _Nonnull)coordinator;
 - (void)pressesBegan:(NSSet<UIPress *> * _Nonnull)presses withEvent:(UIPressesEvent * _Nullable)event;
 - (void)pressesCancelled:(NSSet<UIPress *> * _Nonnull)presses withEvent:(UIPressesEvent * _Nullable)event;
 - (void)pressesEnded:(NSSet<UIPress *> * _Nonnull)presses withEvent:(UIPressesEvent * _Nullable)event;
 @end
+
 
 @class UIImageView;
 @class UILabel;
@@ -273,6 +275,7 @@ SWIFT_CLASS("_TtC11Inthegametv18ITGInteractionView")
 @property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified backgroundView;
 @property (nonatomic, weak) IBOutlet UIView * _Null_unspecified mainContainer;
 @property (nonatomic, weak) IBOutlet UIView * _Null_unspecified infoContainer;
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified viewMoreArrowImageView;
 @property (nonatomic, weak) IBOutlet UIView * _Nullable promotionContainer;
 @property (nonatomic, weak) IBOutlet UIView * _Nullable promotionFlipContainer;
 @property (nonatomic, weak) IBOutlet UIScrollView * _Nullable scrollView;
@@ -312,12 +315,12 @@ SWIFT_CLASS("_TtC11Inthegametv11ITGInfoView")
 @property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified levelHeaderLabel;
 @property (nonatomic, weak) IBOutlet FocusTvButton * _Null_unspecified accountButton;
 @property (nonatomic, weak) IBOutlet FocusTvButton * _Null_unspecified closeButton;
-@property (nonatomic, weak) IBOutlet UIView * _Null_unspecified separator;
 - (void)awakeFromNib;
 - (void)layoutSubviews;
 - (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
+
 
 
 
@@ -329,6 +332,7 @@ SWIFT_CLASS("_TtC11Inthegametv9ITGNotice")
 - (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
+
 
 @class UIEvent;
 
@@ -349,6 +353,7 @@ SWIFT_CLASS("_TtC11Inthegametv14ITGOverlayView")
 
 
 
+
 SWIFT_CLASS("_TtC11Inthegametv17ITGPollAnswerView")
 @interface ITGPollAnswerView : UIView
 @property (nonatomic, weak) IBOutlet FocusTvButton * _Null_unspecified button;
@@ -357,6 +362,7 @@ SWIFT_CLASS("_TtC11Inthegametv17ITGPollAnswerView")
 - (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
+
 
 
 SWIFT_CLASS("_TtC11Inthegametv11ITGPollView")
@@ -386,6 +392,7 @@ SWIFT_CLASS("_TtC11Inthegametv19ITGRatingAnswerView")
 @end
 
 
+
 SWIFT_CLASS("_TtC11Inthegametv13ITGRatingView")
 @interface ITGRatingView : ITGInteractionView
 @property (nonatomic, weak) IBOutlet UIView * _Null_unspecified resultContainer;
@@ -406,6 +413,7 @@ SWIFT_CLASS("_TtC11Inthegametv11ITGShopView")
 - (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
+
 
 @class UITableView;
 @class NSIndexPath;
@@ -430,6 +438,7 @@ SWIFT_CLASS("_TtC11Inthegametv19ITGTriviaAnswerView")
 - (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
+
 
 
 SWIFT_CLASS("_TtC11Inthegametv13ITGTriviaView")
@@ -473,6 +482,7 @@ SWIFT_CLASS("_TtC11Inthegametv11ITGWikiView")
 - (void)scrollViewDidScroll:(UIScrollView * _Nonnull)scrollView;
 - (void)scrollViewDidEndDecelerating:(UIScrollView * _Nonnull)scrollView;
 @end
+
 
 
 
