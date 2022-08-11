@@ -44,6 +44,7 @@ class ITGOverlayFragment: Fragment() {
         view.blockSlip = settings.blockSlip
         view.blockSidebar = settings.blockSidebar
         view.injectionDelay = settings.injectionDelay
+        view.openMenuKey = ITGKey.NONE
         overlay = view
 
         view.listener = tempManagerRef
@@ -54,17 +55,5 @@ class ITGOverlayFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-    }
-
-    override fun onPause() {
-        super.onPause()
-    }
-
-    override fun onResume() {
-        super.onResume()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
     }
 }

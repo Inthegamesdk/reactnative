@@ -10,15 +10,12 @@ import React, { useEffect } from 'react';
 import type {Node} from 'react';
 import ReactNative, {
   Platform,
-  SafeAreaView,
-  ScrollView,
   StatusBar,
   StyleSheet,
   Text,
   useColorScheme,
   View,
   Image,
-  Button,
   BackHandler,
   TVEventControl,
   LogBox,
@@ -34,48 +31,45 @@ LogBox.ignoreLogs([
 ])
 
 const App: () => Node = () => {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const showMenuDelayed=()=>{
-      setTimeout(function(){
-        console.log("OPEN SHOP")
-        this.overlay.openShop()
-      }, 10000);
-  }
-
+  //back button action
   const backAction = () => {
     this.overlay.handleBackPressIfNeeded()
     return true;
   };
 
   useEffect(() => {
-    console.log("COMPONENT START")
+    //important - loads ITG overlay
     this.overlay.setup()
-    showMenuDelayed()
 
+    //to handle the menu key in tvOS
     TVEventControl.enableTVMenuKey();
 
+    //passing key events for android - required if using predictions
     if (Platform.OS == "android") {
       KeyEvent.onKeyDownListener((keyEvent) => {
         this.overlay.receivedKeyEvent(keyEvent.keyCode)
       });
     };
+
+    //handling the back button events
     BackHandler.addEventListener("hardwareBackPress", backAction);
     return () =>
       BackHandler.removeEventListener("hardwareBackPress", backAction);
   }, []);
 
-  //on this call you should return the current playback time in seconds
+  //on this call you should send the overlay the current playback time in seconds
   onOverlayRequestedVideoTime = e => {
     console.log("REQUEST VIDEO TIME")
     this.overlay.videoPlaying(0)
   }
 
+  //pause and play the video when asked to
   onOverlayRequestedPlay = e => { this.player.paused = true }
   onOverlayRequestedPause = e => { this.player.paused = false }
   onOverlayRequestedFocus = e => {}
   onOverlayReleasedFocus = e => {}
 
+  //optional - resize video if needed when ITG content appears
   onOverlayResizeVideoWidth = e => {
     console.log("RESIZE VIDEO WIDTH " + e.activityWidth.toString())
   }
@@ -88,11 +82,14 @@ const App: () => Node = () => {
   onOverlayResetVideoHeight = e => {
     console.log("RESET VIDEO HEIGHT")
   }
+
+  //handle back button press
   onOverlayBackPressResult = e => {
     if (!e.handled) {
       BackHandler.exitApp()
     }
   }
+
   onSeek = e => {
     console.log("VIDEO SEEK " + e.currentTime);
     this.overlay.videoPlaying(e.currentTime)
@@ -102,8 +99,8 @@ const App: () => Node = () => {
     <View style={styles.container}>
       <StatusBar barStyle={'light-content'} />
       <Video source={{uri: "https://media2.inthegame.io/uploads/videos/streamers/278dee276f8d43d11dad3030d0aa449e.a4ef1c02ad73f7b5ed0a6df3809abf12.mp4"}}   // Can be a URL or a local file.
-             ref={(ref) => { this.player = ref }}    // Store reference
-             onBuffer={this.onBuffer}                // Callback when remote video is buffering
+             ref={(ref) => { this.player = ref }}
+             onBuffer={this.onBuffer}
              onError={this.videoError}
              onSeek={this.onSeek}
              style={styles.video}
@@ -148,26 +145,4 @@ const styles = StyleSheet.create({
   overlay: {
     flex: 1,
   },
-  highlight: {
-    fontWeight: '700',
-  },
-   button: {
-     fontSize: 40,
-     color: "#FFFFFF",
-     width: 220,
-     height: 60
-    },
-  buttonContainer: {
-       padding: 4,
-       height: 100,
-       overflow: 'hidden',
-       borderRadius: 4,
-       backgroundColor: '#000000',
-       marginTop: 12,
-       marginBottom: 12,
-       borderRadius: 6,
-       borderColor: "#AAAAAA",
-       borderWidth: 2,
-       justifyContent: 'center',
-       alignItems: 'center'
-    },});
+  });
