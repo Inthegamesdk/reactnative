@@ -124,6 +124,25 @@ const backAction = () => {
 
 ### Updating video time
 
+The overlay needs to be informed of the current video time to display scheduled content. So every time the user presses play, pause, seek forward/backward, you'll need to inform the overlay using the following methods:
+
+```
+this.overlay.videoPlaying(time) //parameter is the current video time in seconds
+this.overlay.videoPaused()
+```
+In some situations the overlay will request a time update directly in a delegate call, you should handle it as follows:
+```
+onOverlayRequestedVideoTime = e => {
+    this.overlay.videoPlaying(0)
+}
+```
+
 ### Opening menu and other elements
 
+Ideally your app interface should have a way for the user to open the ITG menu and access all the useful content. You can open the menu with this call:
+```
+this.overlay.openMenu()
+```
+
+There are other functions to open ITG elements, you can check the full list in `ITGOverlay.js`.
 
