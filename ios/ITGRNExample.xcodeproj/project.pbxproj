@@ -23,8 +23,6 @@
 		6DBE95052875EE87009524E0 /* ITGOverlayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DBE95042875EE87009524E0 /* ITGOverlayManager.m */; };
 		6DBE95082875F2EF009524E0 /* ITGOverlayManagerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DBE95072875F2EF009524E0 /* ITGOverlayManagerExtension.swift */; };
 		6DDF3BA1287C6C1E00AD6C90 /* ITGRNOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDF3BA0287C6C1E00AD6C90 /* ITGRNOverlayView.swift */; };
-		6DE12558289AE14A00AA0861 /* PusherSwift.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DE12557289AE14A00AA0861 /* PusherSwift.xcframework */; };
-		6DE12559289AE14A00AA0861 /* PusherSwift.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DE12557289AE14A00AA0861 /* PusherSwift.xcframework */; };
 		6DF4EA69287C737800A9D158 /* ITGRNOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDF3BA0287C6C1E00AD6C90 /* ITGRNOverlayView.swift */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		EE57DEA5314790D63C074D03 /* libPods-ITGRNExample-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA54FCF2086BA3B4678F8237 /* libPods-ITGRNExample-tvOS.a */; };
@@ -74,7 +72,6 @@
 		6DBE95062875F2EE009524E0 /* ITGRNExample-tvOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ITGRNExample-tvOS-Bridging-Header.h"; sourceTree = "<group>"; };
 		6DBE95072875F2EF009524E0 /* ITGOverlayManagerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ITGOverlayManagerExtension.swift; sourceTree = "<group>"; };
 		6DDF3BA0287C6C1E00AD6C90 /* ITGRNOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ITGRNOverlayView.swift; path = ITGRNExample/ITGRNOverlayView.swift; sourceTree = "<group>"; };
-		6DE12557289AE14A00AA0861 /* PusherSwift.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = PusherSwift.xcframework; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = ITGRNExample/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8DC2855AB2CCC04BED0978AE /* libPods-ITGRNExample.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ITGRNExample.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0216F1136BF7C90703C880F /* libPods-ITGRNExample-tvOS-ITGRNExample-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ITGRNExample-tvOS-ITGRNExample-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -98,7 +95,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6DE12558289AE14A00AA0861 /* PusherSwift.xcframework in Frameworks */,
 				269984920579226908D49904 /* libPods-ITGRNExample.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -109,7 +105,6 @@
 			files = (
 				6DBE94FE2875E75C009524E0 /* libreact-native-video-tvOS.a in Frameworks */,
 				6DBE95022875EDBB009524E0 /* Inthegametv.xcframework in Frameworks */,
-				6DE12559289AE14A00AA0861 /* PusherSwift.xcframework in Frameworks */,
 				EE57DEA5314790D63C074D03 /* libPods-ITGRNExample-tvOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -157,7 +152,6 @@
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
 				6DBE95002875EDBB009524E0 /* Inthegametv.xcframework */,
-				6DE12557289AE14A00AA0861 /* PusherSwift.xcframework */,
 				6DBE95062875F2EE009524E0 /* ITGRNExample-tvOS-Bridging-Header.h */,
 			);
 			name = ITGRNExample;

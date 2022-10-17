@@ -1,0 +1,367 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.7 (swiftlang-5.7.0.127.4 clang-1400.0.29.50)
+// swift-module-flags: -target arm64-apple-tvos14.3 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name Inthegametv
+// swift-module-flags-ignorable: -enable-bare-slash-regex
+import AVFoundation
+import CoreMedia
+import Foundation
+@_exported import Inthegametv
+import Swift
+import UIKit
+import _Concurrency
+import _StringProcessing
+public enum ITGMenuItem : Swift.String, Swift.CaseIterable, Swift.Decodable {
+  case account
+  case leaderboard
+  case shop
+  case chat
+  public init?(rawValue: Swift.String)
+  public typealias AllCases = [Inthegametv.ITGMenuItem]
+  public typealias RawValue = Swift.String
+  public static var allCases: [Inthegametv.ITGMenuItem] {
+    get
+  }
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public struct StorketMessage {
+}
+@objc @_inheritsConvenienceInitializers public class StorketHelper : ObjectiveC.NSObject {
+  public func connect(accountId: Swift.String, channelSlug: Swift.String, environment: Inthegametv.ITGEnvironment, token: Swift.String)
+  public func stop()
+  public func changeType(_ type: Inthegametv.StorketType)
+  @objc override dynamic public init()
+  @objc deinit
+}
+extension Inthegametv.StorketHelper : Inthegametv.StorketDelegate {
+  public func didReceive(messages: [Inthegametv.StorketMessage], storketType: Inthegametv.StorketType)
+}
+public protocol ITGOverlayDelegate : AnyObject {
+  func overlayRequestedVideoTime()
+  func overlayRequestedPause()
+  func overlayRequestedPlay()
+  func overlayRequestedFocus()
+  func overlayReleasedFocus()
+  func overlayResizeVideoWidth(activityWidth: CoreFoundation.CGFloat)
+  func overlayResetVideoWidth()
+  func overlayResizeVideoHeight(activityHeight: CoreFoundation.CGFloat)
+  func overlayResetVideoHeight()
+  func overlayReceivedDeeplink(_ link: Swift.String)
+  func overlayRequestedVideoSeek(time: Swift.Double)
+}
+public enum ITGAnimationType {
+  case fromRight
+  case fromBottom
+  public static func == (a: Inthegametv.ITGAnimationType, b: Inthegametv.ITGAnimationType) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public enum ITGContent {
+  case slip
+  case menu
+  case sidebar
+  case popup
+  case notification
+  public static func == (a: Inthegametv.ITGContent, b: Inthegametv.ITGContent) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) open class ITGOverlayView : UIKit.UIView {
+  @_Concurrency.MainActor(unsafe) public class var reactCompatMode: Swift.Bool {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) weak public var delegate: Inthegametv.ITGOverlayDelegate?
+  @_Concurrency.MainActor(unsafe) public var blockMenu: Swift.Bool
+  @_Concurrency.MainActor(unsafe) public var blockNotifications: Swift.Bool
+  @_Concurrency.MainActor(unsafe) public var blockSlip: Swift.Bool
+  @_Concurrency.MainActor(unsafe) public var blockSidebar: Swift.Bool
+  @_Concurrency.MainActor(unsafe) public var bottomMargin: CoreFoundation.CGFloat
+  @_Concurrency.MainActor(unsafe) public var animationType: Inthegametv.ITGAnimationType
+  @_Concurrency.MainActor(unsafe) public var injectionDelay: Swift.Int? {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) public var canOpenMenuFromRemote: Swift.Bool {
+    get
+  }
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public var preferredFocusEnvironments: [UIKit.UIFocusEnvironment] {
+    @objc get
+  }
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func didMoveToWindow()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func point(inside point: CoreFoundation.CGPoint, with event: UIKit.UIEvent?) -> Swift.Bool
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func layoutSubviews()
+  @_Concurrency.MainActor(unsafe) public func load(channelSlug: Swift.String, accountId: Swift.String, environment: Inthegametv.ITGEnvironment, delegate: Inthegametv.ITGOverlayDelegate?, language: Swift.String = "en", foreignId: Swift.String? = nil, userName: Swift.String? = nil)
+  @_Concurrency.MainActor(unsafe) public func resetUser()
+  @_Concurrency.MainActor(unsafe) public func closeInteractionIfNeeded() -> Swift.Bool
+  @_Concurrency.MainActor(unsafe) public func isDisplayingInteraction() -> Swift.Bool
+  @_Concurrency.MainActor(unsafe) public func videoPaused()
+  @_Concurrency.MainActor(unsafe) public func videoPlaying(time: Swift.Double)
+  @_Concurrency.MainActor(unsafe) public func setLiveMode(enabled: Swift.Bool)
+  @_Concurrency.MainActor(unsafe) public func openMenu()
+  @_Concurrency.MainActor(unsafe) public func openAccount()
+  @_Concurrency.MainActor(unsafe) public func openLeaderboard()
+  @_Concurrency.MainActor(unsafe) public func openShop()
+  @_Concurrency.MainActor(unsafe) public func openChat()
+  @_Concurrency.MainActor(unsafe) public func openPredictions()
+  @_Concurrency.MainActor(unsafe) public func openHighlights()
+  @_Concurrency.MainActor(unsafe) public func openStats()
+  @_Concurrency.MainActor(unsafe) public func closeMenu()
+  @_Concurrency.MainActor(unsafe) public func closeAccount()
+  @_Concurrency.MainActor(unsafe) public func closeLeaderboard()
+  @_Concurrency.MainActor(unsafe) public func closeShop()
+  @_Concurrency.MainActor(unsafe) public func closeChat()
+  @_Concurrency.MainActor(unsafe) public func closePredictions()
+  @_Concurrency.MainActor(unsafe) public func closeHighlights()
+  @_Concurrency.MainActor(unsafe) public func closeStats()
+  @_Concurrency.MainActor(unsafe) public func isMenuVisible() -> Swift.Bool
+  @_Concurrency.MainActor(unsafe) public func currentContent() -> [Inthegametv.ITGContent]
+  @_Concurrency.MainActor(unsafe) public func currentMenuPage() -> Inthegametv.ITGMenuItem?
+  @_Concurrency.MainActor(unsafe) public func closeAll()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreFoundation.CGRect)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
+}
+extension Inthegametv.ITGOverlayView {
+  @_Concurrency.MainActor(unsafe) public func menuShouldClose()
+}
+public enum StorketError : Swift.Error {
+  case notFound
+  case invalidJson
+  case unknown
+  public static func == (a: Inthegametv.StorketError, b: Inthegametv.StorketError) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public protocol StorketDelegate : ObjectiveC.NSObject {
+  func didReceive(messages: [Inthegametv.StorketMessage], storketType: Inthegametv.StorketType)
+}
+public enum StorketType : Swift.String {
+  case storket
+  case chat
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+@_hasMissingDesignatedInitializers public class Storket {
+  public func configure(url: Swift.String, authKey: Swift.String)
+  public func connect(accountId: Swift.String, channelSlug: Swift.String, type: Inthegametv.StorketType)
+  public func stop()
+  public func changeType(_ type: Inthegametv.StorketType)
+  public func currentType() -> Inthegametv.StorketType
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) open class ITGInfoView : UIKit.UIView, Inthegametv.NibView {
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open var preferredFocusEnvironments: [UIKit.UIFocusEnvironment] {
+    @objc get
+  }
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func removeFromSuperview()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreFoundation.CGRect)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) open class ITGAnswerView : UIKit.UIView, Inthegametv.NibView {
+  @objc @IBOutlet @_Concurrency.MainActor(unsafe) public var button: Inthegametv.FocusTvButton!
+  @objc @IBOutlet @_Concurrency.MainActor(unsafe) public var secondaryButton: Inthegametv.FocusTvButton!
+  @objc @IBOutlet @_Concurrency.MainActor(unsafe) public var roundButton: Inthegametv.FocusTvButton!
+  @objc @IBOutlet @_Concurrency.MainActor(unsafe) public var mainImageView: UIKit.UIImageView?
+  @objc @IBOutlet @_Concurrency.MainActor(unsafe) public var secondaryImageView: UIKit.UIImageView?
+  @objc @IBOutlet @_Concurrency.MainActor(unsafe) public var pollPercentageLabel: UIKit.UILabel?
+  @objc @IBOutlet @_Concurrency.MainActor(unsafe) public var coinsLabel: UIKit.UILabel?
+  @objc @IBOutlet @_Concurrency.MainActor(unsafe) public var mainImageHeightConstraint: UIKit.NSLayoutConstraint?
+  @objc @IBOutlet @_Concurrency.MainActor(unsafe) public var mainImageWidthConstraint: UIKit.NSLayoutConstraint?
+  @objc @IBOutlet @_Concurrency.MainActor(unsafe) public var secondaryImageHeightConstraint: UIKit.NSLayoutConstraint?
+  @objc @IBOutlet @_Concurrency.MainActor(unsafe) public var secondaryImageWidthConstraint: UIKit.NSLayoutConstraint?
+  @objc @IBOutlet @_Concurrency.MainActor(unsafe) public var secondaryButtonBottom: UIKit.NSLayoutConstraint?
+  @objc @IBOutlet @_Concurrency.MainActor(unsafe) public var secondaryImageTrailingToButton: UIKit.NSLayoutConstraint?
+  @objc @IBOutlet @_Concurrency.MainActor(unsafe) public var secondaryImageLeadeingToMainImage: UIKit.NSLayoutConstraint?
+  @objc @IBOutlet @_Concurrency.MainActor(unsafe) public var secondaryImageVerticalCenterToMainImage: UIKit.NSLayoutConstraint?
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func didUpdateFocus(in context: UIKit.UIFocusUpdateContext, with coordinator: UIKit.UIFocusAnimationCoordinator)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreFoundation.CGRect)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) open class ITGNotice : UIKit.UIView, Inthegametv.NibView {
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open var preferredFocusEnvironments: [UIKit.UIFocusEnvironment] {
+    @objc get
+  }
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func awakeFromNib()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func didMoveToSuperview()
+  @objc @IBAction @_Concurrency.MainActor(unsafe) public func actionClose(_ sender: Any?)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreFoundation.CGRect)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class ITGTool {
+  public static func getVideoURL(channelSlug: Swift.String, accountId: Swift.String, language: Swift.String, environment: Inthegametv.ITGEnvironment, completion: @escaping (Swift.String?, Swift.Error?) -> ())
+  @objc deinit
+}
+public struct ITGEnvironment {
+  public let apiBaseURL: Swift.String
+  public let imageBaseURL: Swift.String
+  public let envName: Swift.String
+  public init(apiBaseURL: Swift.String, imageBaseURL: Swift.String, envName: Swift.String)
+  public static let dev: Inthegametv.ITGEnvironment
+  public static let test: Inthegametv.ITGEnvironment
+  public static let stage: Inthegametv.ITGEnvironment
+}
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) open class ITGRatingAnswerView : UIKit.UIView, Inthegametv.NibView {
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func awakeFromNib()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreFoundation.CGRect)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
+}
+public protocol NibView {
+  static func nibName() -> Swift.String
+}
+extension Inthegametv.NibView {
+  public static func nibName() -> Swift.String
+}
+extension Inthegametv.NibView where Self : UIKit.UIView {
+  public static func fromNib() -> Self
+}
+extension UIKit.UIImage {
+  public class func imageWithColor(_ color: UIKit.UIColor) -> UIKit.UIImage
+}
+extension UIKit.UIColor {
+  convenience public init?(hex: Swift.String)
+  convenience public init?(hex: Swift.String, opacity: CoreFoundation.CGFloat)
+}
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) open class ITGShopView : UIKit.UIView, Inthegametv.NibView {
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open var preferredFocusEnvironments: [UIKit.UIFocusEnvironment] {
+    @objc get
+  }
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func awakeFromNib()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreFoundation.CGRect)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
+}
+extension Inthegametv.ITGShopView : UIKit.UITableViewDataSource {
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func tableView(_ tableView: UIKit.UITableView, numberOfRowsInSection section: Swift.Int) -> Swift.Int
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func tableView(_ tableView: UIKit.UITableView, cellForRowAt indexPath: Foundation.IndexPath) -> UIKit.UITableViewCell
+}
+extension Inthegametv.ITGShopView : UIKit.UITableViewDelegate {
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func tableView(_ tableView: UIKit.UITableView, didSelectRowAt indexPath: Foundation.IndexPath)
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func indexPathForPreferredFocusedView(in tableView: UIKit.UITableView) -> Foundation.IndexPath?
+}
+@_inheritsConvenienceInitializers @objc @_Concurrency.MainActor(unsafe) open class FocusTvButton : UIKit.UIButton {
+  @objc @IBInspectable @_Concurrency.MainActor(unsafe) public var normalFont: UIKit.UIFont {
+    @objc get
+    @objc set
+  }
+  @objc @IBInspectable @_Concurrency.MainActor(unsafe) public var focusedFont: UIKit.UIFont {
+    @objc get
+    @objc set
+  }
+  @objc @IBInspectable @_Concurrency.MainActor(unsafe) public var focusedBackgroundColor: UIKit.UIColor {
+    @objc get
+    @objc set
+  }
+  @objc @IBInspectable @_Concurrency.MainActor(unsafe) public var focusedBackgroundEndColor: UIKit.UIColor? {
+    @objc get
+    @objc set
+  }
+  @objc @IBInspectable @_Concurrency.MainActor(unsafe) public var normalBackgroundColor: UIKit.UIColor {
+    @objc get
+    @objc set
+  }
+  @objc @IBInspectable @_Concurrency.MainActor(unsafe) public var normalBackgroundEndColor: UIKit.UIColor? {
+    @objc get
+    @objc set
+  }
+  @objc @IBInspectable @_Concurrency.MainActor(unsafe) public var focusedScaleFactor: CoreFoundation.CGFloat {
+    @objc get
+    @objc set
+  }
+  @objc @IBInspectable @_Concurrency.MainActor(unsafe) public var animationDuration: Swift.Double {
+    @objc get
+    @objc set
+  }
+  @objc @IBInspectable @_Concurrency.MainActor(unsafe) public var focusedTitleColor: UIKit.UIColor {
+    @objc get
+    @objc set
+  }
+  @objc @IBInspectable @_Concurrency.MainActor(unsafe) public var normalTitleColor: UIKit.UIColor {
+    @objc get
+    @objc set
+  }
+  @objc @IBInspectable @_Concurrency.MainActor(unsafe) public var gradientStartPoint: CoreFoundation.CGPoint {
+    @objc get
+    @objc set
+  }
+  @objc @IBInspectable @_Concurrency.MainActor(unsafe) public var gradientEndPoint: CoreFoundation.CGPoint {
+    @objc get
+    @objc set
+  }
+  @objc @IBInspectable @_Concurrency.MainActor(unsafe) public var leftContentInset: CoreFoundation.CGFloat {
+    @objc get
+    @objc set
+  }
+  @objc @IBInspectable @_Concurrency.MainActor(unsafe) public var rightContentInset: CoreFoundation.CGFloat {
+    @objc get
+    @objc set
+  }
+  @objc @IBInspectable @_Concurrency.MainActor(unsafe) public var focusedCornerRadius: CoreFoundation.CGFloat {
+    @objc get
+    @objc set
+  }
+  @objc @IBInspectable @_Concurrency.MainActor(unsafe) public var normalCornerRadius: CoreFoundation.CGFloat {
+    @objc get
+    @objc set
+  }
+  @objc @IBInspectable @_Concurrency.MainActor(unsafe) public var focusedBorderColor: UIKit.UIColor {
+    @objc get
+    @objc set
+  }
+  @objc @IBInspectable @_Concurrency.MainActor(unsafe) public var normalBorderColor: UIKit.UIColor {
+    @objc get
+    @objc set
+  }
+  @objc @IBInspectable @_Concurrency.MainActor(unsafe) public var minWidth: CoreFoundation.CGFloat {
+    @objc get
+    @objc set
+  }
+  @objc @IBInspectable @_Concurrency.MainActor(unsafe) public var minHeight: CoreFoundation.CGFloat {
+    @objc get
+    @objc set
+  }
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open var buttonType: UIKit.UIButton.ButtonType {
+    @objc get
+  }
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreFoundation.CGRect)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func awakeFromNib()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func didMoveToSuperview()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func layoutSubviews()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func didUpdateFocus(in context: UIKit.UIFocusUpdateContext, with coordinator: UIKit.UIFocusAnimationCoordinator)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func pressesBegan(_ presses: Swift.Set<UIKit.UIPress>, with event: UIKit.UIPressesEvent?)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func pressesCancelled(_ presses: Swift.Set<UIKit.UIPress>, with event: UIKit.UIPressesEvent?)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func pressesEnded(_ presses: Swift.Set<UIKit.UIPress>, with event: UIKit.UIPressesEvent?)
+  @objc deinit
+}
+@objc @_Concurrency.MainActor(unsafe) open class SpriteImageView : UIKit.UIImageView {
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreFoundation.CGRect)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @objc deinit
+}
+extension Inthegametv.ITGMenuItem : Swift.Equatable {}
+extension Inthegametv.ITGMenuItem : Swift.Hashable {}
+extension Inthegametv.ITGMenuItem : Swift.RawRepresentable {}
+extension Inthegametv.ITGAnimationType : Swift.Equatable {}
+extension Inthegametv.ITGAnimationType : Swift.Hashable {}
+extension Inthegametv.ITGContent : Swift.Equatable {}
+extension Inthegametv.ITGContent : Swift.Hashable {}
+extension Inthegametv.StorketError : Swift.Equatable {}
+extension Inthegametv.StorketError : Swift.Hashable {}
+extension Inthegametv.StorketType : Swift.Equatable {}
+extension Inthegametv.StorketType : Swift.Hashable {}
+extension Inthegametv.StorketType : Swift.RawRepresentable {}

@@ -122,6 +122,12 @@ import Inthegametv
 }
 
 extension ITGOverlayManager: ITGOverlayDelegate {
+  public func overlayReceivedDeeplink(_ link: String) {
+  }
+  
+  public func overlayRequestedVideoSeek(time: Double) {
+  }
+  
   public func overlayRequestedVideoTime() {
     getOverlay()?.onOverlayRequestedVideoTime?(nil)
   }

@@ -9,12 +9,12 @@ import UIKit
 import Inthegametv
 
 @objc public class ITGRNOverlayView: ITGOverlayView {
-  @objc var accountName: String!
-  @objc var channelId: String!
+  @objc var accountId: String!
+  @objc var channelSlug: String!
   @objc var language: String = "en"
   @objc var environment: String!
-  @objc var userBroadcasterForeignID: String?
-  @objc var userInitialName: String?
+  @objc var foreignId: String?
+  @objc var userName: String?
   private var didLoad = false
   
   @objc var onOverlayRequestedVideoTime: RCTDirectEventBlock?
@@ -52,21 +52,23 @@ import Inthegametv
       didLoad = true
       let env: ITGEnvironment!
       switch self.environment {
-      case "prod":
-        env = .productionDefault
+//      case "prod":
+//        env = .productionDefault
+      case "stage":
+        env = .stage
       case "test":
-        env = .testDefault
+        env = .test
       default:
-        env = .devDefault
+        env = .dev
       }
       
-      load(channelID: self.channelId,
-           broadcasterName: self.accountName,
+      load(channelSlug: self.channelSlug,
+           accountId: self.accountId,
            environment: env,
            delegate: delegate,
            language: self.language ?? "en",
-           userBroadcasterForeignID: self.userBroadcasterForeignID,
-           userInitialName: self.userInitialName)
+           foreignId: self.foreignId,
+           userName: self.userName)
     }
   }
 }
