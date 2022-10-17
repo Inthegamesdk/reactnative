@@ -1,20 +1,13 @@
 package com.itgrnexample
 
-import android.graphics.Color.parseColor
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import com.syncedapps.inthegametv.ITGKey
 import com.syncedapps.inthegametv.ITGOverlayView
 import com.syncedapps.inthegametv.ITGSettings
-import com.syncedapps.inthegametv.ITGTools
-import com.syncedapps.inthegametv.network.CloseOption
-import com.syncedapps.inthegametv.network.ITGEnvironment
 
 class ITGOverlayFragment: Fragment() {
     var overlay: ITGOverlayView? = null
@@ -29,22 +22,22 @@ class ITGOverlayFragment: Fragment() {
         super.onCreateView(inflater, container, savedInstanceState)
 
         val config = ITGSettings(requireContext())
-        config.clearUserToken()
+        config.clearAll()
 
-        val view = ITGOverlayView(requireContext())
-        view.load(settings.channelId,
-            settings.accountName,
-            settings.getEnvironment(),
+        val view = ITGOverlayView(requireContext(), settings.getEnvironment())
+        view.load(settings.accountId,
+            settings.channelSlug,
+            "demos",
             settings.language,
-            settings.userBroadcasterForeignID,
-            settings.userInitialName)
+            settings.foreignId,
+            settings.userName)
 
         view.blockMenu = settings.blockMenu
         view.blockNotifications = settings.blockNotifications
         view.blockSlip = settings.blockSlip
         view.blockSidebar = settings.blockSidebar
         view.injectionDelay = settings.injectionDelay
-        view.openMenuKey = ITGKey.NONE
+        view.openMenuKey = ITGKey.UP
         overlay = view
 
         view.listener = tempManagerRef

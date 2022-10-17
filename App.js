@@ -108,9 +108,9 @@ const App: () => Node = () => {
              resizeMode={"contain"} />
 
       <ITGOverlay style={styles.overlay}
-              accountName={"demos"}
-              channelId={"soccer_predictions"}
-              environment={"prod"}
+              accountId={"6329904e5252d9873d0e5ac2"}
+              channelSlug={"yesnetworkbaseball"}
+              environment={"stage"}
               language={"en"}
               blockSlip={false}
               ref={e => this.overlay = e}

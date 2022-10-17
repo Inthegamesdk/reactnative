@@ -13,17 +13,17 @@ import com.facebook.react.uimanager.*
 import com.facebook.react.uimanager.annotations.ReactProp
 import com.facebook.react.uimanager.events.RCTEventEmitter
 import com.syncedapps.inthegametv.ITGOverlayView
-import com.syncedapps.inthegametv.network.CloseOption
+import com.syncedapps.inthegametv.data.CloseOption
 import com.syncedapps.inthegametv.network.ITGEnvironment
 
 
 data class ITGOverlaySettings(
-    var accountName: String = "",
-    var channelId: String = "",
+    var accountId: String = "",
+    var channelSlug: String = "",
     var language: String? = null,
-    var environment: String? = null,
-    var userBroadcasterForeignID: String? = null,
-    var userInitialName: String? = null,
+    var environmentValue: String? = null,
+    var foreignId: String? = null,
+    var userName: String? = null,
     var blockMenu: Boolean = false,
     var blockNotifications: Boolean = false,
     var blockSlip: Boolean = false,
@@ -31,10 +31,10 @@ data class ITGOverlaySettings(
     var injectionDelay: Int? = null,
 ) {
     fun getEnvironment(): ITGEnvironment {
-        return when(environment) {
-            "prod" -> ITGEnvironment.productionDefault
-            "test" -> ITGEnvironment.testDefault
-            else -> ITGEnvironment.devDefault
+        return when(environmentValue) {
+            "stage" -> ITGEnvironment.stage
+            "test" -> ITGEnvironment.test
+            else -> ITGEnvironment.dev
         }
     }
 }
@@ -62,14 +62,14 @@ class ITGOverlayManager : ViewGroupManager<FrameLayout>, ITGOverlayView.ITGOverl
     var viewID: Int = 0
     var settings = ITGOverlaySettings()
 
-    @ReactProp(name = "accountName")
-    fun setAccountName(view: FrameLayout, value: String = "") {
-        settings.accountName = value
+    @ReactProp(name = "accountId")
+    fun setAccountId(view: FrameLayout, value: String = "") {
+        settings.accountId = value
     }
 
-    @ReactProp(name = "channelId")
-    fun setChannelId(view: FrameLayout, value: String = "") {
-        settings.channelId = value
+    @ReactProp(name = "channelSlug")
+    fun setChannelSlug(view: FrameLayout, value: String = "") {
+        settings.channelSlug = value
     }
 
     @ReactProp(name = "language")
@@ -79,17 +79,17 @@ class ITGOverlayManager : ViewGroupManager<FrameLayout>, ITGOverlayView.ITGOverl
 
     @ReactProp(name = "environment")
     fun setEnvironment(view: FrameLayout, value: String = "") {
-        settings.environment = value
+        settings.environmentValue = value
     }
 
-    @ReactProp(name = "userBroadcasterForeignID")
-    fun setUserBroadcasterForeignID(view: FrameLayout, value: String = "") {
-        settings.userBroadcasterForeignID = value
+    @ReactProp(name = "foreignId")
+    fun setForeignId(view: FrameLayout, value: String = "") {
+        settings.foreignId = value
     }
 
-    @ReactProp(name = "userInitialName")
-    fun setUserInitialName(view: FrameLayout, value: String = "") {
-        settings.userInitialName = value
+    @ReactProp(name = "userName")
+    fun setUserName(view: FrameLayout, value: String = "") {
+        settings.userName = value
     }
 
     @ReactProp(name = "blockMenu")
@@ -133,7 +133,7 @@ class ITGOverlayManager : ViewGroupManager<FrameLayout>, ITGOverlayView.ITGOverl
             "closeShop" -> overlayView?.closeShop()
             "closeChat" -> overlayView?.closeChat()
             "videoPlaying" -> overlayView?.videoPlaying((args?.getInt(0) ?: 0).toLong())
-            "videoPaused" -> overlayView?.videoPaused()
+            "videoPaused" -> overlayView?.videoPaused((args?.getInt(0) ?: 0).toLong())
             "setLiveMode" -> overlayView?.setLiveMode(args?.getBoolean(0) ?: true)
             "handleBackPressIfNeeded" -> this.handleBackPressIfNeeded()
             "receivedKeyEvent" -> overlayView?.receivedKeyEvent(KeyEvent(0, (args?.getInt(0) ?: 0)))
@@ -296,5 +296,7 @@ class ITGOverlayManager : ViewGroupManager<FrameLayout>, ITGOverlayView.ITGOverl
 
     override fun overlayClickedUserArea() {}
     override fun overlayClosedByUser(type: CloseOption, timestamp: Long) {}
-    override fun overlayRequestedPortraitTopGap(): Int { return 0 }
+    override fun overlayReceivedDeeplink(customUrl: String) {}
+    override fun overlayRequestedSeekTo(timestampMillis: Long) {}
+//    override fun overlayRequestedPortraitTopGap(): Int { return 0 }
 }

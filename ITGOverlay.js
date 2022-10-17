@@ -13,12 +13,12 @@ const ITGOverlayView = requireNativeComponent(COMPONENT_NAME);
 
 export default class ITGOverlay extends Component {
   static propTypes = {
-    accountName: PropTypes.string,
-    channelId: PropTypes.string,
+    accountId: PropTypes.string,
+    channelSlug: PropTypes.string,
     language: PropTypes.string,
     environment: PropTypes.string,
-    userBroadcasterForeignID: PropTypes.string,
-    userInitialName: PropTypes.string,
+    foreignId: PropTypes.string,
+    userName: PropTypes.string,
     blockMenu: PropTypes.bool,
     blockNotifications: PropTypes.bool,
     blockSlip: PropTypes.bool,
@@ -107,16 +107,16 @@ export default class ITGOverlay extends Component {
 
 
   render() {
-    const { accountName, channelId, language, environment, userBroadcasterForeignID, userInitialName, blockSlip, blockMenu, blockSidebar, blockNotifications, injectionDelay, style } = this.props;
+    const { accountId, channelSlug, language, environment, foreignId, userName, blockSlip, blockMenu, blockSidebar, blockNotifications, injectionDelay, style } = this.props;
     return (
       <ITGOverlayView
       style={itgStyles.overlay}
-      accountName={accountName}
-      channelId={channelId}
+      accountId={accountId}
+      channelSlug={channelSlug}
       language={language}
       environment={environment}
-      userBroadcasterForeignID={userBroadcasterForeignID}
-      userInitialName={userInitialName}
+      foreignId={foreignId}
+      userName={userName}
       blockSlip={blockSlip}
       blockMenu={blockMenu}
       blockSidebar={blockSidebar}
