@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import type {Node} from 'react';
 import ReactNative, {
   Platform,
@@ -37,6 +37,9 @@ const App: () => Node = () => {
     return true;
   };
 
+  const [overlayFocused, setOverlayFocus] = useState(false);
+  const [videoFocused, setVideoFocus] = useState(false);
+
   useEffect(() => {
     //important - loads ITG overlay
     this.overlay.setup()
@@ -66,8 +69,16 @@ const App: () => Node = () => {
   //pause and play the video when asked to
   onOverlayRequestedPlay = e => { this.player.paused = true }
   onOverlayRequestedPause = e => { this.player.paused = false }
-  onOverlayRequestedFocus = e => {}
-  onOverlayReleasedFocus = e => {}
+  onOverlayRequestedFocus = e => {
+    setVideoFocus(false)
+    setOverlayFocus(true)
+    console.log("OVERLAY FOCUS")
+  }
+  onOverlayReleasedFocus = e => {
+    setOverlayFocus(false)
+    setVideoFocus(true)
+    console.log("VIDEO FOCUS")
+  }
 
   //optional - resize video if needed when ITG content appears
   onOverlayResizeVideoWidth = e => {
@@ -98,16 +109,21 @@ const App: () => Node = () => {
   return (
     <View style={styles.container}>
       <StatusBar barStyle={'light-content'} />
-      <Video source={{uri: "https://media2.inthegame.io/uploads/videos/streamers/278dee276f8d43d11dad3030d0aa449e.a4ef1c02ad73f7b5ed0a6df3809abf12.mp4"}}   // Can be a URL or a local file.
-             ref={(ref) => { this.player = ref }}
-             onBuffer={this.onBuffer}
-             onError={this.videoError}
-             onSeek={this.onSeek}
-             style={styles.video}
-             controls={false}
-             resizeMode={"contain"} />
-
-      <ITGOverlay style={styles.overlay}
+      <View style={styles.container}
+          ref={(ref) => { this.playerContainer = ref }}
+          hasTVPreferredFocus={videoFocused}>
+          <Video source={{uri: "https://media2.inthegame.io/uploads/videos/streamers/278dee276f8d43d11dad3030d0aa449e.a4ef1c02ad73f7b5ed0a6df3809abf12.mp4"}}   // Can be a URL or a local file.
+              ref={(ref) => { this.player = ref }}
+              onBuffer={this.onBuffer}
+              onError={this.videoError}
+              onSeek={this.onSeek}
+              style={styles.video}
+              controls={true}
+              resizeMode={"contain"} />
+      </View>
+      <View style={styles.overlayContainer}
+            hasTVPreferredFocus={overlayFocused}>
+          <ITGOverlay style={styles.overlay}
               accountId={"6329904e5252d9873d0e5ac2"}
               channelSlug={"yesnetworkbaseball"}
               environment={"stage"}
@@ -127,7 +143,7 @@ const App: () => Node = () => {
               onOverlayResizeVideoHeight={this.onOverlayResizeVideoHeight}
               onOverlayResetVideoHeight={this.onOverlayResetVideoHeight}
               onOverlayBackPressResult={this.onOverlayBackPressResult}/>
-
+          </View>
     </View>
   );
 };
@@ -144,5 +160,12 @@ const styles = StyleSheet.create({
   },
   overlay: {
     flex: 1,
+  },
+  overlayContainer: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
   },
   });
