@@ -202,6 +202,12 @@ PODS:
     - glog
   - react-native-keyevent (0.2.8):
     - React
+  - react-native-safe-area-context (4.4.1):
+    - RCT-Folly
+    - RCTRequired
+    - RCTTypeSafety
+    - React-Core
+    - ReactCommon/turbomodule/core
   - react-native-video (5.2.1):
     - React-Core
     - react-native-video/Video (= 5.2.1)
@@ -265,6 +271,9 @@ PODS:
     - React-jsi (= 0.69.5-2)
     - React-logger (= 0.69.5-2)
     - React-perflogger (= 0.69.5-2)
+  - RNScreens (3.18.2):
+    - React-Core
+    - React-RCTImage
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -290,6 +299,7 @@ DEPENDENCIES:
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
   - react-native-keyevent (from `../node_modules/react-native-keyevent`)
+  - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - react-native-video (from `../node_modules/react-native-video`)
   - React-perflogger (from `../node_modules/react-native/ReactCommon/reactperflogger`)
   - React-RCTAnimation (from `../node_modules/react-native/Libraries/NativeAnimation`)
@@ -301,6 +311,7 @@ DEPENDENCIES:
   - React-RCTText (from `../node_modules/react-native/Libraries/Text`)
   - React-runtimeexecutor (from `../node_modules/react-native/ReactCommon/runtimeexecutor`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
+  - RNScreens (from `../node_modules/react-native-screens`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 EXTERNAL SOURCES:
@@ -346,6 +357,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/logger"
   react-native-keyevent:
     :path: "../node_modules/react-native-keyevent"
+  react-native-safe-area-context:
+    :path: "../node_modules/react-native-safe-area-context"
   react-native-video:
     :path: "../node_modules/react-native-video"
   React-perflogger:
@@ -368,6 +381,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/runtimeexecutor"
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
+  RNScreens:
+    :path: "../node_modules/react-native-screens"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -393,6 +408,7 @@ SPEC CHECKSUMS:
   React-jsinspector: d86d5ca195e256f2373c21816d96cd13a1f4452f
   React-logger: 076c2a7b1a633788189a4e8e391d35505ef253f0
   react-native-keyevent: f8728b8c73dbfbcb4d2c56d9e78be082c673c456
+  react-native-safe-area-context: ec0d85aca8110dae9327430a9541fec165352dab
   react-native-video: 79a186e378d327b6c08bc3982c17ef455c6bd75c
   React-perflogger: eb259199698e3c105f8433333e8f333d826dee98
   React-RCTAnimation: de05408b2962c9c8a44f929b579c5aab99872bd2
@@ -404,6 +420,7 @@ SPEC CHECKSUMS:
   React-RCTText: 16122ecd9be53be613b2206a13e5cf987835c8cf
   React-runtimeexecutor: 44fe73dca7d31245dfc031971a2ce14085c8d5fe
   ReactCommon: 3f6173ad12133f7e032f4c8d061dba181115c1c0
+  RNScreens: 34cc502acf1b916c582c60003dc3089fa01dc66d
   Yoga: 5f6b76dc63952163378af6afc502d8bab96643a1
 
 PODFILE CHECKSUM: baec3a86b117cdd03dc8b76e1d610c613cdeb9f5

@@ -10,11 +10,11 @@ import React
 import Inthegametv
 
 @objc extension ITGOverlayManager {
-    
+  
   public override static func requiresMainQueueSetup() -> Bool {
-      return true
-    }
-
+    return true
+  }
+  
   func getOverlay() -> ITGRNOverlayView? {
     return self.overlayView as? ITGRNOverlayView
   }
@@ -33,85 +33,85 @@ import Inthegametv
   }
   
   @objc func openMenu(_ node: NSNumber) {
-      DispatchQueue.main.async {
-        self.getOverlay(node: node).openMenu()
-      }
+    DispatchQueue.main.async {
+      self.getOverlay(node: node).openMenu()
+    }
   }
   @objc func openAccount(_ node: NSNumber) {
-      DispatchQueue.main.async {
-        self.getOverlay(node: node).openAccount()
-      }
+    DispatchQueue.main.async {
+      self.getOverlay(node: node).openAccount()
+    }
   }
   @objc func openLeaderboard(_ node: NSNumber) {
-      DispatchQueue.main.async {
-        self.getOverlay(node: node).openLeaderboard()
-      }
+    DispatchQueue.main.async {
+      self.getOverlay(node: node).openLeaderboard()
+    }
   }
   @objc func openPredictions(_ node: NSNumber) {
-      DispatchQueue.main.async {
-        self.getOverlay(node: node).openPredictions()
-      }
+    DispatchQueue.main.async {
+      self.getOverlay(node: node).openPredictions()
+    }
   }
   @objc func openShop(_ node: NSNumber) {
-      DispatchQueue.main.async {
-        self.getOverlay(node: node).openShop()
-      }
+    DispatchQueue.main.async {
+      self.getOverlay(node: node).openShop()
+    }
   }
   @objc func openChat(_ node: NSNumber) {
-      DispatchQueue.main.async {
-        self.getOverlay(node: node).openChat()
-      }
+    DispatchQueue.main.async {
+      self.getOverlay(node: node).openChat()
+    }
   }
   @objc func closeMenu(_ node: NSNumber) {
-      DispatchQueue.main.async {
-        self.getOverlay(node: node).closeMenu()
-      }
+    DispatchQueue.main.async {
+      self.getOverlay(node: node).closeMenu()
+    }
   }
   @objc func closeAccount(_ node: NSNumber) {
-      DispatchQueue.main.async {
-        self.getOverlay(node: node).closeAccount()
-      }
+    DispatchQueue.main.async {
+      self.getOverlay(node: node).closeAccount()
+    }
   }
   @objc func closeLeaderboard(_ node: NSNumber) {
-      DispatchQueue.main.async {
-        self.getOverlay(node: node).closeLeaderboard()
-      }
+    DispatchQueue.main.async {
+      self.getOverlay(node: node).closeLeaderboard()
+    }
   }
   @objc func closePredictions(_ node: NSNumber) {
-      DispatchQueue.main.async {
-        self.getOverlay(node: node).closePredictions()
-      }
+    DispatchQueue.main.async {
+      self.getOverlay(node: node).closePredictions()
+    }
   }
   @objc func closeShop(_ node: NSNumber) {
-      DispatchQueue.main.async {
-        self.getOverlay(node: node).closeShop()
-      }
+    DispatchQueue.main.async {
+      self.getOverlay(node: node).closeShop()
+    }
   }
   @objc func closeChat(_ node: NSNumber) {
-      DispatchQueue.main.async {
-        self.getOverlay(node: node).closeChat()
-      }
+    DispatchQueue.main.async {
+      self.getOverlay(node: node).closeChat()
+    }
   }
   @objc func videoPlaying(_ node: NSNumber, time: NSNumber) {
-      DispatchQueue.main.async {
-        self.getOverlay(node: node).videoPlaying(time: time.doubleValue)
-      }
+    DispatchQueue.main.async {
+      self.getOverlay(node: node).videoPlaying(time: time.doubleValue)
+    }
   }
   @objc func videoPaused(_ node: NSNumber) {
-      DispatchQueue.main.async {
-        self.getOverlay(node: node).videoPaused()
-      }
+    DispatchQueue.main.async {
+      self.getOverlay(node: node).videoPaused()
+    }
   }
   @objc func setLiveMode(_ node: NSNumber, enabled: NSNumber) {
-      DispatchQueue.main.async {
-        self.getOverlay(node: node).setLiveMode(enabled: enabled.boolValue)
-      }
+    DispatchQueue.main.async {
+      self.getOverlay(node: node).setLiveMode(enabled: enabled.boolValue)
+    }
   }
   @objc func handleBackPressIfNeeded(_ node: NSNumber) {
-      DispatchQueue.main.async {
-        let handled = self.getOverlay(node: node).closeInteractionIfNeeded()
-        self.overlayBackPressResult(handled: handled)
-      }
+    DispatchQueue.main.async {
+      let handled = self.getOverlay(node: node).closeInteractionIfNeeded()
+      self.overlayBackPressResult(handled: handled)
+    }
   }
   @objc func setup(_ node: NSNumber, viewID: NSNumber) {
     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
@@ -119,6 +119,7 @@ import Inthegametv
     }
   }
   @objc func receivedKeyEvent(_ node: NSNumber, keyCode: NSNumber) {}
+  @objc func shutdown(_ node: NSNumber) {}
 }
 
 extension ITGOverlayManager: ITGOverlayDelegate {

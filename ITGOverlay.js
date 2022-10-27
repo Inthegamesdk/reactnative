@@ -147,6 +147,14 @@ export default class ITGOverlay extends Component {
     [findNodeHandle(this.ref)]
   );
 
+  shutdown = (...args) => {
+    UIManager.dispatchViewManagerCommand(
+      findNodeHandle(this.ref),
+      "shutdown",
+      [...args]
+    );
+  };
+  
   openMenu = (...args) => {
     UIManager.dispatchViewManagerCommand(
       findNodeHandle(this.ref),
