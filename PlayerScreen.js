@@ -43,13 +43,12 @@ const PlayerScreen = ({ navigation, route }) => {
 
     //handling the back button events
     BackHandler.addEventListener("hardwareBackPress", backAction);
-    return () =>
+    return () => {
+      KeyEvent.removeKeyDownListener();
       BackHandler.removeEventListener("hardwareBackPress", backAction);
+    }
   }, []);
 
-  componentWillUnmount() {
-    this.overlay.shutdown()
-  };
   //on this call you should send the overlay the current playback time in seconds
   onOverlayRequestedVideoTime = e => {
     console.log("REQUEST VIDEO TIME")
@@ -79,7 +78,7 @@ const PlayerScreen = ({ navigation, route }) => {
   //handle back button press
   onOverlayBackPressResult = e => {
     if (!e.handled) {
-      BackHandler.exitApp()
+      navigation.goBack()
     }
   }
 

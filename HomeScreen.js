@@ -35,8 +35,8 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-    <View style={styles.image}>
-    <Image
+    <View style={styles.imageContainer}>
+    <Image style={styles.image}
         source={ require('./img/logo_wide.png') }
       />
       </View>
@@ -63,6 +63,8 @@ const HomeScreen = ({ navigation }) => {
 
 export default HomeScreen;
 
+const scale = Platform.OS === 'ios' ? 2.0 : 1.0;
+
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#000000",
@@ -70,14 +72,18 @@ const styles = StyleSheet.create({
     width:'100%',
     justifyContent: "center",
     alignItems: "center",
-    paddingTop: 120,
-    paddingBottom: 120
+    paddingTop: 60*scale,
+    paddingBottom: 60*scale
   },
   image: {
-    padding: 60
+    resizeMode: "contain",
+    height: 120*scale,
+  },
+  imageContainer: {
+    padding: 30*scale
   },
   list: {
-    height: 200,
+    height: 100*scale,
     width:'100%',
   },
   video: {
@@ -87,23 +93,23 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   item: {
-    height: 280,
-    width: 320,
+    height: 140*scale,
+    width: 160*scale,
    justifyContent: "center",
    alignItems: "center"
   },
   itemButton: {
-      height: 240,
-      width: 280,
+      height: 120*scale,
+      width: 140*scale,
     backgroundColor: "#222222",
-    borderRadius: 20,
-   padding: 20,
+    borderRadius: 10*scale,
+   padding: 10*scale,
   justifyContent: "center",
   alignItems: "center"
   },
   itemText: {
     color: "#FFFFFF",
-   fontSize: 30,
+   fontSize: 16*scale,
    fontWeight: '600',
   },
   highlight: {
