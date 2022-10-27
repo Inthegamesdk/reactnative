@@ -36,7 +36,8 @@ export default class ITGOverlay extends Component {
     onOverlayResetVideoWidth: PropTypes.func,
     onOverlayResizeVideoHeight: PropTypes.func,
     onOverlayResetVideoHeight: PropTypes.func,
-    onOverlayBackPressResult: PropTypes.func
+    onOverlayBackPressResult: PropTypes.func,
+    onDidGetVideoURL: PropTypes.func
   };
 
   _onOverlayRequestedVideoTime = event => {
@@ -104,6 +105,11 @@ export default class ITGOverlay extends Component {
       this.props.onOverlayBackPressResult(event.nativeEvent);
     }
   };
+  _onDidGetVideoURL = event => {
+    if (this.props.onDidGetVideoURL) {
+      this.props.onDidGetVideoURL(event.nativeEvent);
+    }
+  };
 
 
   render() {
@@ -136,6 +142,7 @@ export default class ITGOverlay extends Component {
       onOverlayResizeVideoHeight={this._onOverlayResizeVideoHeight}
       onOverlayResetVideoHeight={this._onOverlayResetVideoHeight}
       onOverlayBackPressResult={this._onOverlayBackPressResult}
+      onDidGetVideoURL={this._onDidGetVideoURL}
       />
     );
   }
@@ -154,7 +161,7 @@ export default class ITGOverlay extends Component {
       [...args]
     );
   };
-  
+
   openMenu = (...args) => {
     UIManager.dispatchViewManagerCommand(
       findNodeHandle(this.ref),
@@ -273,7 +280,16 @@ export default class ITGOverlay extends Component {
       "receivedKeyEvent",
       [keyCode]
     );
-  };}
+  };
+  getVideoURL = (...args) => {
+    UIManager.dispatchViewManagerCommand(
+      findNodeHandle(this.ref),
+      "getVideoURL",
+      [...args]
+    );
+  };
+  }
+
 const itgStyles = StyleSheet.create({
   overlay: {
     position: 'absolute',

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import type {Node} from 'react';
 import ReactNative, {
   Platform,
@@ -19,8 +19,12 @@ import Video from 'react-native-video';
 import KeyEvent from 'react-native-keyevent';
 import ITGOverlay from './ITGOverlay.js';
 
-
+LogBox.ignoreLogs([
+  'Trying to load empty source.',
+]);
 const PlayerScreen = ({ navigation, route }) => {
+  const [videoURL, setVideoURL] = useState("");
+
   //back button action
   const backAction = () => {
     this.overlay.handleBackPressIfNeeded()
@@ -30,6 +34,8 @@ const PlayerScreen = ({ navigation, route }) => {
   useEffect(() => {
     //important - loads ITG overlay
     this.overlay.setup()
+    //get video url if needed
+    this.overlay.getVideoURL()
 
     //to handle the menu key in tvOS
     TVEventControl.enableTVMenuKey();
@@ -74,6 +80,12 @@ const PlayerScreen = ({ navigation, route }) => {
   onOverlayResetVideoHeight = e => {
     console.log("RESET VIDEO HEIGHT")
   }
+  onDidGetVideoURL = e => {
+    console.log("VIDEO URL " + e.url)
+
+    setVideoURL(e.url)
+    //this.player.paused = false
+  }
 
   //handle back button press
   onOverlayBackPressResult = e => {
@@ -90,7 +102,7 @@ const PlayerScreen = ({ navigation, route }) => {
   return (
     <View style={styles.container}>
       <StatusBar barStyle={'light-content'} />
-      <Video source={{uri: "https://media2.inthegame.io/uploads/videos/streamers/278dee276f8d43d11dad3030d0aa449e.a4ef1c02ad73f7b5ed0a6df3809abf12.mp4"}}   // Can be a URL or a local file.
+      <Video source={{uri: videoURL}} 
              ref={(ref) => { this.player = ref }}
              onBuffer={this.onBuffer}
              onError={this.videoError}
@@ -118,7 +130,8 @@ const PlayerScreen = ({ navigation, route }) => {
               onOverlayResetVideoWidth={this.onOverlayResetVideoWidth}
               onOverlayResizeVideoHeight={this.onOverlayResizeVideoHeight}
               onOverlayResetVideoHeight={this.onOverlayResetVideoHeight}
-              onOverlayBackPressResult={this.onOverlayBackPressResult}/>
+              onOverlayBackPressResult={this.onOverlayBackPressResult}
+              onDidGetVideoURL={this.onDidGetVideoURL}/>
     </View>
   );
 };

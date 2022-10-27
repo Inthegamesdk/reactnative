@@ -61,6 +61,7 @@ RCT_EXTERN_METHOD(setLiveMode:(nonnull NSNumber *)node enabled:(nonnull NSNumber
 RCT_EXTERN_METHOD(setup:(nonnull NSNumber *)node viewID:(nonnull NSNumber *)viewID)
 RCT_EXTERN_METHOD(handleBackPressIfNeeded:(nonnull NSNumber *)node)
 RCT_EXTERN_METHOD(receivedKeyEvent:(nonnull NSNumber *)node keyCode:(nonnull NSNumber *)keyCode)
+RCT_EXTERN_METHOD(getVideoURL:(nonnull NSNumber *)node)
 
 - (UIView *)view {
   return [self createOverlay];

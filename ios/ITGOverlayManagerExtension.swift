@@ -120,6 +120,8 @@ import Inthegametv
   }
   @objc func receivedKeyEvent(_ node: NSNumber, keyCode: NSNumber) {}
   @objc func shutdown(_ node: NSNumber) {}
+  @objc func getVideoURL(_ node: NSNumber) {
+  }
 }
 
 extension ITGOverlayManager: ITGOverlayDelegate {

@@ -13,6 +13,7 @@ import com.facebook.react.uimanager.*
 import com.facebook.react.uimanager.annotations.ReactProp
 import com.facebook.react.uimanager.events.RCTEventEmitter
 import com.syncedapps.inthegametv.ITGOverlayView
+import com.syncedapps.inthegametv.ITGTools
 import com.syncedapps.inthegametv.data.CloseOption
 import com.syncedapps.inthegametv.network.ITGEnvironment
 
@@ -136,6 +137,7 @@ class ITGOverlayManager : ViewGroupManager<FrameLayout>, ITGOverlayView.ITGOverl
             "videoPaused" -> overlayView?.videoPaused((args?.getInt(0) ?: 0).toLong())
             "setLiveMode" -> overlayView?.setLiveMode(args?.getBoolean(0) ?: true)
             "handleBackPressIfNeeded" -> this.handleBackPressIfNeeded()
+            "getVideoURL" -> this.getVideoURL()
             "receivedKeyEvent" -> overlayView?.receivedKeyEvent(KeyEvent(0, (args?.getInt(0) ?: 0)))
             "setup" -> {
                 val viewID = args?.getInt(0) ?: 0
@@ -228,6 +230,8 @@ class ITGOverlayManager : ViewGroupManager<FrameLayout>, ITGOverlayView.ITGOverl
             MapBuilder.of("registrationName", "onOverlayResetVideoWidth")
         map["onOverlayBackPressResult"] =
             MapBuilder.of("registrationName", "onOverlayBackPressResult")
+        map["onDidGetVideoURL"] =
+            MapBuilder.of("registrationName", "onDidGetVideoURL")
         return map
     }
 
@@ -239,6 +243,20 @@ class ITGOverlayManager : ViewGroupManager<FrameLayout>, ITGOverlayView.ITGOverl
         context
             .getJSModule(RCTEventEmitter::class.java)
             ?.receiveEvent(viewID, eventName, params)
+    }
+
+    private fun getVideoURL() {
+        ITGTools.getVideoURL(
+            settings.accountId,
+            settings.channelSlug,
+            settings.getEnvironment(),
+            reactContext!!
+        ) { videoURL, _ ->
+            var params = Arguments.createMap()
+            params.putString("url", videoURL)
+            sendEvent(reactContext, "onDidGetVideoURL", params)
+        }
+
     }
 
     //add methods!!!
