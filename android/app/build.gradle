@@ -291,7 +291,7 @@ dependencies {
     }
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.7.0'
+    implementation 'androidx.core:core-ktx:1.9.0'
 //    implementation 'androidx.appcompat:appcompat:1.2.0'
 
 //    implementation 'com.github.Inthegamesdk:ITGAndroidRelease:1.9.4-compat'
