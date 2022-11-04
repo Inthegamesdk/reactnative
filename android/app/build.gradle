@@ -295,7 +295,7 @@ dependencies {
 //    implementation 'androidx.appcompat:appcompat:1.2.0'
 
 //    implementation 'com.github.Inthegamesdk:ITGAndroidRelease:1.9.4-compat'
-    implementation 'com.github.Inthegamesdk:ITGAndroidRelease:2.0.29'
+    implementation 'com.github.Inthegamesdk:ITGAndroidRelease:2.0.32'
 }
 
 if (isNewArchitectureEnabled()) {

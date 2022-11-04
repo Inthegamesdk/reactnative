@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import type {Node} from 'react';
 import ReactNative, {
   Platform,
@@ -24,6 +24,9 @@ LogBox.ignoreLogs([
 ]);
 const PlayerScreen = ({ navigation, route }) => {
   const [videoURL, setVideoURL] = useState("");
+  const [videoPaused, setVideoPaused] = useState(false);
+
+  const videoTime = useRef(0.0)
 
   //back button action
   const backAction = () => {
@@ -57,13 +60,21 @@ const PlayerScreen = ({ navigation, route }) => {
 
   //on this call you should send the overlay the current playback time in seconds
   onOverlayRequestedVideoTime = e => {
-    console.log("REQUEST VIDEO TIME")
-    this.overlay.videoPlaying(0)
+    console.log("REQUEST VIDEO TIME " + videoTime.current)
+    this.overlay.videoPlaying(videoTime.current * 1000)
   }
 
   //pause and play the video when asked to
-  onOverlayRequestedPlay = e => { this.player.paused = true }
-  onOverlayRequestedPause = e => { this.player.paused = false }
+  onOverlayRequestedPlay = e => {
+    setVideoPaused(false)
+    this.overlay.videoPlaying(videoTime.current * 1000)
+    console.log("REQUEST VIDEO PLAY " + videoTime.current)
+  }
+  onOverlayRequestedPause = e => {
+    setVideoPaused(true)
+    this.overlay.videoPaused(videoTime.current * 1000)
+    console.log("REQUEST VIDEO PAUSE " + videoTime.current)
+  }
   onOverlayRequestedFocus = e => {}
   onOverlayReleasedFocus = e => {}
 
@@ -84,7 +95,7 @@ const PlayerScreen = ({ navigation, route }) => {
     console.log("VIDEO URL " + e.url)
 
     setVideoURL(e.url)
-    //this.player.paused = false
+    this.overlay.videoPlaying(0.0)
   }
 
   //handle back button press
@@ -96,18 +107,24 @@ const PlayerScreen = ({ navigation, route }) => {
 
   onSeek = e => {
     console.log("VIDEO SEEK " + e.currentTime);
-    this.overlay.videoPlaying(e.currentTime)
+    this.overlay.videoPlaying(e.currentTime * 1000)
+  }
+
+  onProgress = e => {
+    videoTime.current = e.currentTime
   }
 
   return (
     <View style={styles.container}>
       <StatusBar barStyle={'light-content'} />
-      <Video source={{uri: videoURL}} 
+      <Video source={{uri: videoURL}}
              ref={(ref) => { this.player = ref }}
              onBuffer={this.onBuffer}
              onError={this.videoError}
              onSeek={this.onSeek}
+             onProgress={this.onProgress}
              style={styles.video}
+             paused={videoPaused}
              controls={false}
              resizeMode={"contain"} />
 
