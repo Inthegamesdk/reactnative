@@ -60,7 +60,7 @@ const PlayerScreen = ({ navigation, route }) => {
 
   //on this call you should send the overlay the current playback time in seconds
   onOverlayRequestedVideoTime = e => {
-    console.log("REQUEST VIDEO TIME " + videoTime.current)
+    console.log("REQUEST VIDEO TIME NEW" + videoTime.current)
     this.overlay.videoPlaying(videoTime.current * 1000)
   }
 
@@ -71,6 +71,7 @@ const PlayerScreen = ({ navigation, route }) => {
     console.log("REQUEST VIDEO PLAY " + videoTime.current)
   }
   onOverlayRequestedPause = e => {
+    console.log("VIDEO PAUSE CALLED")
     setVideoPaused(true)
     this.overlay.videoPaused(videoTime.current * 1000)
     console.log("REQUEST VIDEO PAUSE " + videoTime.current)
@@ -95,7 +96,10 @@ const PlayerScreen = ({ navigation, route }) => {
     console.log("VIDEO URL " + e.url)
 
     setVideoURL(e.url)
-    this.overlay.videoPlaying(0.0)
+    setTimeout(() => {
+      console.log("SYNC VIDEO TIME" + videoTime.current)
+      this.overlay.videoPlaying(videoTime.current * 1000)
+    }, 2000)
   }
 
   //handle back button press
@@ -123,6 +127,7 @@ const PlayerScreen = ({ navigation, route }) => {
              onError={this.videoError}
              onSeek={this.onSeek}
              onProgress={this.onProgress}
+             progressUpdateInterval={50.0}
              style={styles.video}
              paused={videoPaused}
              controls={false}
