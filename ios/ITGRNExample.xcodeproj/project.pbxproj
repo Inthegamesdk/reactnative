@@ -22,6 +22,9 @@
 		6DBE95022875EDBB009524E0 /* Inthegametv.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DBE95002875EDBB009524E0 /* Inthegametv.xcframework */; };
 		6DBE95052875EE87009524E0 /* ITGOverlayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DBE95042875EE87009524E0 /* ITGOverlayManager.m */; };
 		6DBE95082875F2EF009524E0 /* ITGOverlayManagerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DBE95072875F2EF009524E0 /* ITGOverlayManagerExtension.swift */; };
+		6DC2AA3029265D3500925CFC /* StorketService.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DC2AA2F29265D3500925CFC /* StorketService.xcframework */; };
+		6DC2AA3129265D3500925CFC /* StorketService.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DC2AA2F29265D3500925CFC /* StorketService.xcframework */; };
+		6DC2AA3329265D4800925CFC /* InthegametviOS.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DC2AA3229265D4800925CFC /* InthegametviOS.xcframework */; };
 		6DDF3BA1287C6C1E00AD6C90 /* ITGRNOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDF3BA0287C6C1E00AD6C90 /* ITGRNOverlayView.swift */; };
 		6DF4EA69287C737800A9D158 /* ITGRNOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDF3BA0287C6C1E00AD6C90 /* ITGRNOverlayView.swift */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
@@ -71,6 +74,8 @@
 		6DBE95042875EE87009524E0 /* ITGOverlayManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ITGOverlayManager.m; sourceTree = "<group>"; };
 		6DBE95062875F2EE009524E0 /* ITGRNExample-tvOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ITGRNExample-tvOS-Bridging-Header.h"; sourceTree = "<group>"; };
 		6DBE95072875F2EF009524E0 /* ITGOverlayManagerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ITGOverlayManagerExtension.swift; sourceTree = "<group>"; };
+		6DC2AA2F29265D3500925CFC /* StorketService.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = StorketService.xcframework; sourceTree = "<group>"; };
+		6DC2AA3229265D4800925CFC /* InthegametviOS.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = InthegametviOS.xcframework; sourceTree = "<group>"; };
 		6DDF3BA0287C6C1E00AD6C90 /* ITGRNOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ITGRNOverlayView.swift; path = ITGRNExample/ITGRNOverlayView.swift; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = ITGRNExample/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8DC2855AB2CCC04BED0978AE /* libPods-ITGRNExample.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ITGRNExample.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -95,6 +100,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6DC2AA3329265D4800925CFC /* InthegametviOS.xcframework in Frameworks */,
+				6DC2AA3029265D3500925CFC /* StorketService.xcframework in Frameworks */,
 				269984920579226908D49904 /* libPods-ITGRNExample.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -105,6 +112,7 @@
 			files = (
 				6DBE94FE2875E75C009524E0 /* libreact-native-video-tvOS.a in Frameworks */,
 				6DBE95022875EDBB009524E0 /* Inthegametv.xcframework in Frameworks */,
+				6DC2AA3129265D3500925CFC /* StorketService.xcframework in Frameworks */,
 				EE57DEA5314790D63C074D03 /* libPods-ITGRNExample-tvOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -152,6 +160,8 @@
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
 				6DBE95002875EDBB009524E0 /* Inthegametv.xcframework */,
+				6DC2AA3229265D4800925CFC /* InthegametviOS.xcframework */,
+				6DC2AA2F29265D3500925CFC /* StorketService.xcframework */,
 				6DBE95062875F2EE009524E0 /* ITGRNExample-tvOS-Bridging-Header.h */,
 			);
 			name = ITGRNExample;
@@ -726,12 +736,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6KKS6W5LF2;
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"COCOAPODS=1",
 				);
 				INFOPLIST_FILE = ITGRNExample/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -742,9 +754,9 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.ITGRNExample;
 				PRODUCT_NAME = ITGRNExample;
-				SWIFT_OBJC_BRIDGING_HEADER = "ITGRNExample-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "ITGRNExample-tvOS-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -758,7 +770,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6KKS6W5LF2;
 				INFOPLIST_FILE = ITGRNExample/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -769,9 +783,9 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.ITGRNExample;
 				PRODUCT_NAME = ITGRNExample;
-				SWIFT_OBJC_BRIDGING_HEADER = "ITGRNExample-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "ITGRNExample-tvOS-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

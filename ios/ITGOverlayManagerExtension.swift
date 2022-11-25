@@ -48,9 +48,9 @@ import Inthegametv
     }
   }
   @objc func openPredictions(_ node: NSNumber) {
-    DispatchQueue.main.async {
-      self.getOverlay(node: node).openPredictions()
-    }
+//    DispatchQueue.main.async {
+//      self.getOverlay(node: node).openPredictions()
+//    }
   }
   @objc func openShop(_ node: NSNumber) {
     DispatchQueue.main.async {
@@ -78,9 +78,9 @@ import Inthegametv
     }
   }
   @objc func closePredictions(_ node: NSNumber) {
-    DispatchQueue.main.async {
-      self.getOverlay(node: node).closePredictions()
-    }
+//    DispatchQueue.main.async {
+//      self.getOverlay(node: node).closePredictions()
+//    }
   }
   @objc func closeShop(_ node: NSNumber) {
     DispatchQueue.main.async {
@@ -94,10 +94,10 @@ import Inthegametv
   }
   @objc func videoPlaying(_ node: NSNumber, time: NSNumber) {
     DispatchQueue.main.async {
-      self.getOverlay(node: node).videoPlaying(time: time.doubleValue)
+      self.getOverlay(node: node).videoPlaying(time: time.doubleValue/1000)
     }
   }
-  @objc func videoPaused(_ node: NSNumber) {
+  @objc func videoPaused(_ node: NSNumber, time: NSNumber) {
     DispatchQueue.main.async {
       self.getOverlay(node: node).videoPaused()
     }
@@ -114,13 +114,26 @@ import Inthegametv
     }
   }
   @objc func setup(_ node: NSNumber, viewID: NSNumber) {
-    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
       self.getOverlay(node: node).start(delegate: self)
     }
   }
   @objc func receivedKeyEvent(_ node: NSNumber, keyCode: NSNumber) {}
   @objc func shutdown(_ node: NSNumber) {}
   @objc func getVideoURL(_ node: NSNumber) {
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+      guard let overlay = self.getOverlay() else { return }
+      ITGTool.getVideoURL(channelSlug: overlay.channelSlug,
+                          accountId: overlay.accountId,
+                          language: overlay.language,
+                          environment: overlay.getEnvironment()) { videoURL, error in
+        if let videoURL = videoURL {
+          DispatchQueue.main.async {
+            self.getOverlay()?.onDidGetVideoURL?(["url": videoURL])
+          }
+        }
+      }
+    }
   }
 }
 
