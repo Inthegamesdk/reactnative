@@ -7,7 +7,11 @@
 
 import UIKit
 import React
+#if os(tvOS)
 import Inthegametv
+#else
+import InthegametviOS
+#endif
 
 @objc extension ITGOverlayManager {
   

@@ -26,6 +26,8 @@
 		6DC2AA3129265D3500925CFC /* StorketService.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DC2AA2F29265D3500925CFC /* StorketService.xcframework */; };
 		6DC2AA3329265D4800925CFC /* InthegametviOS.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DC2AA3229265D4800925CFC /* InthegametviOS.xcframework */; };
 		6DDF3BA1287C6C1E00AD6C90 /* ITGRNOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDF3BA0287C6C1E00AD6C90 /* ITGRNOverlayView.swift */; };
+		6DE84D702930FB4A00169E7C /* ITGOverlayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DBE95042875EE87009524E0 /* ITGOverlayManager.m */; };
+		6DE84D712930FB5000169E7C /* ITGOverlayManagerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DBE95072875F2EF009524E0 /* ITGOverlayManagerExtension.swift */; };
 		6DF4EA69287C737800A9D158 /* ITGRNOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDF3BA0287C6C1E00AD6C90 /* ITGRNOverlayView.swift */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		EE57DEA5314790D63C074D03 /* libPods-ITGRNExample-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA54FCF2086BA3B4678F8237 /* libPods-ITGRNExample-tvOS.a */; };
@@ -636,7 +638,9 @@
 			files = (
 				6DDF3BA1287C6C1E00AD6C90 /* ITGRNOverlayView.swift in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
+				6DE84D712930FB5000169E7C /* ITGOverlayManagerExtension.swift in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				6DE84D702930FB4A00169E7C /* ITGOverlayManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
