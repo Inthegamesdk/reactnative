@@ -256,6 +256,7 @@ android {
                 output.versionCodeOverride =
                         defaultConfig.versionCode * 1000 + versionCodes.get(abi)
             }
+
         }
     }
 }
@@ -294,7 +295,7 @@ dependencies {
 //    implementation 'androidx.appcompat:appcompat:1.2.0'
 
 //    implementation 'com.github.Inthegamesdk:ITGAndroidRelease:1.9.4-compat'
-    implementation 'com.github.Inthegamesdk:ITGAndroidRelease:2.0.35'
+    implementation 'com.github.Inthegamesdk:ITGAndroidRelease:2.0.49'
 }
 
 if (isNewArchitectureEnabled()) {
