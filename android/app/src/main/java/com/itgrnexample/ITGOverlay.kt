@@ -218,6 +218,8 @@ class ITGOverlayManager : ViewGroupManager<FrameLayout>, ITGOverlayView.ITGOverl
             MapBuilder.of("registrationName", "onOverlayRequestedPause")
         map["onOverlayRequestedPlay"] =
             MapBuilder.of("registrationName", "onOverlayRequestedPlay")
+        map["overlayRequestedSeekTo"] =
+            MapBuilder.of("registrationName", "onOverlayRequestedSeekTo")
         map["onOverlayRequestedVideoTime"] =
             MapBuilder.of("registrationName", "onOverlayRequestedVideoTime")
         map["onOverlayResizeVideoHeight"] =
@@ -301,13 +303,13 @@ class ITGOverlayManager : ViewGroupManager<FrameLayout>, ITGOverlayView.ITGOverl
     }
 
     override fun overlayResizeVideoHeight(activityHeight: Float) {
-        var params = Arguments.createMap()
+        val params = Arguments.createMap()
         params.putDouble("activityHeight", activityHeight.toDouble())
         sendEvent(reactContext, "onOverlayResizeVideoHeight", params)
     }
 
     override fun overlayResizeVideoWidth(activityWidth: Float) {
-        var params = Arguments.createMap()
+        val params = Arguments.createMap()
         params.putDouble("activityWidth", activityWidth.toDouble())
         sendEvent(reactContext, "onOverlayResizeVideoWidth", params)
     }
@@ -315,6 +317,11 @@ class ITGOverlayManager : ViewGroupManager<FrameLayout>, ITGOverlayView.ITGOverl
     override fun overlayClickedUserArea() {}
     override fun overlayClosedByUser(type: CloseOption, timestamp: Long) {}
     override fun overlayReceivedDeeplink(customUrl: String) {}
-    override fun overlayRequestedSeekTo(timestampMillis: Long) {}
+    override fun overlayRequestedSeekTo(timestampMillis: Long) {
+        val params = Arguments.createMap()
+        params.putDouble("timestampMillis", timestampMillis.toDouble())
+        sendEvent(reactContext, "overlayRequestedSeekTo", Arguments.createMap())
+
+    }
 //    override fun overlayRequestedPortraitTopGap(): Int { return 0 }
 }
