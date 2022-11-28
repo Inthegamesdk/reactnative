@@ -32,10 +32,10 @@ class ITGOverlayFragment: Fragment() {
             settings.foreignId,
             settings.userName)
 
-//        view.blockMenu = settings.blockMenu
-//        view.blockNotifications = settings.blockNotifications
-//        view.blockSlip = settings.blockSlip
-//        view.blockSidebar = settings.blockSidebar
+        view.blockMenu = settings.blockMenu
+        view.blockNotifications = settings.blockNotifications
+        view.blockSlip = settings.blockSlip
+        view.blockSidebar = settings.blockSidebar
         view.injectionDelay = settings.injectionDelay
         view.openMenuKey = ITGKey.UP
         overlay = view
