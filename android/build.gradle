@@ -4,8 +4,7 @@ import org.apache.tools.ant.taskdefs.condition.Os
 
 buildscript {
     ext {
-        buildToolsVersion = "31.0.0"
-        kotlin_version = "1.7.10"
+        kotlin_version = "1.7.20"
         minSdkVersion = 22
         compileSdkVersion = 33
         targetSdkVersion = 33

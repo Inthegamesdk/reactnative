@@ -27,6 +27,7 @@ export default class ITGOverlay extends Component {
     onOverlayRequestedVideoTime: PropTypes.func,
     onOverlayRequestedPause: PropTypes.func,
     onOverlayRequestedPlay: PropTypes.func,
+    onOverlayRequestedSeekTo: PropTypes.func,
     onOverlayRequestedFocus: PropTypes.func,
     onOverlayReleasedFocus: PropTypes.func,
     onOverlayDidTapVideo: PropTypes.func,
@@ -53,6 +54,11 @@ export default class ITGOverlay extends Component {
   _onOverlayRequestedPlay = event => {
     if (this.props.onOverlayRequestedPlay) {
       this.props.onOverlayRequestedPlay(event.nativeEvent);
+    }
+  };
+  _onOverlayRequestedSeekTo = event => {
+    if (this.props.onOverlayRequestedSeekTo) {
+      this.props.onOverlayRequestedSeekTo(event.nativeEvent);
     }
   };
   _onOverlayRequestedFocus = event => {
@@ -132,6 +138,7 @@ export default class ITGOverlay extends Component {
       onOverlayRequestedVideoTime={this._onOverlayRequestedVideoTime}
       onOverlayRequestedPause={this._onOverlayRequestedPause}
       onOverlayRequestedPlay={this._onOverlayRequestedPlay}
+      onOverlayRequestedSeekTo={this._onOverlayRequestedSeekTo}
       onOverlayRequestedFocus={this._onOverlayRequestedFocus}
       onOverlayReleasedFocus={this._onOverlayReleasedFocus}
       onOverlayDidTapVideo={this._onOverlayDidTapVideo}
