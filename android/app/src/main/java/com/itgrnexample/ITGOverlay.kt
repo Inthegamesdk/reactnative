@@ -323,5 +323,4 @@ class ITGOverlayManager : ViewGroupManager<FrameLayout>, ITGOverlayView.ITGOverl
         sendEvent(reactContext, "overlayRequestedSeekTo", params)
 
     }
-//    override fun overlayRequestedPortraitTopGap(): Int { return 0 }
 }
