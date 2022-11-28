@@ -139,8 +139,8 @@ android {
         applicationId "com.itgrnexample"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName "1.3"
         buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
 
         if (isNewArchitectureEnabled()) {
@@ -294,7 +294,7 @@ dependencies {
 //    implementation 'androidx.appcompat:appcompat:1.2.0'
 
 //    implementation 'com.github.Inthegamesdk:ITGAndroidRelease:1.9.4-compat'
-    implementation 'com.github.Inthegamesdk:ITGAndroidRelease:2.0.54'
+    implementation 'com.github.Inthegamesdk:ITGAndroidRelease:2.0.55'
 }
 
 if (isNewArchitectureEnabled()) {
