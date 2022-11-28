@@ -320,7 +320,7 @@ class ITGOverlayManager : ViewGroupManager<FrameLayout>, ITGOverlayView.ITGOverl
     override fun overlayRequestedSeekTo(timestampMillis: Long) {
         val params = Arguments.createMap()
         params.putDouble("timestampMillis", timestampMillis.toDouble())
-        sendEvent(reactContext, "overlayRequestedSeekTo", Arguments.createMap())
+        sendEvent(reactContext, "overlayRequestedSeekTo", params)
 
     }
 //    override fun overlayRequestedPortraitTopGap(): Int { return 0 }

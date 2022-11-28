@@ -68,7 +68,7 @@ const PlayerScreen = ({ navigation, route }) => {
   onOverlayRequestedPlay = e => {
     setVideoPaused(false)
     this.overlay.videoPlaying(videoTime.current * 1000)
-    console.log("REQUEST VIDEO PLAY3 " + videoTime.current)
+    console.log("REQUEST VIDEO PLAY " + videoTime.current)
   }
   onOverlayRequestedPause = e => {
     console.log("VIDEO PAUSE CALLED")
@@ -78,7 +78,7 @@ const PlayerScreen = ({ navigation, route }) => {
   }
   onOverlayRequestedSeekTo = e => {
       console.log("VIDEO SEEK CALLED " + e.timestampMillis.toString())
-      this.player.seek(e.timestampMillis);
+      this.player.seek(e.timestampMillis / 1000.0);
    }
   onOverlayRequestedFocus = e => {}
   onOverlayReleasedFocus = e => {}

@@ -57,7 +57,6 @@ export default class ITGOverlay extends Component {
     }
   };
   _onOverlayRequestedSeekTo = event => {
-    console.log("VIDEO SEEK CALLED INT " + event.toString())
     if (this.props.onOverlayRequestedSeekTo) {
       this.props.onOverlayRequestedSeekTo(event.nativeEvent);
     }
