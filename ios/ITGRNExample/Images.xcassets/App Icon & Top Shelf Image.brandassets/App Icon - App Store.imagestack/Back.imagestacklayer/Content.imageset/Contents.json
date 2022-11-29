@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "logo_wide (3).png",
+      "idiom" : "tv"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
