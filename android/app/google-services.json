@@ -1,0 +1,118 @@
+{
+  "project_info": {
+    "project_number": "358575970473",
+    "project_id": "smarttv-68d19",
+    "storage_bucket": "smarttv-68d19.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:358575970473:android:28673275bf04185b6131b8",
+        "android_client_info": {
+          "package_name": "com.itgrnexample"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "358575970473-nnh6l2afc0i9hul13iri6q3m4djjdoqs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNUH3XrPdNfyDyUOKOwADfLx84joKq6N4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "358575970473-nnh6l2afc0i9hul13iri6q3m4djjdoqs.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "358575970473-jkrmdafnm7lonvd9frf5i68ruvmjb0fk.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.syncedapps.InthegameTVDemo"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:358575970473:android:9ec7b52979eff7086131b8",
+        "android_client_info": {
+          "package_name": "com.syncedapps.inthegametvdemo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "358575970473-nnh6l2afc0i9hul13iri6q3m4djjdoqs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNUH3XrPdNfyDyUOKOwADfLx84joKq6N4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "358575970473-nnh6l2afc0i9hul13iri6q3m4djjdoqs.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "358575970473-jkrmdafnm7lonvd9frf5i68ruvmjb0fk.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.syncedapps.InthegameTVDemo"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:358575970473:android:6308bebea2e879576131b8",
+        "android_client_info": {
+          "package_name": "com.syncedapps.inthegametvdemo.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "358575970473-nnh6l2afc0i9hul13iri6q3m4djjdoqs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNUH3XrPdNfyDyUOKOwADfLx84joKq6N4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "358575970473-nnh6l2afc0i9hul13iri6q3m4djjdoqs.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "358575970473-jkrmdafnm7lonvd9frf5i68ruvmjb0fk.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.syncedapps.InthegameTVDemo"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
