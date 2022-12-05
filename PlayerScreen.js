@@ -22,6 +22,7 @@ import ITGOverlay from './ITGOverlay.js';
 LogBox.ignoreLogs([
   'Trying to load empty source.',
 ]);
+
 const PlayerScreen = ({ navigation, route }) => {
   const [videoURL, setVideoURL] = useState("");
   const [videoPaused, setVideoPaused] = useState(false);
@@ -165,7 +166,7 @@ const PlayerScreen = ({ navigation, route }) => {
 
 export default PlayerScreen;
 
-const styles = StyleSheet.create({
+const stylesTV = StyleSheet.create({
   container: {
     backgroundColor: "#000000",
     flex: 1,
@@ -178,3 +179,23 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   });
+
+  const stylesMobile = StyleSheet.create({
+    container: {
+      paddingTop: 40,
+      backgroundColor: "#000000",
+      display: 'flex',
+      flexDirection:'column',
+      flex: 1,
+      width:'100%',
+    },
+    video: {
+      flex: 0.3,
+    },
+    overlay: {
+      position: 'relative',
+      flex: 0.7,
+    },
+    });
+
+    const styles = Platform.isTV ? stylesTV : stylesMobile;

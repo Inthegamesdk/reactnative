@@ -63,8 +63,8 @@ const HomeScreen = ({ navigation }) => {
 
 export default HomeScreen;
 
-const scale = Platform.OS === 'ios' ? 2.0 : 1.0;
-
+const scale = Platform.isTVOS ? 2.0 : (Platform.isTV ? 1.0 : 0.8);
+const topMargin = Platform.isTV ? 60 : 120
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#000000",
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     width:'100%',
     justifyContent: "center",
     alignItems: "center",
-    paddingTop: 60*scale,
+    paddingTop: topMargin*scale,
     paddingBottom: 60*scale
   },
   image: {
