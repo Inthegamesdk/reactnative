@@ -11,6 +11,7 @@ import ReactNative, {
   BackHandler,
   TVEventControl,
   LogBox,
+  TouchableHighlight,
 } from 'react-native';
 
 import { NavigationContainer } from '@react-navigation/native';
@@ -160,6 +161,16 @@ const PlayerScreen = ({ navigation, route }) => {
               onOverlayResetVideoHeight={this.onOverlayResetVideoHeight}
               onOverlayBackPressResult={this.onOverlayBackPressResult}
               onDidGetVideoURL={this.onDidGetVideoURL}/>
+
+            {!Platform.isTV &&
+        <TouchableHighlight style={styles.backButton}
+              underlayColor="#777777"
+              onPress = {() =>
+                this.overlay.handleBackPressIfNeeded()
+              }>
+              <Image style={styles.backImage} source={ require('./img/close.png') } />
+              </TouchableHighlight>
+            }
     </View>
   );
 };
@@ -196,6 +207,18 @@ const stylesTV = StyleSheet.create({
       position: 'relative',
       flex: 0.7,
     },
+    backImage: {
+      resizeMode: "contain",
+    width: 32,
+    height: 32,
+    },
+    backButton: {
+      position: 'absolute',
+      top: 60,
+      left: 8,
+      width: 32,
+      height: 32,
+    }
     });
 
     const styles = Platform.isTV ? stylesTV : stylesMobile;
