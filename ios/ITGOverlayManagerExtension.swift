@@ -103,7 +103,7 @@ import InthegametviOS
   }
   @objc func videoPaused(_ node: NSNumber, time: NSNumber) {
     DispatchQueue.main.async {
-      self.getOverlay(node: node).videoPaused()
+      self.getOverlay(node: node).videoPaused(time: time.doubleValue/1000)
     }
   }
   @objc func setLiveMode(_ node: NSNumber, enabled: NSNumber) {

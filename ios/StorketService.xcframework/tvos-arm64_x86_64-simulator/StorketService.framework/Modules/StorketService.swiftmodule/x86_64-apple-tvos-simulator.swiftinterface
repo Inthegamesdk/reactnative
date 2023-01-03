@@ -28,9 +28,9 @@ public enum StorketType : Swift.String {
     get
   }
 }
-@_hasMissingDesignatedInitializers public class Storket {
-  public static let shared: StorketService.Storket
+public class Storket {
   weak public var delegate: StorketService.StorketDelegate?
+  public init()
   public func configure(url: Swift.String, authKey: Swift.String)
   public func connect(accountId: Swift.String, channelSlug: Swift.String, type: StorketService.StorketType)
   public func stop()

@@ -193,7 +193,7 @@ const stylesTV = StyleSheet.create({
 
   const stylesMobile = StyleSheet.create({
     container: {
-      paddingTop: 40,
+      paddingTop: 48,
       backgroundColor: "#000000",
       display: 'flex',
       flexDirection:'column',
@@ -201,11 +201,11 @@ const stylesTV = StyleSheet.create({
       width:'100%',
     },
     video: {
-      flex: 0.3,
+      aspectRatio: 16/9,
     },
     overlay: {
       position: 'relative',
-      flex: 0.7,
+      flex: 1,
     },
     backImage: {
       resizeMode: "contain",

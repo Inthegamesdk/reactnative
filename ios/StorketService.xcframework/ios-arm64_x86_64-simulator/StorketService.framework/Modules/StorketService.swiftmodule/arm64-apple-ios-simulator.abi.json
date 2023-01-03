@@ -528,57 +528,6 @@
         "children": [
           {
             "kind": "Var",
-            "name": "shared",
-            "printedName": "shared",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Storket",
-                "printedName": "StorketService.Storket",
-                "usr": "s:14StorketService0A0C"
-              }
-            ],
-            "declKind": "Var",
-            "usr": "s:14StorketService0A0C6sharedACvpZ",
-            "mangledName": "$s14StorketService0A0C6sharedACvpZ",
-            "moduleName": "StorketService",
-            "static": true,
-            "declAttributes": [
-              "HasInitialValue",
-              "Final",
-              "HasStorage",
-              "AccessControl"
-            ],
-            "isLet": true,
-            "hasStorage": true,
-            "accessors": [
-              {
-                "kind": "Accessor",
-                "name": "Get",
-                "printedName": "Get()",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Storket",
-                    "printedName": "StorketService.Storket",
-                    "usr": "s:14StorketService0A0C"
-                  }
-                ],
-                "declKind": "Accessor",
-                "usr": "s:14StorketService0A0C6sharedACvgZ",
-                "mangledName": "$s14StorketService0A0C6sharedACvgZ",
-                "moduleName": "StorketService",
-                "static": true,
-                "implicit": true,
-                "declAttributes": [
-                  "Final"
-                ],
-                "accessorKind": "get"
-              }
-            ]
-          },
-          {
-            "kind": "Var",
             "name": "delegate",
             "printedName": "delegate",
             "children": [
@@ -679,6 +628,27 @@
                 "accessorKind": "_modify"
               }
             ]
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Storket",
+                "printedName": "StorketService.Storket",
+                "usr": "s:14StorketService0A0C"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:14StorketService0A0CACycfc",
+            "mangledName": "$s14StorketService0A0CACycfc",
+            "moduleName": "StorketService",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "init_kind": "Designated"
           },
           {
             "kind": "Function",
@@ -824,8 +794,7 @@
         "moduleName": "StorketService",
         "declAttributes": [
           "AccessControl"
-        ],
-        "hasMissingDesignatedInitializers": true
+        ]
       },
       {
         "kind": "Import",
@@ -1357,56 +1326,56 @@
     {
       "filePath": "\/Users\/daedalus\/Documents\/inthegame\/Storket\/Storket\/Storket.swift",
       "kind": "StringLiteral",
-      "offset": 570,
+      "offset": 528,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/daedalus\/Documents\/inthegame\/Storket\/Storket\/Storket.swift",
       "kind": "StringLiteral",
-      "offset": 607,
+      "offset": 565,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/daedalus\/Documents\/inthegame\/Storket\/Storket\/Storket.swift",
       "kind": "StringLiteral",
-      "offset": 644,
+      "offset": 602,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/daedalus\/Documents\/inthegame\/Storket\/Storket\/Storket.swift",
       "kind": "StringLiteral",
-      "offset": 683,
+      "offset": 641,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/daedalus\/Documents\/inthegame\/Storket\/Storket\/Storket.swift",
       "kind": "StringLiteral",
-      "offset": 724,
+      "offset": 682,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/daedalus\/Documents\/inthegame\/Storket\/Storket\/Storket.swift",
       "kind": "IntegerLiteral",
-      "offset": 762,
+      "offset": 720,
       "length": 1,
       "value": "3"
     },
     {
       "filePath": "\/Users\/daedalus\/Documents\/inthegame\/Storket\/Storket\/Storket.swift",
       "kind": "IntegerLiteral",
-      "offset": 874,
+      "offset": 832,
       "length": 1,
       "value": "3"
     },
     {
       "filePath": "\/Users\/daedalus\/Documents\/inthegame\/Storket\/Storket\/Storket.swift",
       "kind": "StringLiteral",
-      "offset": 941,
+      "offset": 899,
       "length": 2,
       "value": "\"\""
     },
@@ -1496,15 +1465,22 @@
     },
     {
       "filePath": "\/Users\/daedalus\/Documents\/inthegame\/Storket\/Storket\/StorketServiceManager.swift",
+      "kind": "IntegerLiteral",
+      "offset": 567,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/daedalus\/Documents\/inthegame\/Storket\/Storket\/StorketServiceManager.swift",
       "kind": "StringLiteral",
-      "offset": 645,
+      "offset": 676,
       "length": 41,
       "value": "\"EEE',' dd' 'MMM' 'yyyy HH':'mm':'ss zzz\""
     },
     {
       "filePath": "\/Users\/daedalus\/Documents\/inthegame\/Storket\/Storket\/StorketServiceManager.swift",
       "kind": "StringLiteral",
-      "offset": 733,
+      "offset": 764,
       "length": 7,
       "value": "\"en_US\""
     }

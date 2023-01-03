@@ -29,7 +29,8 @@ public enum ITGMenuItem : Swift.String, Swift.CaseIterable, Swift.Decodable {
 @objc @_inheritsConvenienceInitializers public class ITGStorketHelper : ObjectiveC.NSObject {
   public func connect(accountId: Swift.String, channelSlug: Swift.String, environment: InthegametviOS.ITGEnvironment, token: Swift.String)
   public func stop()
-  public func changeType(_ type: StorketService.StorketType)
+  public func connectChat(accountId: Swift.String, channelSlug: Swift.String, environment: InthegametviOS.ITGEnvironment, token: Swift.String)
+  public func stopChat()
   @objc override dynamic public init()
   @objc deinit
 }
@@ -90,17 +91,22 @@ public enum ITGContent {
   @_Concurrency.MainActor(unsafe) public var canOpenMenuFromRemote: Swift.Bool {
     get
   }
+  @_Concurrency.MainActor(unsafe) public var adsMetadata: [Swift.Dictionary<Swift.String, Any>]? {
+    get
+    set
+  }
   @_Concurrency.MainActor(unsafe) @objc override dynamic public var preferredFocusEnvironments: [UIKit.UIFocusEnvironment] {
     @objc get
   }
   @_Concurrency.MainActor(unsafe) @objc override dynamic public func didMoveToWindow()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func didUpdateFocus(in context: UIKit.UIFocusUpdateContext, with coordinator: UIKit.UIFocusAnimationCoordinator)
   @_Concurrency.MainActor(unsafe) @objc override dynamic public func point(inside point: CoreFoundation.CGPoint, with event: UIKit.UIEvent?) -> Swift.Bool
   @_Concurrency.MainActor(unsafe) @objc override dynamic public func layoutSubviews()
   @_Concurrency.MainActor(unsafe) public func load(channelSlug: Swift.String, accountId: Swift.String, environment: InthegametviOS.ITGEnvironment, delegate: InthegametviOS.ITGOverlayDelegate?, language: Swift.String = "en", foreignId: Swift.String? = nil, userName: Swift.String? = nil)
   @_Concurrency.MainActor(unsafe) public func resetUser()
   @_Concurrency.MainActor(unsafe) public func closeInteractionIfNeeded() -> Swift.Bool
   @_Concurrency.MainActor(unsafe) public func isDisplayingInteraction() -> Swift.Bool
-  @_Concurrency.MainActor(unsafe) public func videoPaused()
+  @_Concurrency.MainActor(unsafe) public func videoPaused(time: Swift.Double)
   @_Concurrency.MainActor(unsafe) public func videoPlaying(time: Swift.Double)
   @_Concurrency.MainActor(unsafe) public func setLiveMode(enabled: Swift.Bool)
   @_Concurrency.MainActor(unsafe) public func openMenu()
@@ -163,6 +169,7 @@ extension InthegametviOS.ITGOverlayView {
   }
   @_Concurrency.MainActor(unsafe) @objc override dynamic public func awakeFromNib()
   @_Concurrency.MainActor(unsafe) @objc override dynamic public func didMoveToSuperview()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func didUpdateFocus(in context: UIKit.UIFocusUpdateContext, with coordinator: UIKit.UIFocusAnimationCoordinator)
   @_Concurrency.MainActor(unsafe) @objc override dynamic open func draw(_ rect: CoreFoundation.CGRect)
   @objc @IBAction @_Concurrency.MainActor(unsafe) public func actionClose(_ sender: Any?)
   @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreFoundation.CGRect)
@@ -307,6 +314,9 @@ extension UIKit.UIColor {
   @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreFoundation.CGRect)
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
   @objc deinit
+}
+extension InthegametviOS.ITGShopView : UIKit.UIScrollViewDelegate {
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func scrollViewDidScroll(_ scrollView: UIKit.UIScrollView)
 }
 extension InthegametviOS.ITGShopView : UIKit.UITableViewDataSource {
   @_Concurrency.MainActor(unsafe) @objc dynamic public func tableView(_ tableView: UIKit.UITableView, numberOfRowsInSection section: Swift.Int) -> Swift.Int

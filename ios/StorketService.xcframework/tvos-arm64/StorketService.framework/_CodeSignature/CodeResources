@@ -18,15 +18,15 @@
 		</data>
 		<key>Modules/StorketService.swiftmodule/Project/arm64-apple-tvos.swiftsourceinfo</key>
 		<data>
-		7zJmKrK0jQ/8ZaDbEHAeKT+pgAY=
+		GFdcXNvfrSK+BgA6tjQafHystuI=
 		</data>
 		<key>Modules/StorketService.swiftmodule/arm64-apple-tvos.abi.json</key>
 		<data>
-		nxmQlD15JtcH6PW2i4R8DjygeCE=
+		IfqDq08MhC4e05jCpBeEZvIAe8k=
 		</data>
 		<key>Modules/StorketService.swiftmodule/arm64-apple-tvos.private.swiftinterface</key>
 		<data>
-		KXnv7PHNecASYyxYKa+jqDW2Dxc=
+		XjsCVrkn/hygNVNONHDrDR/ThAM=
 		</data>
 		<key>Modules/StorketService.swiftmodule/arm64-apple-tvos.swiftdoc</key>
 		<data>
@@ -34,11 +34,11 @@
 		</data>
 		<key>Modules/StorketService.swiftmodule/arm64-apple-tvos.swiftinterface</key>
 		<data>
-		KXnv7PHNecASYyxYKa+jqDW2Dxc=
+		XjsCVrkn/hygNVNONHDrDR/ThAM=
 		</data>
 		<key>Modules/StorketService.swiftmodule/arm64-apple-tvos.swiftmodule</key>
 		<data>
-		2JWwO5GXlqdQi8rEFGz7+khgO2s=
+		ZFsxrmW4xlFiDSaEc2UMvOb87s0=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -65,21 +65,21 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			60ERi6MbOkjm2zSuafehmAFHHyGDoOMdtsYeHs+YSNM=
+			ZRDNvlOkiwGPfygPcNksIJjkRDAZ2cj7Yj5DUxzw7RY=
 			</data>
 		</dict>
 		<key>Modules/StorketService.swiftmodule/arm64-apple-tvos.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			6rfqrooSSa5RWDMm7AeyvZdt1l4FZlHCll0m0xB4Cqs=
+			HPi4K49Bbs94L9iXYQ+5+MBrv5XmKTmIbr50EXnd3Vo=
 			</data>
 		</dict>
 		<key>Modules/StorketService.swiftmodule/arm64-apple-tvos.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			bFCm8D7plTw8hfX+JiwQcawfaqAvNgA4PIXyhOZ3CbM=
+			GybyEVLLkqcmhmjqjnZhRlVeCsBi2QBH5amUpP6qvt4=
 			</data>
 		</dict>
 		<key>Modules/StorketService.swiftmodule/arm64-apple-tvos.swiftdoc</key>
@@ -93,14 +93,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			bFCm8D7plTw8hfX+JiwQcawfaqAvNgA4PIXyhOZ3CbM=
+			GybyEVLLkqcmhmjqjnZhRlVeCsBi2QBH5amUpP6qvt4=
 			</data>
 		</dict>
 		<key>Modules/StorketService.swiftmodule/arm64-apple-tvos.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			LQGmK43/9gMjEibwDCI1coFVWeWyDAay4iENGYWB0YA=
+			gBNDtlUUnEUvRNa62nf1LUBDIozo0w3zP+ANOIcJKcE=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

@@ -343,6 +343,7 @@ SWIFT_CLASS("_TtC14InthegametviOS9ITGNotice")
 @property (nonatomic, readonly, copy) NSArray<id <UIFocusEnvironment>> * _Nonnull preferredFocusEnvironments;
 - (void)awakeFromNib;
 - (void)didMoveToSuperview;
+- (void)didUpdateFocusInContext:(UIFocusUpdateContext * _Nonnull)context withAnimationCoordinator:(UIFocusAnimationCoordinator * _Nonnull)coordinator;
 - (void)drawRect:(CGRect)rect;
 - (IBAction)actionClose:(id _Nullable)sender;
 - (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
@@ -357,6 +358,7 @@ SWIFT_CLASS("_TtC14InthegametviOS14ITGOverlayView")
 @interface ITGOverlayView : UIView
 @property (nonatomic, readonly, copy) NSArray<id <UIFocusEnvironment>> * _Nonnull preferredFocusEnvironments;
 - (void)didMoveToWindow;
+- (void)didUpdateFocusInContext:(UIFocusUpdateContext * _Nonnull)context withAnimationCoordinator:(UIFocusAnimationCoordinator * _Nonnull)coordinator;
 - (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent * _Nullable)event SWIFT_WARN_UNUSED_RESULT;
 - (void)layoutSubviews;
 - (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
@@ -393,6 +395,12 @@ SWIFT_CLASS("_TtC14InthegametviOS11ITGShopView")
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
 
+
+@class UIScrollView;
+
+@interface ITGShopView (SWIFT_EXTENSION(InthegametviOS)) <UIScrollViewDelegate>
+- (void)scrollViewDidScroll:(UIScrollView * _Nonnull)scrollView;
+@end
 
 @class UITableView;
 @class NSIndexPath;
