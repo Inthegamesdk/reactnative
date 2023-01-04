@@ -27,7 +27,6 @@ class ITGOverlayFragment: Fragment() {
         val view = ITGOverlayView(requireContext(), settings.getEnvironment())
         view.load(settings.accountId,
             settings.channelSlug,
-            "demos",
             settings.language,
             settings.foreignId,
             settings.userName)

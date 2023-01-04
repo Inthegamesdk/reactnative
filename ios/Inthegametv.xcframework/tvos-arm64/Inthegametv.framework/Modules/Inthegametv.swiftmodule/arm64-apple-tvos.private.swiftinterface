@@ -1,11 +1,12 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.7 (swiftlang-5.7.0.127.4 clang-1400.0.29.50)
+// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.135.3 clang-1400.0.29.51)
 // swift-module-flags: -target arm64-apple-tvos14.3 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name Inthegametv
 // swift-module-flags-ignorable: -enable-bare-slash-regex
 import AVFoundation
 import CoreMedia
 import Foundation
 @_exported import Inthegametv
+import StorketService
 import Swift
 import UIKit
 import _Concurrency
@@ -15,6 +16,7 @@ public enum ITGMenuItem : Swift.String, Swift.CaseIterable, Swift.Decodable {
   case leaderboard
   case shop
   case chat
+  case stats
   public init?(rawValue: Swift.String)
   public typealias AllCases = [Inthegametv.ITGMenuItem]
   public typealias RawValue = Swift.String
@@ -25,17 +27,16 @@ public enum ITGMenuItem : Swift.String, Swift.CaseIterable, Swift.Decodable {
     get
   }
 }
-public struct StorketMessage {
-}
-@objc @_inheritsConvenienceInitializers public class StorketHelper : ObjectiveC.NSObject {
+@objc @_inheritsConvenienceInitializers public class ITGStorketHelper : ObjectiveC.NSObject {
   public func connect(accountId: Swift.String, channelSlug: Swift.String, environment: Inthegametv.ITGEnvironment, token: Swift.String)
   public func stop()
-  public func changeType(_ type: Inthegametv.StorketType)
+  public func connectChat(accountId: Swift.String, channelSlug: Swift.String, environment: Inthegametv.ITGEnvironment, token: Swift.String)
+  public func stopChat()
   @objc override dynamic public init()
   @objc deinit
 }
-extension Inthegametv.StorketHelper : Inthegametv.StorketDelegate {
-  public func didReceive(messages: [Inthegametv.StorketMessage], storketType: Inthegametv.StorketType)
+extension Inthegametv.ITGStorketHelper : StorketService.StorketDelegate {
+  public func didReceive(messages: [StorketService.StorketMessage], storketType: StorketService.StorketType)
 }
 public protocol ITGOverlayDelegate : AnyObject {
   func overlayRequestedVideoTime()
@@ -53,6 +54,7 @@ public protocol ITGOverlayDelegate : AnyObject {
 public enum ITGAnimationType {
   case fromRight
   case fromBottom
+  case fade
   public static func == (a: Inthegametv.ITGAnimationType, b: Inthegametv.ITGAnimationType) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -90,17 +92,22 @@ public enum ITGContent {
   @_Concurrency.MainActor(unsafe) public var canOpenMenuFromRemote: Swift.Bool {
     get
   }
+  @_Concurrency.MainActor(unsafe) public var adsMetadata: [Swift.Dictionary<Swift.String, Any>]? {
+    get
+    set
+  }
   @_Concurrency.MainActor(unsafe) @objc override dynamic public var preferredFocusEnvironments: [UIKit.UIFocusEnvironment] {
     @objc get
   }
   @_Concurrency.MainActor(unsafe) @objc override dynamic public func didMoveToWindow()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func didUpdateFocus(in context: UIKit.UIFocusUpdateContext, with coordinator: UIKit.UIFocusAnimationCoordinator)
   @_Concurrency.MainActor(unsafe) @objc override dynamic public func point(inside point: CoreFoundation.CGPoint, with event: UIKit.UIEvent?) -> Swift.Bool
   @_Concurrency.MainActor(unsafe) @objc override dynamic public func layoutSubviews()
   @_Concurrency.MainActor(unsafe) public func load(channelSlug: Swift.String, accountId: Swift.String, environment: Inthegametv.ITGEnvironment, delegate: Inthegametv.ITGOverlayDelegate?, language: Swift.String = "en", foreignId: Swift.String? = nil, userName: Swift.String? = nil)
   @_Concurrency.MainActor(unsafe) public func resetUser()
   @_Concurrency.MainActor(unsafe) public func closeInteractionIfNeeded() -> Swift.Bool
   @_Concurrency.MainActor(unsafe) public func isDisplayingInteraction() -> Swift.Bool
-  @_Concurrency.MainActor(unsafe) public func videoPaused()
+  @_Concurrency.MainActor(unsafe) public func videoPaused(time: Swift.Double)
   @_Concurrency.MainActor(unsafe) public func videoPlaying(time: Swift.Double)
   @_Concurrency.MainActor(unsafe) public func setLiveMode(enabled: Swift.Bool)
   @_Concurrency.MainActor(unsafe) public func openMenu()
@@ -108,16 +115,12 @@ public enum ITGContent {
   @_Concurrency.MainActor(unsafe) public func openLeaderboard()
   @_Concurrency.MainActor(unsafe) public func openShop()
   @_Concurrency.MainActor(unsafe) public func openChat()
-  @_Concurrency.MainActor(unsafe) public func openPredictions()
-  @_Concurrency.MainActor(unsafe) public func openHighlights()
   @_Concurrency.MainActor(unsafe) public func openStats()
   @_Concurrency.MainActor(unsafe) public func closeMenu()
   @_Concurrency.MainActor(unsafe) public func closeAccount()
   @_Concurrency.MainActor(unsafe) public func closeLeaderboard()
   @_Concurrency.MainActor(unsafe) public func closeShop()
   @_Concurrency.MainActor(unsafe) public func closeChat()
-  @_Concurrency.MainActor(unsafe) public func closePredictions()
-  @_Concurrency.MainActor(unsafe) public func closeHighlights()
   @_Concurrency.MainActor(unsafe) public func closeStats()
   @_Concurrency.MainActor(unsafe) public func isMenuVisible() -> Swift.Bool
   @_Concurrency.MainActor(unsafe) public func currentContent() -> [Inthegametv.ITGContent]
@@ -129,36 +132,6 @@ public enum ITGContent {
 }
 extension Inthegametv.ITGOverlayView {
   @_Concurrency.MainActor(unsafe) public func menuShouldClose()
-}
-public enum StorketError : Swift.Error {
-  case notFound
-  case invalidJson
-  case unknown
-  public static func == (a: Inthegametv.StorketError, b: Inthegametv.StorketError) -> Swift.Bool
-  public func hash(into hasher: inout Swift.Hasher)
-  public var hashValue: Swift.Int {
-    get
-  }
-}
-public protocol StorketDelegate : ObjectiveC.NSObject {
-  func didReceive(messages: [Inthegametv.StorketMessage], storketType: Inthegametv.StorketType)
-}
-public enum StorketType : Swift.String {
-  case storket
-  case chat
-  public init?(rawValue: Swift.String)
-  public typealias RawValue = Swift.String
-  public var rawValue: Swift.String {
-    get
-  }
-}
-@_hasMissingDesignatedInitializers public class Storket {
-  public func configure(url: Swift.String, authKey: Swift.String)
-  public func connect(accountId: Swift.String, channelSlug: Swift.String, type: Inthegametv.StorketType)
-  public func stop()
-  public func changeType(_ type: Inthegametv.StorketType)
-  public func currentType() -> Inthegametv.StorketType
-  @objc deinit
 }
 @objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) open class ITGInfoView : UIKit.UIView, Inthegametv.NibView {
   @_Concurrency.MainActor(unsafe) @objc override dynamic open var preferredFocusEnvironments: [UIKit.UIFocusEnvironment] {
@@ -196,6 +169,7 @@ public enum StorketType : Swift.String {
   }
   @_Concurrency.MainActor(unsafe) @objc override dynamic public func awakeFromNib()
   @_Concurrency.MainActor(unsafe) @objc override dynamic public func didMoveToSuperview()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func didUpdateFocus(in context: UIKit.UIFocusUpdateContext, with coordinator: UIKit.UIFocusAnimationCoordinator)
   @objc @IBAction @_Concurrency.MainActor(unsafe) public func actionClose(_ sender: Any?)
   @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreFoundation.CGRect)
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
@@ -244,6 +218,9 @@ extension UIKit.UIColor {
   @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreFoundation.CGRect)
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
   @objc deinit
+}
+extension Inthegametv.ITGShopView : UIKit.UIScrollViewDelegate {
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func scrollViewDidScroll(_ scrollView: UIKit.UIScrollView)
 }
 extension Inthegametv.ITGShopView : UIKit.UITableViewDataSource {
   @_Concurrency.MainActor(unsafe) @objc dynamic public func tableView(_ tableView: UIKit.UITableView, numberOfRowsInSection section: Swift.Int) -> Swift.Int
@@ -360,8 +337,3 @@ extension Inthegametv.ITGAnimationType : Swift.Equatable {}
 extension Inthegametv.ITGAnimationType : Swift.Hashable {}
 extension Inthegametv.ITGContent : Swift.Equatable {}
 extension Inthegametv.ITGContent : Swift.Hashable {}
-extension Inthegametv.StorketError : Swift.Equatable {}
-extension Inthegametv.StorketError : Swift.Hashable {}
-extension Inthegametv.StorketType : Swift.Equatable {}
-extension Inthegametv.StorketType : Swift.Hashable {}
-extension Inthegametv.StorketType : Swift.RawRepresentable {}

@@ -6,7 +6,11 @@
 //
 
 import UIKit
+#if os(tvOS)
 import Inthegametv
+#else
+import InthegametviOS
+#endif
 
 @objc public class ITGRNOverlayView: ITGOverlayView {
   @objc var accountId: String!
@@ -50,17 +54,7 @@ import Inthegametv
   public func start(delegate: ITGOverlayDelegate?) {
     if !didLoad {
       didLoad = true
-      let env: ITGEnvironment!
-      switch self.environment {
-//      case "prod":
-//        env = .productionDefault
-      case "stage":
-        env = .stage
-      case "test":
-        env = .test
-      default:
-        env = .dev
-      }
+      let env = self.getEnvironment()
       
       load(channelSlug: self.channelSlug,
            accountId: self.accountId,
@@ -71,4 +65,16 @@ import Inthegametv
            userName: self.userName)
     }
   }
+  
+  public func getEnvironment() -> ITGEnvironment {
+    switch self.environment {
+    case "stage":
+      return .stage
+    case "test":
+      return .test
+    default:
+      return .dev
+    }
+  }
+
 }

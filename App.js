@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import type {Node} from 'react';
 import ReactNative, {
   Platform,
@@ -31,6 +31,9 @@ LogBox.ignoreLogs([
 ])
 
 const App: () => Node = () => {
+  const [videoPaused, setVideoPaused] = useState(false);
+  const videoTime = useRef(0.0)
+
   //back button action
   const backAction = () => {
     this.overlay.handleBackPressIfNeeded()
@@ -54,18 +57,28 @@ const App: () => Node = () => {
     //handling the back button events
     BackHandler.addEventListener("hardwareBackPress", backAction);
     return () =>
+      KeyEvent.removeKeyDownListener();
       BackHandler.removeEventListener("hardwareBackPress", backAction);
   }, []);
 
   //on this call you should send the overlay the current playback time in seconds
   onOverlayRequestedVideoTime = e => {
     console.log("REQUEST VIDEO TIME")
-    this.overlay.videoPlaying(0)
+    this.overlay.videoPlaying(videoTime.current * 1000)
   }
 
   //pause and play the video when asked to
-  onOverlayRequestedPlay = e => { this.player.paused = true }
-  onOverlayRequestedPause = e => { this.player.paused = false }
+  onOverlayRequestedPlay = e => {
+    setVideoPaused(false)
+    this.overlay.videoPlaying(videoTime.current * 1000)
+  }
+  onOverlayRequestedPause = e => {
+    setVideoPaused(true)
+    this.overlay.videoPaused(videoTime.current * 1000)
+  }
+  onOverlayRequestedSeekTo = e => {
+    this.player.seek(e.timestampMillis / 1000.0);
+  }
   onOverlayRequestedFocus = e => {}
   onOverlayReleasedFocus = e => {}
 
@@ -92,7 +105,11 @@ const App: () => Node = () => {
 
   onSeek = e => {
     console.log("VIDEO SEEK " + e.currentTime);
-    this.overlay.videoPlaying(e.currentTime)
+    this.overlay.videoPlaying(e.currentTime * 1000)
+  }
+
+  onProgress = e => {
+    videoTime.current = e.currentTime
   }
 
   return (
@@ -103,7 +120,10 @@ const App: () => Node = () => {
              onBuffer={this.onBuffer}
              onError={this.videoError}
              onSeek={this.onSeek}
+             onProgress={this.onProgress}
+             progressUpdateInterval={50.0}
              style={styles.video}
+             paused={videoPaused}
              controls={false}
              resizeMode={"contain"} />
 
@@ -117,6 +137,7 @@ const App: () => Node = () => {
               onOverlayRequestedVideoTime={this.onOverlayRequestedVideoTime}
               onOverlayRequestedPlay={this.onOverlayRequestedPlay}
               onOverlayRequestedPause={this.onOverlayRequestedPause}
+              onOverlayRequestedSeekTo={this.onOverlayRequestedSeekTo}
               onOverlayRequestedFocus={this.onOverlayRequestedFocus}
               onOverlayReleasedFocus={this.onOverlayReleasedFocus}
               onOverlayDidTapVideo={this.onOverlayDidTapVideo}

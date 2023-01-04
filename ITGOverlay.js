@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import {
   requireNativeComponent,
   UIManager,
+  Platform,
   findNodeHandle,
   StyleSheet,
 } from 'react-native';
@@ -27,6 +28,7 @@ export default class ITGOverlay extends Component {
     onOverlayRequestedVideoTime: PropTypes.func,
     onOverlayRequestedPause: PropTypes.func,
     onOverlayRequestedPlay: PropTypes.func,
+    onOverlayRequestedSeekTo: PropTypes.func,
     onOverlayRequestedFocus: PropTypes.func,
     onOverlayReleasedFocus: PropTypes.func,
     onOverlayDidTapVideo: PropTypes.func,
@@ -36,7 +38,8 @@ export default class ITGOverlay extends Component {
     onOverlayResetVideoWidth: PropTypes.func,
     onOverlayResizeVideoHeight: PropTypes.func,
     onOverlayResetVideoHeight: PropTypes.func,
-    onOverlayBackPressResult: PropTypes.func
+    onOverlayBackPressResult: PropTypes.func,
+    onDidGetVideoURL: PropTypes.func
   };
 
   _onOverlayRequestedVideoTime = event => {
@@ -52,6 +55,11 @@ export default class ITGOverlay extends Component {
   _onOverlayRequestedPlay = event => {
     if (this.props.onOverlayRequestedPlay) {
       this.props.onOverlayRequestedPlay(event.nativeEvent);
+    }
+  };
+  _onOverlayRequestedSeekTo = event => {
+    if (this.props.onOverlayRequestedSeekTo) {
+      this.props.onOverlayRequestedSeekTo(event.nativeEvent);
     }
   };
   _onOverlayRequestedFocus = event => {
@@ -104,13 +112,18 @@ export default class ITGOverlay extends Component {
       this.props.onOverlayBackPressResult(event.nativeEvent);
     }
   };
+  _onDidGetVideoURL = event => {
+    if (this.props.onDidGetVideoURL) {
+      this.props.onDidGetVideoURL(event.nativeEvent);
+    }
+  };
 
 
   render() {
     const { accountId, channelSlug, language, environment, foreignId, userName, blockSlip, blockMenu, blockSidebar, blockNotifications, injectionDelay, style } = this.props;
     return (
       <ITGOverlayView
-      style={itgStyles.overlay}
+      style={Platform.isTV ? itgStyles.overlay : itgStylesMobile.overlay}
       accountId={accountId}
       channelSlug={channelSlug}
       language={language}
@@ -126,6 +139,7 @@ export default class ITGOverlay extends Component {
       onOverlayRequestedVideoTime={this._onOverlayRequestedVideoTime}
       onOverlayRequestedPause={this._onOverlayRequestedPause}
       onOverlayRequestedPlay={this._onOverlayRequestedPlay}
+      onOverlayRequestedSeekTo={this._onOverlayRequestedSeekTo}
       onOverlayRequestedFocus={this._onOverlayRequestedFocus}
       onOverlayReleasedFocus={this._onOverlayReleasedFocus}
       onOverlayDidTapVideo={this._onOverlayDidTapVideo}
@@ -136,6 +150,7 @@ export default class ITGOverlay extends Component {
       onOverlayResizeVideoHeight={this._onOverlayResizeVideoHeight}
       onOverlayResetVideoHeight={this._onOverlayResetVideoHeight}
       onOverlayBackPressResult={this._onOverlayBackPressResult}
+      onDidGetVideoURL={this._onDidGetVideoURL}
       />
     );
   }
@@ -146,6 +161,14 @@ export default class ITGOverlay extends Component {
     "setup",
     [findNodeHandle(this.ref)]
   );
+
+  shutdown = (...args) => {
+    UIManager.dispatchViewManagerCommand(
+      findNodeHandle(this.ref),
+      "shutdown",
+      [...args]
+    );
+  };
 
   openMenu = (...args) => {
     UIManager.dispatchViewManagerCommand(
@@ -265,7 +288,16 @@ export default class ITGOverlay extends Component {
       "receivedKeyEvent",
       [keyCode]
     );
-  };}
+  };
+  getVideoURL = (...args) => {
+    UIManager.dispatchViewManagerCommand(
+      findNodeHandle(this.ref),
+      "getVideoURL",
+      [...args]
+    );
+  };
+  }
+
 const itgStyles = StyleSheet.create({
   overlay: {
     position: 'absolute',
@@ -274,3 +306,8 @@ const itgStyles = StyleSheet.create({
     bottom: 0,
     right: 0,
   },});
+
+  const itgStylesMobile = StyleSheet.create({
+    overlay: {
+      flex: 0.7
+    },});
