@@ -1,5 +1,6 @@
 package com.itgrnexample
 
+import android.util.Log
 import android.view.Choreographer
 import android.view.KeyEvent
 import android.view.View
@@ -15,7 +16,8 @@ import com.facebook.react.uimanager.events.RCTEventEmitter
 import com.syncedapps.inthegametv.ITGOverlayView
 import com.syncedapps.inthegametv.data.CloseOption
 import com.syncedapps.inthegametv.network.ITGEnvironment
-
+import com.syncedapps.inthegametv.domain.model.AnalyticsEventSnapshot
+import com.syncedapps.inthegametv.domain.model.UserSnapshot
 
 data class ITGOverlaySettings(
     var accountId: String = "",
@@ -31,7 +33,9 @@ data class ITGOverlaySettings(
     var injectionDelay: Int? = null,
 ) {
     fun getEnvironment(): ITGEnvironment {
+        Log.d("ITGOverlaySettings", "getEnvironment $environmentValue")
         return when(environmentValue) {
+            "v2-1" -> ITGEnvironment.v2_1
             "stage" -> ITGEnvironment.stage
             "test" -> ITGEnvironment.test
             else -> ITGEnvironment.dev
@@ -64,11 +68,13 @@ class ITGOverlayManager : ViewGroupManager<FrameLayout>, ITGOverlayView.ITGOverl
 
     @ReactProp(name = "accountId")
     fun setAccountId(view: FrameLayout, value: String = "") {
+        Log.d("ITGOverlayManager", "setAccountId $value")
         settings.accountId = value
     }
 
     @ReactProp(name = "channelSlug")
     fun setChannelSlug(view: FrameLayout, value: String = "") {
+        Log.d("ITGOverlayManager", "setChannelSlug $value")
         settings.channelSlug = value
     }
 
@@ -79,6 +85,7 @@ class ITGOverlayManager : ViewGroupManager<FrameLayout>, ITGOverlayView.ITGOverl
 
     @ReactProp(name = "environment")
     fun setEnvironment(view: FrameLayout, value: String = "") {
+        Log.d("ITGOverlayManager", "setEnvironment $value")
         settings.environmentValue = value
     }
 
@@ -136,7 +143,7 @@ class ITGOverlayManager : ViewGroupManager<FrameLayout>, ITGOverlayView.ITGOverl
             "videoPaused" -> overlayView?.videoPaused((args?.getInt(0) ?: 0).toLong())
             "setLiveMode" -> overlayView?.setLiveMode(args?.getBoolean(0) ?: true)
             "handleBackPressIfNeeded" -> this.handleBackPressIfNeeded()
-            "receivedKeyEvent" -> overlayView?.receivedKeyEvent(KeyEvent(0, (args?.getInt(0) ?: 0)))
+           // "receivedKeyEvent" -> overlayView?.receivedKeyEvent(KeyEvent(0, (args?.getInt(0) ?: 0)))
             "setup" -> {
                 val viewID = args?.getInt(0) ?: 0
                 createFragment(root, viewID)
@@ -295,6 +302,14 @@ class ITGOverlayManager : ViewGroupManager<FrameLayout>, ITGOverlayView.ITGOverl
         params.putDouble("activityWidth", activityWidth.toDouble())
         sendEvent(reactContext, "onOverlayResizeVideoWidth", params)
     }
+
+    override fun overlayProducedAnalyticsEvent(eventSnapshot: AnalyticsEventSnapshot) {
+
+    }
+
+    override fun userState(userSnapshot: UserSnapshot) {
+    }
+
 
     override fun overlayClickedUserArea() {}
     override fun overlayClosedByUser(type: CloseOption, timestamp: Long) {}

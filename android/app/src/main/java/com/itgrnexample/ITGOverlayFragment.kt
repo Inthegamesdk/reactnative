@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.syncedapps.inthegametv.ITGKey
 import com.syncedapps.inthegametv.ITGOverlayView
 import com.syncedapps.inthegametv.ITGSettings
 
@@ -35,8 +34,6 @@ class ITGOverlayFragment: Fragment() {
         view.blockNotifications = settings.blockNotifications
         view.blockSlip = settings.blockSlip
         view.blockSidebar = settings.blockSidebar
-        view.injectionDelay = settings.injectionDelay
-        view.openMenuKey = ITGKey.UP
         overlay = view
 
         view.listener = tempManagerRef

@@ -131,9 +131,24 @@ def reactNativeArchitectures() {
 }
 
 android {
+    namespace "com.itgrnexample"
+
     ndkVersion rootProject.ext.ndkVersion
 
     compileSdkVersion rootProject.ext.compileSdkVersion
+
+
+    buildFeatures {
+        buildConfig = true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = 17
+    }
 
     defaultConfig {
         applicationId "com.itgrnexample"
@@ -299,7 +314,7 @@ dependencies {
 //    implementation 'androidx.appcompat:appcompat:1.2.0'
 
 //    implementation 'com.github.Inthegamesdk:ITGAndroidRelease:1.9.4-compat'
-    implementation 'com.github.Inthegamesdk:ITGAndroidRelease:2.0.69'
+    implementation 'com.github.Inthegamesdk:ITGAndroidRelease:2.3.0-rn-01'
 }
 
 if (isNewArchitectureEnabled()) {

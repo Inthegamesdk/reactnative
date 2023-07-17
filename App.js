@@ -115,7 +115,7 @@ const App: () => Node = () => {
   return (
     <View style={styles.container}>
       <StatusBar barStyle={'light-content'} />
-      <Video source={{uri: "https://media2.inthegame.io/uploads/videos/streamers/278dee276f8d43d11dad3030d0aa449e.a4ef1c02ad73f7b5ed0a6df3809abf12.mp4"}}   // Can be a URL or a local file.
+      <Video source={{uri: "https://media.inthegame.io/uploads/dev/testing/videos/DolbyAtmosdemos4kHDR(GoodfortestingTVormobileHDRSupporteddevices).mp4"}}   // Can be a URL or a local file.
              ref={(ref) => { this.player = ref }}
              onBuffer={this.onBuffer}
              onError={this.videoError}
@@ -128,9 +128,9 @@ const App: () => Node = () => {
              resizeMode={"contain"} />
 
       <ITGOverlay style={styles.overlay}
-              accountId={"6329904e5252d9873d0e5ac2"}
-              channelSlug={"yesnetworkbaseball"}
-              environment={"stage"}
+              accountId={"62a73d850bcf95e08a025f82"}
+              channelSlug={"android_test"}
+              environment={"dev"}
               language={"en"}
               blockSlip={false}
               ref={e => this.overlay = e}
