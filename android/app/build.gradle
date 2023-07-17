@@ -140,9 +140,12 @@ android {
 
     buildFeatures {
         buildConfig = true
+        viewBinding = true
+        dataBinding = true
     }
 
     compileOptions {
+        coreLibraryDesugaringEnabled true
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
     }
@@ -315,6 +318,7 @@ dependencies {
 
 //    implementation 'com.github.Inthegamesdk:ITGAndroidRelease:1.9.4-compat'
     implementation 'com.github.Inthegamesdk:ITGAndroidRelease:2.3.0-rn-01'
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.2.2'
 }
 
 if (isNewArchitectureEnabled()) {
