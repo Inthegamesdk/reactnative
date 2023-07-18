@@ -129,7 +129,7 @@ const App: () => Node = () => {
 
       <ITGOverlay style={styles.overlay}
               accountId={"62a73d850bcf95e08a025f82"}
-              channelSlug={"mykola_test"}
+              channelSlug={"android_test"}
               environment={"dev"}
               language={"en"}
               blockSlip={false}

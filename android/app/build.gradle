@@ -317,7 +317,7 @@ dependencies {
 //    implementation 'androidx.appcompat:appcompat:1.2.0'
 
 //    implementation 'com.github.Inthegamesdk:ITGAndroidRelease:1.9.4-compat'
-    implementation 'com.github.Inthegamesdk:ITGAndroidRelease:2.3.0-rn-01'
+    implementation 'com.github.Inthegamesdk:ITGAndroidRelease:2.1.22'
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.2.2'
 }
 
