@@ -309,5 +309,5 @@ const itgStyles = StyleSheet.create({
 
   const itgStylesMobile = StyleSheet.create({
     overlay: {
-      flex: 0.7
+      flex: 1
     },});

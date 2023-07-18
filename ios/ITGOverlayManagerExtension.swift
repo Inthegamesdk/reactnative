@@ -7,7 +7,11 @@
 
 import UIKit
 import React
+#if os(tvOS)
 import Inthegametv
+#else
+import InthegametviOS
+#endif
 
 @objc extension ITGOverlayManager {
   
@@ -118,6 +122,17 @@ import Inthegametv
 }
 
 extension ITGOverlayManager: ITGOverlayDelegate {
+  
+  public func overlayRequestedVideoResolution() -> String {
+    return ""
+  }
+  
+  public func overlayDidProcessAnalyticEvent(info: AnalyticsInfo, type: AnalyticsEventType) {
+  }
+  
+  public func userState(_ user: User) {
+  }
+  
   public func overlayReceivedDeeplink(_ link: String) {
   }
   
@@ -175,4 +190,5 @@ extension ITGOverlayManager: ITGOverlayDelegate {
   public func overlayBackPressResult(handled: Bool) {
     getOverlay()?.onOverlayBackPressResult?(["handled": handled])
   }
+  
 }

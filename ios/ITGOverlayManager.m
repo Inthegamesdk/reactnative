@@ -6,10 +6,15 @@
 //
 
 @import Foundation;
-#import <Inthegametv/Inthegametv.h>
+#if TARGET_TVOS
+@import Inthegametv;
+#import "ITGRNExample_tvOS-Swift.h"
+#else
+@import InthegametviOS;
+#import "ITGRNExample-Swift.h"
+#endif
 
 #import "ITGOverlayManager.h"
-#import "ITGRNExample_tvOS-Swift.h"
 
 
 @implementation ITGOverlayManager

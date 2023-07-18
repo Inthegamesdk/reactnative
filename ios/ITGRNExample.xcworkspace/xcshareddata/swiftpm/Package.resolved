@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "inthegameframework",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Inthegamesdk/InthegameFramework.git",
+      "state" : {
+        "revision" : "5d799dcda42100e991881723fd5b74812d4c86b7",
+        "version" : "2.1.0"
+      }
+    }
+  ],
+  "version" : 2
+}

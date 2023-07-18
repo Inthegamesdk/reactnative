@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import React
 #if os(tvOS)
 import Inthegametv
 #else
@@ -54,27 +55,15 @@ import InthegametviOS
   public func start(delegate: ITGOverlayDelegate?) {
     if !didLoad {
       didLoad = true
-      let env = self.getEnvironment()
-      
       load(channelSlug: self.channelSlug,
            accountId: self.accountId,
-           environment: env,
+           environment: ITGEnvironment.init(envName: environment),
            delegate: delegate,
-           language: self.language ?? "en",
+           language: self.language ,
            foreignId: self.foreignId,
-           userName: self.userName)
+           userName: self.userName,
+           userRole: UserRole.user)
     }
   }
   
-  public func getEnvironment() -> ITGEnvironment {
-    switch self.environment {
-    case "stage":
-      return .stage
-    case "test":
-      return .test
-    default:
-      return .dev
-    }
-  }
-
 }
