@@ -48,7 +48,7 @@ Lastly, if using the predictions feature, you must pass key events in `MainActiv
 
 ### tvOS
 
-On your xcode project (ios folder) add the two frameworks included in this example: `Inthegametv.xcframework` and `PusherSwift.xcframework`
+On your xcode project use Swift Package Manager to install SDK using next link - https://github.com/Inthegamesdk/InthegameFramework.git
 
 Then, copy the following wrapper files to your xcode project:
 ```
@@ -65,15 +65,16 @@ To use the ITGOverlay, you include it in your layout, over the video player.
 
 ```
 <ITGOverlay style={styles.overlay}
-              accountName={"demos"}
-              channelId={"soccer_predictions"}
-              environment={"prod"}
+              accountId={"64100c941dca8096fc0df832"}
+              channelSlug={"dudeplus"}
+              environment={"v2-1"}
               language={"en"}
               blockSlip={false}
               ref={e => this.overlay = e}
               onOverlayRequestedVideoTime={this.onOverlayRequestedVideoTime}
               onOverlayRequestedPlay={this.onOverlayRequestedPlay}
               onOverlayRequestedPause={this.onOverlayRequestedPause}
+              onOverlayRequestedSeekTo={this.onOverlayRequestedSeekTo}
               onOverlayRequestedFocus={this.onOverlayRequestedFocus}
               onOverlayReleasedFocus={this.onOverlayReleasedFocus}
               onOverlayDidTapVideo={this.onOverlayDidTapVideo}
@@ -86,7 +87,7 @@ To use the ITGOverlay, you include it in your layout, over the video player.
               onOverlayBackPressResult={this.onOverlayBackPressResult}/>
 ```
 
-The accountName and channelID should be changed to match your ITG account and channel.
+The accountId and channelSlug should be changed to match your ITG account and channel.
 
 Please implement the delegate methods mentioned above as in the example project.
 
