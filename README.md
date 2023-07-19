@@ -6,7 +6,7 @@ This repository is an example of how to integrate Inthegame in a React Native TV
 
 The project requires the `react-native-tvOS` package to support tvOS devices and `react-native-keyevent` to handle key events in android (required if using the predictions feature). Please add these packages if missing:
 ```
-"react-native": "npm:react-native-tvos@0.68.2-2",
+"react-native": "npm:react-native-tvos@0.69.6-0",
 "react-native-keyevent": "^0.2.8",
 ```
 
@@ -18,17 +18,16 @@ After that you'll need to configure the native modules in each platform.
 
 Add the ITG dependency in the app's build.gradle:
 ```
-implementation 'com.github.Inthegamesdk:ITGAndroidRelease:1.9.4-compat'
+implementation 'com.github.Inthegamesdk:ITGAndroidRelease:2.1.22'
 ```
 
 Kotlin is required, please add it if not included yet. On the project's build.gradle:
 ```
-classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.0")
+classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.21")
 ```
 On the app's build.gradle:
 ```
-implementation "org.jetbrains.kotlin:kotlin-stdlib:1.5.0"
-implementation 'androidx.core:core-ktx:1.7.0'
+implementation "org.jetbrains.kotlin:kotlin-stdlib:1.8.21"
 ```
 
 Next, add the wrapper files to your android studio project: `ITGOverlay.kt` and `ITGOverlayFragment.kt`
@@ -36,14 +35,6 @@ Next, add the wrapper files to your android studio project: `ITGOverlay.kt` and 
 On your `MainApplication.java` file, add the ITG package:
 ```
 packages.add(new ITGOverlayPackage());
-```
-
-Lastly, if using the predictions feature, you must pass key events in `MainActivity.java`:
-```
-@Override public boolean onKeyDown(int keyCode, KeyEvent event) {
-    KeyEventModule.getInstance().onKeyDownEvent(keyCode, event);
-    return super.onKeyDown(keyCode, event);
-  }
 ```
 
 ### tvOS
@@ -66,7 +57,7 @@ To use the ITGOverlay, you include it in your layout, over the video player.
 ```
 <ITGOverlay style={styles.overlay}
               accountId={"64100c941dca8096fc0df832"}
-              channelSlug={"dudeplus"}
+              channelSlug={"dudeplusdemo"}
               environment={"v2-1"}
               language={"en"}
               blockSlip={false}
@@ -98,14 +89,6 @@ this.overlay.setup()
 Enable the tvOS menu key handler
 ```
 TVEventControl.enableTVMenuKey();
-```
-If using predictions - we must pass key events to android
-```
-if (Platform.OS == "android") {
-      KeyEvent.onKeyDownListener((keyEvent) => {
-        this.overlay.receivedKeyEvent(keyEvent.keyCode)
-      });
-    };
 ```
 
 Add a listener for back button events
