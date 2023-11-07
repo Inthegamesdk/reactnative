@@ -6,7 +6,6 @@
 //
 
 #import <React/RCTViewManager.h>
-//#import "ITGRNExample_tvOS-Swift.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
