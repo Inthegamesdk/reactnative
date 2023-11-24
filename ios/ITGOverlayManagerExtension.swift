@@ -6,11 +6,8 @@
 //
 
 import UIKit
-#if os(tvOS)
-import Inthegametv
-#else
 import InthegametviOS
-#endif
+import AVFoundation
 
 @objc extension ITGOverlayManager {
   
@@ -202,6 +199,31 @@ import InthegametviOS
 }
 
 extension ITGOverlayManager: ITGOverlayDelegate {
+    
+    public func overlayRequestedVideoLength() -> TimeInterval {
+        if let videoLength = getOverlay()?.onOverlayRequestedVideoLength?(nil) as? Double {
+                return TimeInterval(exactly: videoLength) ?? 0.0
+            } else {
+                return 0.0
+            }
+    }
+    
+    public func overlayRequestedVideoGravity(_ videoGravity: AVLayerVideoGravity) {
+        getOverlay()?.onOverlayRequestedVideoGravity?(["videoGravity": videoGravity ])
+    }
+    
+    public func overlayRequestedResetVideoGravity() {
+        getOverlay()?.onOverlayRequestedResetVideoGravity?(nil)
+    }
+    
+    public func overlayRequestedVideoSoundLevel(_ soundLevel: Float) {
+        getOverlay()?.onOverlayRequestedVideoSoundLevel?(["soundLevel": soundLevel])
+    }
+    
+    public func overlayRequestedResetVideoSoundLevel() {
+        getOverlay()?.onOverlayRequestedResetVideoSoundLevel?(nil)
+    }
+    
   
   public func overlayDidLoadChannelInfo(_ videoUrl: String?) {
     getOverlay()?.onOverlayDidLoadChannelInfo?(["videoUrl": videoUrl ?? ""])

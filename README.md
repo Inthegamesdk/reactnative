@@ -12,7 +12,7 @@ npm install itg-react-native react-native-keyevent react-native-video react-nati
 ## Usage
 
 ```js
-import { ItgOverlayView } from 'itg-react-native';
+import { ITGVideoOverlay } from 'itg-react-native';
 
 // ...
 

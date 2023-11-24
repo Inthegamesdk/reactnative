@@ -7,11 +7,7 @@
 
 import UIKit
 import React
-#if os(tvOS)
-import Inthegametv
-#else
 import InthegametviOS
-#endif
 
 @objc public class ITGRNOverlayView: ITGOverlayView {
   
@@ -26,7 +22,12 @@ import InthegametviOS
   @objc var userIsGuest: Bool = false
   @objc var videoResolution: String?
   private var didLoad = false
-  
+
+  @objc var onOverlayRequestedVideoGravity: RCTDirectEventBlock?
+  @objc var onOverlayRequestedResetVideoSoundLevel: RCTDirectEventBlock?
+  @objc var onOverlayRequestedVideoSoundLevel: RCTDirectEventBlock?
+  @objc var onOverlayRequestedVideoLength: RCTDirectEventBlock?
+  @objc var onOverlayRequestedResetVideoGravity: RCTDirectEventBlock?
   @objc var onOverlayRequestedVideoTime: RCTDirectEventBlock?
   @objc var onOverlayRequestedPause: RCTDirectEventBlock?
   @objc var onOverlayRequestedPlay: RCTDirectEventBlock?

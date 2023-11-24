@@ -1,135 +1,59 @@
-import React, { Ref, useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import {
-  requireNativeComponent,
   UIManager,
   Platform,
   findNodeHandle,
   StyleSheet,
   BackHandler,
   SafeAreaView,
-  TouchableOpacity,
-  Text,
-  NativeModules,
+  View,
   useWindowDimensions,
 } from 'react-native';
-import Video from 'react-native-video';
-import { TVEventHandler, useTVEventHandler } from 'react-native';
-import KeyEvent from 'react-native-keyevent';
-import ITGOverlay from './ITGOverlay';
-
-interface VideoProps {
-  videoStyle?: object;
-
-  source: object;
-  paused: boolean;
-  muted: boolean;
-  controls: boolean;
-  resizeMode: string;
-}
-
-interface VideoCallback {
-  (payload: any): void;
-}
-
-interface VideoCallbacks {
-  onAudioBecomingNoisy: VideoCallback;
-  onBandwidthUpdate: VideoCallback;
-  onEnd: VideoCallback;
-  onExternalPlaybackChange: VideoCallback;
-  onFullscreenPlayerWillPresent: VideoCallback;
-  onFullscreenPlayerDidPresent: VideoCallback;
-  onFullscreenPlayerWillDismiss: VideoCallback;
-  onFullscreenPlayerDidDismiss: VideoCallback;
-  onLoad: VideoCallback;
-  onLoadStart: VideoCallback;
-  onReadyForDisplay: VideoCallback;
-  onPictureInPictureStatusChanged: VideoCallback;
-  onPlaybackRateChange: VideoCallback;
-  onProgress: VideoCallback;
-  onSeek: VideoCallback;
-  onRestoreUserInterfaceForPictureInPictureStop: VideoCallback;
-  onTimedMetadata: VideoCallback;
-}
-
-type ITGVideoInterface = VideoProps & VideoCallbacks;
-
-interface OverlayProps {
-  accountId: string;
-  channelSlug: string;
-  language: string;
-  environment: string;
-
-  secondaryChannelSlug?: string;
-  foreignId: string;
-  userName: string;
-  userAvatar: string;
-  videoResolution: string;
-  blockMenu: boolean;
-  blockNotifications: boolean;
-  blockSlip: boolean;
-  blockSidebar: boolean;
-  injectionDelay: number;
-}
-
-interface OverlayCallback {
-  (overlay: ITGOverlay): void;
-}
-
-interface OverlayCallbacks {
-  onOverlayRequestedVideoTime?: OverlayCallback;
-  onOverlayRequestedPlay?: OverlayCallback;
-  onOverlayRequestedPause?: OverlayCallback;
-  onOverlayRequestedFocus?: OverlayCallback;
-  onOverlayReleasedFocus?: OverlayCallback;
-  onOverlayResizeVideoWidth?: OverlayCallback;
-  onOverlayResetVideoWidth?: OverlayCallback;
-  onOverlayResizeVideoHeight?: OverlayCallback;
-  onOverlayResetVideoHeight?: OverlayCallback;
-  onOverlayDidLoadChannelInfo?: OverlayCallback;
-  onOverlayRequestedVideoResolution?: OverlayCallback;
-  onOverlayDidPresentContent?: OverlayCallback;
-  onOverlayDidEndPresentingContent?: OverlayCallback;
-  onOverlayReceivedDeeplink?: OverlayCallback;
-  onOverlayRequestedVideoSeek?: OverlayCallback;
-  onOverlayDidProcessAnalyticEvent?: OverlayCallback;
-  onUserState?: OverlayCallback;
-
-  onCloseInteractionIfNeeded?: OverlayCallback;
-  onIsDisplayingInteractionResult?: OverlayCallback;
-  onIsDisplayingSidebar?: OverlayCallback;
-  onIsMenuVisible?: OverlayCallback;
-  onCurrentContent?: OverlayCallback;
-  onCurrentMenuPage?: OverlayCallback;
-}
-
-type ITGOverlayInterface = OverlayProps & OverlayCallbacks;
-type ITGVideoOverlayInterface = ITGOverlayInterface & ITGVideoInterface;
+import Video, { type OnLoadData } from 'react-native-video';
+import KeyEvent, { type KeyEventProps } from 'react-native-keyevent';
+import type { ViewStyle } from 'react-native';
+import { requireNativeComponent } from 'react-native';
+import type { NativeSyntheticEvent } from 'react-native';
+import {
+  NativeFunctions,
+  type OverlayCallback,
+  type VideoCallback,
+  type ITGOverlayInterface,
+  type ITGVideoOverlayInterface,
+} from './types';
+import type { StyleProp } from 'react-native';
 
 const COMPONENT_NAME = 'ITGOverlay';
-const ITGOverlayView = requireNativeComponent(COMPONENT_NAME);
+const ITGOverlayView = requireNativeComponent(
+  COMPONENT_NAME
+) as unknown as React.FC<
+  ITGOverlayInterface & {
+    style: StyleProp<ViewStyle> | undefined;
+    ref: React.MutableRefObject<null>;
+  }
+>;
 
-const _createOverlayCallback =
-  (
-    eventName: string,
-    props: ITGVideoOverlayInterface,
-    internalHandler?: OverlayCallback
-  ) =>
-  (overlay) => {
+const _createOverlayCallback = (
+  eventName: keyof ITGVideoOverlayInterface,
+  props: ITGVideoOverlayInterface,
+  internalHandler?: OverlayCallback
+) =>
+  function <T>(overlay: NativeSyntheticEvent<T>) {
     const callback = props[eventName];
-    if (callback) callback(overlay.nativeEvent);
-    console.log('CALLED BY OVERLAY: ', eventName);
+    if (callback && typeof callback === 'function' && overlay)
+      callback(overlay.nativeEvent);
     if (internalHandler) internalHandler(overlay);
   };
 
-const _createVideoCallback =
-  (
-    eventName: string,
-    props: ITGVideoOverlayInterface,
-    internalHandler?: VideoCallback
-  ) =>
-  (payload) => {
-    const callback = props[eventName];
-    if (callback) callback(payload);
+const _createVideoCallback = (
+  eventName: keyof ITGVideoOverlayInterface,
+  props?: ITGVideoOverlayInterface,
+  internalHandler?: VideoCallback
+) =>
+  function <T>(payload?: T) {
+    const callback = props && props[eventName];
+    if (!!callback && typeof callback === 'function' && !!payload)
+      callback(payload);
     if (internalHandler) internalHandler(payload);
   };
 
@@ -138,7 +62,6 @@ const _callNativeFunction = (
   eventName: string,
   methodArgs?: any
 ) => {
-  console.log('_callNativeFunction: ', eventName, methodArgs);
   if (methodArgs != null && Array.isArray(methodArgs)) {
     UIManager.dispatchViewManagerCommand(
       findNodeHandle(overlay),
@@ -158,13 +81,6 @@ const _callNativeFunction = (
   }
 };
 
-enum NativeFunctions {
-  setup = 'setup',
-  openMenu = 'openMenu',
-  videoPaused = 'videoPaused',
-  videoPlaying = 'videoPlaying',
-}
-
 const ITGVideoOverlay = (props: ITGVideoOverlayInterface) => {
   const $bridge = useRef(null);
   const $video = useRef(null);
@@ -175,8 +91,7 @@ const ITGVideoOverlay = (props: ITGVideoOverlayInterface) => {
   const [videoPaused, setVideoPaused] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [videoDuration, setVideoDuration] = useState(0);
-
-  const { source, paused, controls, resizeMode, muted, videoStyle } = props;
+  const { source, controls, resizeMode, muted, paused, videoStyle, containerStyle } = props;
   const {
     accountId,
     channelSlug,
@@ -196,7 +111,7 @@ const ITGVideoOverlay = (props: ITGVideoOverlayInterface) => {
     injectionDelay,
   } = props;
 
-  //: MARK - Overlay Event Callback
+  // Overlay Event Callback
   const _backAction = () => {
     _callNativeFunction($bridge.current, 'handleBackPressIfNeeded');
     return true;
@@ -206,7 +121,7 @@ const ITGVideoOverlay = (props: ITGVideoOverlayInterface) => {
     let methodName = isVideoPlaying
       ? NativeFunctions.videoPlaying
       : NativeFunctions.videoPaused;
-    if (Platform.OS == 'ios') {
+    if (Platform.OS === 'ios') {
       _callNativeFunction($bridge.current, methodName, currentTime);
     } else {
       _callNativeFunction($bridge.current, methodName, [
@@ -219,14 +134,14 @@ const ITGVideoOverlay = (props: ITGVideoOverlayInterface) => {
   const _onOverlayRequestedPlay = _createOverlayCallback(
     'onOverlayRequestedPlay',
     props,
-    (overlay: ITGOverlay) => {
+    () => {
       setVideoPaused(false);
     }
   );
   const _onOverlayRequestedPause = _createOverlayCallback(
     'onOverlayRequestedPause',
     props,
-    (overlay: ITGOverlay) => {
+    () => {
       setVideoPaused(true);
     }
   );
@@ -238,7 +153,7 @@ const ITGVideoOverlay = (props: ITGVideoOverlayInterface) => {
   const _onOverlayRequestedVideoTime = _createOverlayCallback(
     'onOverlayRequestedVideoTime',
     props,
-    (overlay: ITGOverlay) => {
+    () => {
       _updateOverlayPlayingState();
     }
   );
@@ -312,13 +227,14 @@ const ITGVideoOverlay = (props: ITGVideoOverlayInterface) => {
   const _onCurrentContent = _createOverlayCallback('onCurrentContent', props);
   const _onCurrentMenuPage = _createOverlayCallback('onCurrentMenuPage', props);
 
-  //: MARK - Video Event Callback
+  //Video Event Callback
 
   const _onAudioBecomingNoisy = _createVideoCallback(
     'onAudioBecomingNoisy',
     props
   );
   const _onBandwidthUpdate = _createVideoCallback('onBandwidthUpdate', props);
+
   const _onEnd = _createVideoCallback('onEnd', props);
   const _onExternalPlaybackChange = _createVideoCallback(
     'onExternalPlaybackChange',
@@ -340,9 +256,13 @@ const ITGVideoOverlay = (props: ITGVideoOverlayInterface) => {
     'onFullscreenPlayerDidDismiss',
     props
   );
-  const _onLoad = _createVideoCallback('onLoad', props, (payload) => {
-    setVideoDuration(payload.duration);
-  });
+  const _onLoad = _createVideoCallback(
+    'onLoad',
+    props,
+    (payload: OnLoadData) => {
+      setVideoDuration(payload.duration);
+    }
+  );
   const _onPlaybackResume = _createVideoCallback('onPlaybackResume', props);
   const _onLoadStart = _createVideoCallback('onLoadStart', props);
   const _onReadyForDisplay = _createVideoCallback('onReadyForDisplay', props);
@@ -355,14 +275,14 @@ const ITGVideoOverlay = (props: ITGVideoOverlayInterface) => {
     'onPlaybackRateChange',
     props,
     (payload) => {
-      setIsVideoPlaying(payload.playbackRate == 1);
+      setIsVideoPlaying(payload.playbackRate === 1);
       _updateOverlayPlayingState();
     }
   );
   const _onProgress = _createVideoCallback('onProgress', props, (payload) => {
     setCurrentTime(payload.currentTime);
   });
-  const _onSeek = _createVideoCallback('onSeek', props, (payload) => {
+  const _onSeek = _createVideoCallback('onSeek', props, () => {
     if (isVideoPlaying) {
       _updateOverlayPlayingState();
     }
@@ -378,43 +298,41 @@ const ITGVideoOverlay = (props: ITGVideoOverlayInterface) => {
   }, [width, height]);
 
   useEffect(() => {
-    console.log('Platform.OS: ', Platform.OS);
-
-    if (Platform.OS == 'android') {
+    if (Platform.OS === 'android') {
       _callNativeFunction($bridge.current, NativeFunctions.setup, [
         findNodeHandle($bridge.current),
         findNodeHandle($video.current),
       ]);
-      KeyEvent.onKeyDownListener((keyEvent) => {
-        console.log(keyEvent);
+      KeyEvent.onKeyDownListener((keyEvent: KeyEventProps) => {
         _callNativeFunction(
           $bridge.current,
           'receivedKeyEvent',
           keyEvent.keyCode
         );
       });
-    } else if (Platform.OS == 'ios') {
+    } else if (Platform.OS === 'ios') {
       _callNativeFunction($bridge.current, NativeFunctions.setup, [
         findNodeHandle($bridge.current),
       ]);
     }
 
     BackHandler.addEventListener('hardwareBackPress', _backAction);
-    return () =>
+    return () => {
       BackHandler.removeEventListener('hardwareBackPress', _backAction);
-    KeyEvent.removeKeyDownListener();
+      KeyEvent.removeKeyDownListener();
+    };
   }, []);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={[styles.container, containerStyle && containerStyle]}>
       <Video
         ref={$video}
-        style={isFullscreen ? styles.video : styles.videoMinimal}
+        style={[isFullscreen ? styles.video : styles.videoMinimal]}
         source={source}
-        paused={false}
-        controls={controls ?? true}
-        muted={muted ?? false}
-        resizeMode={resizeMode ?? 'contain'}
+        paused={videoPaused || false}
+        controls={controls || true}
+        muted={muted || false}
+        resizeMode={resizeMode || isFullscreen ? 'cover' : 'contain' }
         progressUpdateInterval={1000}
         onEnd={_onEnd}
         onSeek={_onSeek}
@@ -427,23 +345,23 @@ const ITGVideoOverlay = (props: ITGVideoOverlayInterface) => {
         onBandwidthUpdate={_onBandwidthUpdate}
         onPlaybackRateChange={_onPlaybackRateChange}
         onAudioBecomingNoisy={_onAudioBecomingNoisy}
-        onPlaybackStateChange={_onPlaybackRateChange}
         onExternalPlaybackChange={_onExternalPlaybackChange}
         onFullscreenPlayerWillPresent={_onFullscreenPlayerWillPresent}
         onFullscreenPlayerDidPresent={_onFullscreenPlayerDidPresent}
         onFullscreenPlayerWillDismiss={_onFullscreenPlayerWillDismiss}
         onFullscreenPlayerDidDismiss={_onFullscreenPlayerDidDismiss}
         onPictureInPictureStatusChanged={_onPictureInPictureStatusChanged}
-        onRestoreUserInterfaceForPictureInPictureStop={_onRestoreUserInterfaceForPictureInPictureStop}
+        onRestoreUserInterfaceForPictureInPictureStop={
+          _onRestoreUserInterfaceForPictureInPictureStop
+        }
       />
-
       <ITGOverlayView
-        style={styles.overlay}
-        accountId={accountId}
+        style={[isFullscreen ? styles.fullOverlay : Platform.OS === 'android' ? androidStyles.overlay : iosStyles.overlay]}
+        accountId={accountId} 
         channelSlug={channelSlug}
         secondaryChannelSlug={secondaryChannelSlug}
         language={language}
-        environment={environment ?? 'dev'}
+        environment={environment || 'dev'}
         foreignId={foreignId}
         userName={userName}
         userAvatar={userAvatar}
@@ -457,6 +375,7 @@ const ITGVideoOverlay = (props: ITGVideoOverlayInterface) => {
         onOverlayRequestedVideoTime={_onOverlayRequestedVideoTime}
         onOverlayRequestedPause={_onOverlayRequestedPause}
         onOverlayRequestedPlay={_onOverlayRequestedPlay}
+        onOverlayRequestedFocus={_onOverlayRequestedFocus}
         onOverlayReleasedFocus={_onOverlayReleasedFocus}
         onOverlayResizeVideoWidth={_onOverlayResizeVideoWidth}
         onOverlayResetVideoWidth={_onOverlayResetVideoWidth}
@@ -475,7 +394,7 @@ const ITGVideoOverlay = (props: ITGVideoOverlayInterface) => {
         onIsDisplayingSidebar={_onIsDisplayingSidebar}
         onIsMenuVisible={_onIsMenuVisible}
         onCurrentContent={_onCurrentContent}
-        onCurrentMenuPag={_onCurrentMenuPage}
+        onCurrentMenuPage={_onCurrentMenuPage}
       />
     </SafeAreaView>
   );
@@ -488,14 +407,30 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   video: {
+      width: '100%',
+      height: '100%',
     flex: 1,
+    zIndex: 1,
   },
   videoMinimal: {
     width: '100%',
-    aspectRatio: 16 / 9,
+    flex:1,
   },
-  overlay: {
+  fullOverlay: {
+    zIndex: 2,
     ...StyleSheet.absoluteFillObject,
-    zIndex: 1,
-  },
+  }
 });
+
+const androidStyles = StyleSheet.create({
+  overlay: {
+    zIndex: 2,
+    ...StyleSheet.absoluteFillObject,
+  },
+})
+const iosStyles = StyleSheet.create({
+  overlay: {
+    zIndex: 2,
+    flex: 1,
+  }
+})
