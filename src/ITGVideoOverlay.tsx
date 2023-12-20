@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState, useImperativeHandle } from 'react';
+import React, { useRef, useEffect, useState, useImperativeHandle, useCallback } from 'react';
 import {
   UIManager,
   Platform,
@@ -90,6 +90,7 @@ const ITGVideoOverlay = React.forwardRef((props: ITGVideoOverlayInterface, ref:R
 
   const { width, height } = useWindowDimensions();
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [aspectRatio, setAspectRatio] = useState(16/9)
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const [videoPaused, setVideoPaused] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
@@ -122,8 +123,6 @@ const ITGVideoOverlay = React.forwardRef((props: ITGVideoOverlayInterface, ref:R
     _callNative('handleBackPressIfNeeded')
    return true
   }
-  const openChat = () =>  _callNative('openChat')
-  const openStats = () =>  _callNative('openStats')
   const closeMenu = () => _callNative('closeMenu')
   const closeAccount = () => _callNative('closeAccount')
   const closeLeaderboard = () => _callNative('closeLeaderboard')
@@ -149,7 +148,6 @@ const ITGVideoOverlay = React.forwardRef((props: ITGVideoOverlayInterface, ref:R
     setLiveMode,
   }));
 
- 
 
   const _updateOverlayPlayingState = () => {
     let methodName = isVideoPlaying
@@ -161,7 +159,7 @@ const ITGVideoOverlay = React.forwardRef((props: ITGVideoOverlayInterface, ref:R
       _callNativeFunction($bridge.current, methodName, [
         currentTime,
         videoDuration,
-        1//replace with current aspect ratio
+        aspectRatio,
       ]);
     }
   };
@@ -332,7 +330,6 @@ const ITGVideoOverlay = React.forwardRef((props: ITGVideoOverlayInterface, ref:R
   useEffect(() => {
     setIsFullscreen(width > height);
   }, [width, height]);
-
   useEffect(() => {
     if (Platform.OS === 'android') {
       _callNativeFunction($bridge.current, NativeFunctions.setup, [
@@ -358,12 +355,22 @@ const ITGVideoOverlay = React.forwardRef((props: ITGVideoOverlayInterface, ref:R
       KeyEvent.removeKeyDownListener();
     };
   }, []);
+ 
+ const onLayout = useCallback(
+    (event: { nativeEvent: { layout: { width: number; height: number, x: number, y: number } } }) => {
+      const { width, height } = event.nativeEvent.layout;
+      setAspectRatio(width / height)
+    },
+    [isFullscreen],
+  )
+  
 
   return (
     <SafeAreaView style={[styles.container, containerStyle && containerStyle]}>
-      <Video
+     <View  onLayout={onLayout} style={[isFullscreen ? styles.video : styles.videoMinimal, videoStyle && videoStyle ]}>
+     <Video
         ref={$video}
-        style={[isFullscreen ? styles.video : styles.videoMinimal]}
+        style={styles.full}
         source={source}
         paused={videoPaused || false}
         controls={controls || true}
@@ -391,6 +398,7 @@ const ITGVideoOverlay = React.forwardRef((props: ITGVideoOverlayInterface, ref:R
           _onRestoreUserInterfaceForPictureInPictureStop
         }
       />
+     </View>
       <ITGOverlayView
         style={[isFullscreen ? styles.fullOverlay : Platform.OS === 'android' ? androidStyles.overlay : iosStyles.overlay]}
         accountId={accountId} 
@@ -455,7 +463,8 @@ const styles = StyleSheet.create({
   fullOverlay: {
     zIndex: 2,
     ...StyleSheet.absoluteFillObject,
-  }
+  },
+  full: {width: '100%', height: '100%'}
 });
 
 const androidStyles = StyleSheet.create({

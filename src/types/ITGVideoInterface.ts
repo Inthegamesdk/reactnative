@@ -5,7 +5,7 @@ import type { VideoCallbacks } from './VideoCallbacks';
 
 
 export interface VideoProps {
-  videoStyle: ViewStyle;
+  videoStyle?:  ViewStyle;
   containerStyle?: ViewStyle;
   source:
     | {
