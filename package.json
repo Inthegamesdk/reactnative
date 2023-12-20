@@ -1,6 +1,6 @@
 {
   "name": "itg-react-native",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "ITGOverlay for react-native",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -88,9 +88,6 @@
     "react-native-vector-icons": "*",
     "react-native-video": "*"
   },
-  "workspaces": [
-    "example"
-  ],
   "packageManager": "yarn@3.6.1",
   "engines": {
     "node": ">= 18.0.0"
