@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, useImperativeHandle } from 'react';
 import {
   UIManager,
   Platform,
@@ -20,6 +20,7 @@ import {
   type VideoCallback,
   type ITGOverlayInterface,
   type ITGVideoOverlayInterface,
+  type ITGOverlayRef,
 } from './types';
 import type { StyleProp } from 'react-native';
 
@@ -57,6 +58,8 @@ const _createVideoCallback = (
     if (internalHandler) internalHandler(payload);
   };
 
+
+
 const _callNativeFunction = (
   overlay: any,
   eventName: string,
@@ -81,7 +84,7 @@ const _callNativeFunction = (
   }
 };
 
-const ITGVideoOverlay = (props: ITGVideoOverlayInterface) => {
+const ITGVideoOverlay = React.forwardRef((props: ITGVideoOverlayInterface, ref:React.ForwardedRef<ITGOverlayRef>) => {
   const $bridge = useRef(null);
   const $video = useRef(null);
 
@@ -112,10 +115,41 @@ const ITGVideoOverlay = (props: ITGVideoOverlayInterface) => {
   } = props;
 
   // Overlay Event Callback
-  const _backAction = () => {
-    _callNativeFunction($bridge.current, 'handleBackPressIfNeeded');
-    return true;
+  const _callNative = (action: string) => {
+    _callNativeFunction($bridge.current, action);
   };
+  const _backAction = () =>  {
+    _callNative('handleBackPressIfNeeded')
+   return true
+  }
+  const openChat = () =>  _callNative('openChat')
+  const openStats = () =>  _callNative('openStats')
+  const closeMenu = () => _callNative('closeMenu')
+  const closeAccount = () => _callNative('closeAccount')
+  const closeLeaderboard = () => _callNative('closeLeaderboard')
+  const closeShop = () => _callNative('closeShop')
+  const closeSidebar = () => _callNative('closeSidebar')
+  const closeAll = () =>  _callNative( 'closeAll')
+  const openAccount = () => _callNative('openAccount')
+  const openLeaderboard = () => _callNative('openLeaderboard')
+  const openShop = () => _callNative('openShop')
+  const setLiveMode = (enabled: boolean) =>  _callNativeFunction($bridge.current, 'setLiveMode', [enabled])
+
+
+  useImperativeHandle(ref, () => ({
+    closeMenu,
+    closeAccount,
+    closeLeaderboard,
+    closeShop,
+    closeSidebar,
+    closeAll,
+    openAccount,
+    openLeaderboard,
+    openShop,
+    setLiveMode,
+  }));
+
+ 
 
   const _updateOverlayPlayingState = () => {
     let methodName = isVideoPlaying
@@ -127,6 +161,7 @@ const ITGVideoOverlay = (props: ITGVideoOverlayInterface) => {
       _callNativeFunction($bridge.current, methodName, [
         currentTime,
         videoDuration,
+        1//replace with current aspect ratio
       ]);
     }
   };
@@ -150,6 +185,7 @@ const ITGVideoOverlay = (props: ITGVideoOverlayInterface) => {
     'onOverlayRequestedVideoSeek',
     props
   );
+  
   const _onOverlayRequestedVideoTime = _createOverlayCallback(
     'onOverlayRequestedVideoTime',
     props,
@@ -398,7 +434,7 @@ const ITGVideoOverlay = (props: ITGVideoOverlayInterface) => {
       />
     </SafeAreaView>
   );
-};
+});
 
 export default ITGVideoOverlay;
 
@@ -414,7 +450,7 @@ const styles = StyleSheet.create({
   },
   videoMinimal: {
     width: '100%',
-    flex:1,
+    aspectRatio: 16/9,
   },
   fullOverlay: {
     zIndex: 2,

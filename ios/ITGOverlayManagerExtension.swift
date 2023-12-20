@@ -56,24 +56,6 @@ import AVFoundation
     }
   }
   
-  @objc func openChat(_ node: NSNumber) {
-    DispatchQueue.main.async {
-      self.getOverlay(node: node).openChat()
-    }
-  }
-
-  @objc func openStats(_ node: NSNumber) {
-    DispatchQueue.main.async {
-      self.getOverlay(node: node).openStats()
-    }
-  }
-  
-  @objc func openExtension(_ node: NSNumber) {
-    DispatchQueue.main.async {
-      self.getOverlay(node: node).openExtension()
-    }
-  }
-  
   @objc func closeMenu(_ node: NSNumber) {
     DispatchQueue.main.async {
       self.getOverlay(node: node).closeMenu()
@@ -98,21 +80,9 @@ import AVFoundation
     }
   }
   
-  @objc func closeChat(_ node: NSNumber) {
+  @objc func closeSidebar(_ node: NSNumber) {
     DispatchQueue.main.async {
-      self.getOverlay(node: node).closeChat()
-    }
-  }
-  
-  @objc func closeStats(_ node: NSNumber) {
-    DispatchQueue.main.async {
-      self.getOverlay(node: node).closeStats()
-    }
-  }
-  
-  @objc func closeExtension(_ node: NSNumber) {
-    DispatchQueue.main.async {
-      self.getOverlay(node: node).closeExtension()
+      // self.getOverlay(node: node).closeSidebar()//ask for methon name
     }
   }
   

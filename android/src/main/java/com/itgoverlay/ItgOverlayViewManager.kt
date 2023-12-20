@@ -67,6 +67,7 @@ class ITGOverlayManager : ViewGroupManager<FrameLayout>, ITGOverlayView.ITGOverl
     var videoID: Int = 0
     var settings = ITGOverlaySettings()
     var duration : Long = 0L
+    var aspectRatio : Float = 1F
 
     @ReactProp(name = "accountId")
     fun setAccountId(view: FrameLayout, value: String = "") {
@@ -134,21 +135,24 @@ class ITGOverlayManager : ViewGroupManager<FrameLayout>, ITGOverlayView.ITGOverl
             "openAccount" -> overlayView?.openAccount()
             "openLeaderboard" -> overlayView?.openLeaderboard()
             "openShop" -> overlayView?.openShop()
-            "openChat" -> overlayView?.openAccount()
-            "openPredictions" -> overlayView?.openAccount()
+            "openChat" -> overlayView?.openChat()
             "closeMenu" -> overlayView?.closeMenu()
             "closeAccount" -> overlayView?.closeAccount()
             "closeLeaderboard" -> overlayView?.closeLeaderboard()
-            "closePredictions" -> overlayView?.closePredictions()
+            "openStats" -> overlayView?.openStats()
+            "closeStats" -> overlayView?.closeStats()
             "closeShop" -> overlayView?.closeShop()
             "closeChat" -> overlayView?.closeChat()
+            "closeAll" -> overlayView?.closeAll()
             "videoPlaying" -> {
                 overlayView?.videoPlaying(((args?.getInt(0)  ?: 0) * 1000).toLong())
                 duration = args.optDuration()
+                aspectRatio = args.optAspectRatio()
             }
             "videoPaused" -> {
                 overlayView?.videoPaused(((args?.getInt(0) ?: 0) * 1000).toLong())
                 duration = args.optDuration()
+                aspectRatio = args.optAspectRatio()
             }
             "setLiveMode" -> overlayView?.setLiveMode(args?.getBoolean(0) ?: true)
             "handleBackPressIfNeeded" -> this.handleBackPressIfNeeded()
@@ -167,6 +171,14 @@ class ITGOverlayManager : ViewGroupManager<FrameLayout>, ITGOverlayView.ITGOverl
         else
             0L
     }
+
+  private fun ReadableArray?.optAspectRatio() : Float {
+    val args = this
+    return if(args != null && args.size() > 2)
+    args.getDouble(2).toFloat()
+    else
+    1F
+  }
 
     fun handleBackPressIfNeeded() {
         val handled = this.overlayView?.handleBackPressIfNeeded() ?: false
@@ -320,5 +332,8 @@ class ITGOverlayManager : ViewGroupManager<FrameLayout>, ITGOverlayView.ITGOverl
 
     override fun overlayRequestedVideoDuration(): Long {
         return duration
+    }
+    override fun overlayRequestedVideoAspectRatio(): Float {
+        return aspectRatio
     }
 }

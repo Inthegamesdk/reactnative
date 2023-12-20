@@ -1,12 +1,14 @@
 import * as React from 'react';
 
 import { StyleSheet } from 'react-native';
-import { ITGVideoOverlay } from 'itg-react-native';
+import { ITGVideoOverlay, type ITGOverlayRef } from 'itg-react-native';
 
 export default function App() {
+  const overlayRef = React.useRef<ITGOverlayRef>(null);
+
   return (
     <ITGVideoOverlay
-        style={styles.container}
+      ref={overlayRef}
         source={
           {
             uri: "https://media.inthegame.io/uploads/dev/testing/videos/DolbyAtmosdemos4kHDR(GoodfortestingTVormobileHDRSupporteddevices).mp4"
