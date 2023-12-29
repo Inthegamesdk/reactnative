@@ -6,7 +6,11 @@
 //
 
 import UIKit
+#if os(tvOS)
+import Inthegametv
+#else
 import InthegametviOS
+#endif
 import AVFoundation
 
 @objc extension ITGOverlayManager {
