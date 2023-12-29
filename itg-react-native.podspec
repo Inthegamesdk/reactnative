@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   s.homepage     = package["homepage"]
   s.license      = package["license"]
   s.authors      = package["author"]
-  s.platforms    = { :ios => "15.0" }
+  s.platforms    = { :ios => "15.0" , :tvos => '15.0'}
   s.source       = { :git => "https://gl.pettersonapps.com/react-native/itg-react-native", :tag => "#{s.version}" }
 
   s.source_files = "ios/**/*.{h,m,mm,swift}"
