@@ -6,10 +6,14 @@
 //
 
 @import Foundation;
-@import InthegametviOS;
+
 #import "ITGOverlayManager.h"
 
-
+#if TARGET_OS_TV
+    @import Inthegametv;
+#else
+    @import InthegametviOS;
+#endif
 @implementation ITGOverlayManager
 
 RCT_EXPORT_MODULE(ITGOverlay)
