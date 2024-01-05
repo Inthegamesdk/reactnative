@@ -1,3 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.itgoverlay">
+        package="com.itgoverlay"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:ignore="ImpliedTouchscreenHardware,MissingLeanbackLauncher,MissingLeanbackSupport">
+        <uses-feature android:name="android.software.leanback" android:required="false"/>
 </manifest>
