@@ -93,6 +93,7 @@ const ITGVideoOverlay = React.forwardRef((props: ITGVideoOverlayInterface, ref:R
   const [aspectRatio, setAspectRatio] = useState(16/9)
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const [videoPaused, setVideoPaused] = useState(false);
+  const [channelVideo, setChannelVideo] = useState({uri: ''})
   const [currentTime, setCurrentTime] = useState(0);
   const [videoDuration, setVideoDuration] = useState(0);
   const { source, controls, resizeMode, muted, paused, videoStyle, containerStyle } = props;
@@ -368,10 +369,12 @@ const ITGVideoOverlay = React.forwardRef((props: ITGVideoOverlayInterface, ref:R
   return (
     <SafeAreaView style={[styles.container, containerStyle && containerStyle]}>
      <View  onLayout={onLayout} style={[isFullscreen ? styles.video : styles.videoMinimal, videoStyle && videoStyle ]}>
-     <Video
+      {
+        channelVideo.uri ?
+        <Video
         ref={$video}
         style={styles.full}
-        source={source}
+        source={source || channelVideo}
         paused={videoPaused || false}
         controls={controls || true}
         muted={muted || false}
@@ -398,6 +401,10 @@ const ITGVideoOverlay = React.forwardRef((props: ITGVideoOverlayInterface, ref:R
           _onRestoreUserInterfaceForPictureInPictureStop
         }
       />
+      :
+      <></>
+      }
+    
      </View>
       <ITGOverlayView
         style={[isFullscreen ? styles.fullOverlay : Platform.OS === 'android' ? androidStyles.overlay : iosStyles.overlay]}
@@ -417,6 +424,12 @@ const ITGVideoOverlay = React.forwardRef((props: ITGVideoOverlayInterface, ref:R
         injectionDelay={injectionDelay}
         ref={$bridge}
         onOverlayRequestedVideoTime={_onOverlayRequestedVideoTime}
+        onOverlayDidLoadChannelInfo={(props) => {
+          _onOverlayDidLoadChannelInfo(props)
+          setChannelVideo({
+            uri: props.nativeEvent.videoUrl
+          })
+        }}
         onOverlayRequestedPause={_onOverlayRequestedPause}
         onOverlayRequestedPlay={_onOverlayRequestedPlay}
         onOverlayRequestedFocus={_onOverlayRequestedFocus}
@@ -425,7 +438,6 @@ const ITGVideoOverlay = React.forwardRef((props: ITGVideoOverlayInterface, ref:R
         onOverlayResetVideoWidth={_onOverlayResetVideoWidth}
         onOverlayResizeVideoHeight={_onOverlayResizeVideoHeight}
         onOverlayResetVideoHeight={_onOverlayResetVideoHeight}
-        onOverlayDidLoadChannelInfo={_onOverlayDidLoadChannelInfo}
         onOverlayRequestedVideoResolution={_onOverlayRequestedVideoResolution}
         onOverlayDidPresentContent={_onOverlayDidPresentContent}
         onOverlayDidEndPresentingContent={_onOverlayDidEndPresentingContent}

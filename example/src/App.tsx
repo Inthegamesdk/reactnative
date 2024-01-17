@@ -9,11 +9,6 @@ export default function App() {
   return (
     <ITGVideoOverlay
       ref={overlayRef}
-        source={
-          {
-            uri: "https://media.inthegame.io/uploads/dev/testing/videos/DolbyAtmosdemos4kHDR(GoodfortestingTVormobileHDRSupporteddevices).mp4"
-          }
-        } 
         accountId={'62a73d850bcf95e08a025f82'}
         channelSlug={'android_test'}
         environment={'dev'}
