@@ -364,43 +364,39 @@ const ITGVideoOverlay = React.forwardRef((props: ITGVideoOverlayInterface, ref:R
     },
     [isFullscreen],
   )
-  
-
   return (
     <SafeAreaView style={[styles.container, containerStyle && containerStyle]}>
      <View  onLayout={onLayout} style={[isFullscreen ? styles.video : styles.videoMinimal, videoStyle && videoStyle ]}>
-        <Video
-        ref={$video}
-        style={styles.full}
-        source={source}
-        paused={videoPaused || false}
-        controls={controls || true}
-        muted={muted || false}
-        resizeMode={resizeMode || isFullscreen ? 'cover' : 'contain' }
-        progressUpdateInterval={1000}
-        onEnd={_onEnd}
-        onSeek={_onSeek}
-        onLoad={_onLoad}
-        onPlaybackResume={_onPlaybackResume}
-        onProgress={_onProgress}
-        onLoadStart={_onLoadStart}
-        onTimedMetadata={_onTimedMetadata}
-        onReadyForDisplay={_onReadyForDisplay}
-        onBandwidthUpdate={_onBandwidthUpdate}
-        onPlaybackRateChange={_onPlaybackRateChange}
-        onAudioBecomingNoisy={_onAudioBecomingNoisy}
-        onExternalPlaybackChange={_onExternalPlaybackChange}
-        onFullscreenPlayerWillPresent={_onFullscreenPlayerWillPresent}
-        onFullscreenPlayerDidPresent={_onFullscreenPlayerDidPresent}
-        onFullscreenPlayerWillDismiss={_onFullscreenPlayerWillDismiss}
-        onFullscreenPlayerDidDismiss={_onFullscreenPlayerDidDismiss}
-        onPictureInPictureStatusChanged={_onPictureInPictureStatusChanged}
-        onRestoreUserInterfaceForPictureInPictureStop={
-          _onRestoreUserInterfaceForPictureInPictureStop
-        }
-      />
-     
-    
+         <Video
+         ref={$video}
+         style={styles.full}
+         source={source || channelVideo}
+         paused={videoPaused || false}
+         controls={controls || true}
+         muted={muted || false}
+         resizeMode={resizeMode || isFullscreen ? 'cover' : 'contain' }
+         progressUpdateInterval={1000}
+         onEnd={_onEnd}
+         onSeek={_onSeek}
+         onLoad={_onLoad}
+         onPlaybackResume={_onPlaybackResume}
+         onProgress={_onProgress}
+         onLoadStart={_onLoadStart}
+         onTimedMetadata={_onTimedMetadata}
+         onReadyForDisplay={_onReadyForDisplay}
+         onBandwidthUpdate={_onBandwidthUpdate}
+         onPlaybackRateChange={_onPlaybackRateChange}
+         onAudioBecomingNoisy={_onAudioBecomingNoisy}
+         onExternalPlaybackChange={_onExternalPlaybackChange}
+         onFullscreenPlayerWillPresent={_onFullscreenPlayerWillPresent}
+         onFullscreenPlayerDidPresent={_onFullscreenPlayerDidPresent}
+         onFullscreenPlayerWillDismiss={_onFullscreenPlayerWillDismiss}
+         onFullscreenPlayerDidDismiss={_onFullscreenPlayerDidDismiss}
+         onPictureInPictureStatusChanged={_onPictureInPictureStatusChanged}
+         onRestoreUserInterfaceForPictureInPictureStop={
+           _onRestoreUserInterfaceForPictureInPictureStop
+         }
+       />      
      </View>
       <ITGOverlayView
         style={[isFullscreen ? styles.fullOverlay : Platform.OS === 'android' ? androidStyles.overlay : iosStyles.overlay]}
@@ -423,7 +419,7 @@ const ITGVideoOverlay = React.forwardRef((props: ITGVideoOverlayInterface, ref:R
         onOverlayDidLoadChannelInfo={(props) => {
           _onOverlayDidLoadChannelInfo(props)
           setChannelVideo({
-            uri: props.nativeEvent.videoUrl
+            uri: props?.nativeEvent?.videoUrl
           })
         }}
         onOverlayRequestedPause={_onOverlayRequestedPause}

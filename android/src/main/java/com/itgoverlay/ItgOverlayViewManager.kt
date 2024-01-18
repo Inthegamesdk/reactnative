@@ -35,6 +35,7 @@ data class ITGOverlaySettings(
     fun getEnvironment(): ITGEnvironment {
         Log.d("ITGOverlaySettings", "getEnvironment $environmentValue")
         return when(environmentValue) {
+            "v2-3" -> ITGEnvironment.v2_3
             "v2-1" -> ITGEnvironment.v2_1
             "stage" -> ITGEnvironment.stage
             "test" -> ITGEnvironment.test
@@ -267,6 +268,8 @@ class ITGOverlayManager : ViewGroupManager<FrameLayout>, ITGOverlayView.ITGOverl
             MapBuilder.of("registrationName", "onOverlayResetVideoWidth")
         map["onOverlayBackPressResult"] =
             MapBuilder.of("registrationName", "onOverlayBackPressResult")
+        map["onOverlayDidLoadChannelInfo"] =
+            MapBuilder.of("registrationName", "onOverlayDidLoadChannelInfo")
         return map
     }
 
@@ -318,6 +321,12 @@ class ITGOverlayManager : ViewGroupManager<FrameLayout>, ITGOverlayView.ITGOverl
     }
 
     override fun userState(userSnapshot: UserSnapshot) {
+    }
+
+    override fun channelInfoDidLoad(streamUrl: String?) {
+        val params = Arguments.createMap()
+        params.putString("videoUrl", streamUrl.orEmpty())
+        sendEvent(reactContext, "onOverlayDidLoadChannelInfo", params)
     }
 
 
