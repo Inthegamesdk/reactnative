@@ -369,12 +369,10 @@ const ITGVideoOverlay = React.forwardRef((props: ITGVideoOverlayInterface, ref:R
   return (
     <SafeAreaView style={[styles.container, containerStyle && containerStyle]}>
      <View  onLayout={onLayout} style={[isFullscreen ? styles.video : styles.videoMinimal, videoStyle && videoStyle ]}>
-      {
-        channelVideo.uri ?
         <Video
         ref={$video}
         style={styles.full}
-        source={source || channelVideo}
+        source={source}
         paused={videoPaused || false}
         controls={controls || true}
         muted={muted || false}
@@ -401,9 +399,7 @@ const ITGVideoOverlay = React.forwardRef((props: ITGVideoOverlayInterface, ref:R
           _onRestoreUserInterfaceForPictureInPictureStop
         }
       />
-      :
-      <></>
-      }
+     
     
      </View>
       <ITGOverlayView
