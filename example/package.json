@@ -13,7 +13,7 @@
     "react-native": "0.72.5",
     "react-native-keyevent": "^0.3.1",
     "react-native-vector-icons": "^10.0.0",
-    "react-native-video": "^5.2.1"
+    "react-native-video": "6.0.0-beta.4"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

@@ -55,9 +55,9 @@
     "@react-native/eslint-config": "^0.72.2",
     "@release-it/conventional-changelog": "^5.0.0",
     "@types/jest": "^28.1.2",
+    "@types/lodash": "^4.14.202",
     "@types/react": "~17.0.21",
     "@types/react-native": "0.70.0",
-    "@types/react-native-video": "^5.0.16",
     "@typescript-eslint/eslint-plugin": "^6.10.0",
     "commitlint": "^17.0.2",
     "del-cli": "^5.0.0",
@@ -75,6 +75,7 @@
     "react-native": "0.72.5",
     "react-native-builder-bob": "^0.20.0",
     "react-native-keyevent": "^0.3.1",
+    "react-native-video": "6.0.0-beta.4",
     "release-it": "^15.0.0",
     "turbo": "^1.10.7",
     "typescript": "^5.0.2"
@@ -169,5 +170,8 @@
     "name": "RNItgOverlayViewSpec",
     "type": "components",
     "jsSrcsDir": "src"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21"
   }
 }
