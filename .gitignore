@@ -51,6 +51,9 @@ example/ios/Pods
 # Ruby
 example/vendor/
 
+
+# yarn
+example/.yarn
 # node.js
 #
 node_modules/
