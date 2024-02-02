@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState, useImperativeHandle, useCallback } from 'react';
+import React, { useRef, useEffect, useState, useImperativeHandle, useCallback, type ReactElement, useMemo } from 'react';
 import {
   UIManager,
   Platform,
@@ -91,22 +91,16 @@ const ITGVideoOverlay = React.forwardRef((props: ITGVideoOverlayInterface, ref:R
   const { width, height } = useWindowDimensions();
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [aspectRatio, setAspectRatio] = useState(16/9)
-  const [isVideoPlaying, setIsVideoPlaying] = useState(true);
-  const [videoPaused, setVideoPaused] = useState(false);
-  const [channelVideo, setChannelVideo] = useState({uri: 'background'})
-  const [currentTime, setCurrentTime] = useState(0);
-  const [videoDuration, setVideoDuration] = useState(0);
-  const [expectedTime, setExpectedTime] = useState(currentTime + 1)
-  const { source, controls, resizeMode, muted, paused, videoStyle, containerStyle } = props;
+  const {  videoStyle, containerStyle } = props;
+  const [expectedTime, setExpectedTime] = useState(1)
   const {
+    children,
     accountId,
     channelSlug,
     secondaryChannelSlug,
     language,
     environment,
     foreignId,
-  } = props;
-  const {
     userName,
     userAvatar,
     videoResolution,
@@ -115,6 +109,12 @@ const ITGVideoOverlay = React.forwardRef((props: ITGVideoOverlayInterface, ref:R
     blockSlip,
     blockSidebar,
     injectionDelay,
+    onOverlayDidLoadChannelInfo,
+    onOverlayRequestedPause,
+    currentTime,
+    videoPlaybackState,
+    videoDuration,
+    onOverlayRequestedFullScreen,
   } = props;
 
   // Overlay Event Callback
@@ -125,6 +125,8 @@ const ITGVideoOverlay = React.forwardRef((props: ITGVideoOverlayInterface, ref:R
     _callNative('handleBackPressIfNeeded')
    return true
   }
+
+  // Methods
   const closeMenu = () => _callNative('closeMenu')
   const closeAccount = () => _callNative('closeAccount')
   const closeLeaderboard = () => _callNative('closeLeaderboard')
@@ -150,11 +152,17 @@ const ITGVideoOverlay = React.forwardRef((props: ITGVideoOverlayInterface, ref:R
     setLiveMode,
   }));
 
+
+
+
   useEffect(() => {
+
     _updateOverlayPlayingState()
-  }, [isVideoPlaying])
-const _updateOverlayPlayingState = ( )=> {
-  const methodName = isVideoPlaying
+  }, [videoPlaybackState, videoDuration])
+  
+
+const _updateOverlayPlayingState = ()=> {
+  const methodName = videoPlaybackState
     ? NativeFunctions.videoPlaying
     : NativeFunctions.videoPaused;
   if (Platform.OS === 'ios') {
@@ -167,30 +175,19 @@ const _updateOverlayPlayingState = ( )=> {
     ]);
   }
 }
- 
-
-
-  // useEffect(() => {    
-  //   if(expectedTime - Math.round(currentTime) > 1 ) {
-  //     _updateOverlayPlayingState()
-  //   }
-  //   setExpectedTime(Math.round(currentTime) + 1 )
-   
-  // }, [currentTime])
-  
 
   const _onOverlayRequestedPlay = _createOverlayCallback(
     'onOverlayRequestedPlay',
     props,
     () => {
-      setVideoPaused(false);
+      onOverlayRequestedPause && onOverlayRequestedPause(false)
     }
   );
   const _onOverlayRequestedPause = _createOverlayCallback(
     'onOverlayRequestedPause',
     props,
     () => {
-      setVideoPaused(true);
+      onOverlayRequestedPause && onOverlayRequestedPause(true)
     }
   );
 
@@ -275,76 +272,20 @@ const _updateOverlayPlayingState = ( )=> {
   const _onCurrentContent = _createOverlayCallback('onCurrentContent', props);
   const _onCurrentMenuPage = _createOverlayCallback('onCurrentMenuPage', props);
 
-  //Video Event Callback
 
-  const _onAudioBecomingNoisy = _createVideoCallback(
-    'onAudioBecomingNoisy',
-    props
-  );
-  const _onBandwidthUpdate = _createVideoCallback('onBandwidthUpdate', props);
-
-  const _onEnd = _createVideoCallback('onEnd', props);
-  const _onExternalPlaybackChange = _createVideoCallback(
-    'onExternalPlaybackChange',
-    props
-  );
-  const _onFullscreenPlayerWillPresent = _createVideoCallback(
-    'onFullscreenPlayerWillPresent',
-    props
-  );
-  const _onFullscreenPlayerDidPresent = _createVideoCallback(
-    'onFullscreenPlayerDidPresent',
-    props
-  );
-  const _onFullscreenPlayerWillDismiss = _createVideoCallback(
-    'onFullscreenPlayerWillDismiss',
-    props
-  );
-  const _onFullscreenPlayerDidDismiss = _createVideoCallback(
-    'onFullscreenPlayerDidDismiss',
-    props
-  );
-  const _onLoad = _createVideoCallback(
-    'onLoad',
-    props,
-    (payload: OnLoadData) => {
-      setVideoDuration(payload.duration);
+  useEffect(() => {
+    if(Math.round(currentTime) -  Math.round(expectedTime) > 1 ||  Math.round(expectedTime) -  Math.round(currentTime) > 1) {
+      _updateOverlayPlayingState()
     }
-  );
-  const _onPlaybackResume = _createVideoCallback('onPlaybackResume', props);
-  const _onLoadStart = _createVideoCallback('onLoadStart', props);
-  const _onReadyForDisplay = _createVideoCallback('onReadyForDisplay', props);
-  const _onPictureInPictureStatusChanged = _createVideoCallback(
-    'onPictureInPictureStatusChanged',
-    props
-  );
-
-  const _onPlaybackRateChange = _createVideoCallback(
-    'onPlaybackRateChange',
-    props,
-    ({isPlaying}) => {
-      setIsVideoPlaying(isPlaying);
-      if(isPlaying) _onPlaybackResume(props)
-    }
-  );
-
-  const _onProgress = _createVideoCallback('onProgress', props, (payload) => {
-    setCurrentTime(payload.currentTime);
-  });
-  const _onSeek = _createVideoCallback('onSeek', props, () => {
-    if (isVideoPlaying) {
-      _updateOverlayPlayingState();
-    }
-  });
-  const _onRestoreUserInterfaceForPictureInPictureStop = _createVideoCallback(
-    'onRestoreUserInterfaceForPictureInPictureStop',
-    props
-  );
-  const _onTimedMetadata = _createVideoCallback('onTimedMetadata', props);
+    setExpectedTime(currentTime)
+  }, [currentTime])
+  
 
   useEffect(() => {
     setIsFullscreen(width > height);
   }, [width, height]);
+
+  
   useEffect(() => {
     if (Platform.OS === 'android') {
       _callNativeFunction($bridge.current, NativeFunctions.setup, [
@@ -370,59 +311,36 @@ const _updateOverlayPlayingState = ( )=> {
       KeyEvent.removeKeyDownListener();
     };
   }, []);
+
+  const clonedChild = useMemo(() => {
+    return React.cloneElement(children as ReactElement, {
+     style: styles.full
+    });
+  }, [children])
  
  const onLayout = useCallback(
     (event: { nativeEvent: { layout: { width: number; height: number, x: number, y: number } } }) => {
       const { width, height } = event.nativeEvent.layout;
       setAspectRatio(width / height)
     },
+
     [isFullscreen],
+    
   )
-//   const handleProgress  = (progress: {
-//     currentTime: number;
-//     playableDuration: number;
-//     seekableDuration: number;
-// }) => {
-//   setCurrentTime(progress.currentTime);
-//     if(progress.currentTime < currentTime - 10) {
-//         _updateOverlayPlayingState()
-//     }
-//   }
+
+  useEffect(() => {
+    onOverlayRequestedFullScreen && onOverlayRequestedFullScreen(isFullscreen)
+  }, [isFullscreen])
+  
+
   return (
     <SafeAreaView style={[styles.container, containerStyle && containerStyle]}>
      <View ref={$video} onLayout={onLayout} style={[isFullscreen ? styles.video : styles.videoMinimal, videoStyle && videoStyle ]}>
-         <Video
-         style={styles.full}
-         source={source || channelVideo}
-         paused={videoPaused || false}
-         controls={controls || true}
-         muted={muted || false}
-         resizeMode={resizeMode || isFullscreen ? 'cover' : 'contain' }
-         onEnd={_onEnd}
-         onSeek={_onSeek}
-         onLoad={_onLoad}
-         progressUpdateInterval={1000}
-         onProgress={_onProgress}
-         onLoadStart={_onLoadStart}
-         onTimedMetadata={_onTimedMetadata}
-         onReadyForDisplay={_onReadyForDisplay}
-         onBandwidthUpdate={_onBandwidthUpdate}
-         onPlaybackStateChanged={_onPlaybackRateChange}
-         onAudioBecomingNoisy={_onAudioBecomingNoisy}
-         onExternalPlaybackChange={_onExternalPlaybackChange}
-         onFullscreenPlayerWillPresent={_onFullscreenPlayerWillPresent}
-         onFullscreenPlayerDidPresent={_onFullscreenPlayerDidPresent}
-         onFullscreenPlayerWillDismiss={_onFullscreenPlayerWillDismiss}
-         onFullscreenPlayerDidDismiss={_onFullscreenPlayerDidDismiss}
-         onPictureInPictureStatusChanged={_onPictureInPictureStatusChanged}
-         onRestoreUserInterfaceForPictureInPictureStop={
-           _onRestoreUserInterfaceForPictureInPictureStop
-         }
-       />      
+      {clonedChild} 
      </View>
       <ITGOverlayView
         style={[isFullscreen ? styles.fullOverlay : Platform.OS === 'android' ? androidStyles.overlay : iosStyles.overlay]}
-        accountId={accountId} 
+        accountId={accountId}
         channelSlug={channelSlug}
         secondaryChannelSlug={secondaryChannelSlug}
         language={language}
@@ -439,11 +357,9 @@ const _updateOverlayPlayingState = ( )=> {
         ref={$bridge}
         onOverlayRequestedVideoTime={_onOverlayRequestedVideoTime}
         onOverlayDidLoadChannelInfo={(props) => {
-          _onOverlayDidLoadChannelInfo(props)
-          setChannelVideo({
-            uri: props?.nativeEvent?.videoUrl
-          })
-        }}
+          _onOverlayDidLoadChannelInfo(props);
+          onOverlayDidLoadChannelInfo && onOverlayDidLoadChannelInfo(props?.nativeEvent?.videoUrl);
+        } }
         onOverlayRequestedPause={_onOverlayRequestedPause}
         onOverlayRequestedPlay={_onOverlayRequestedPlay}
         onOverlayRequestedFocus={_onOverlayRequestedFocus}
@@ -464,8 +380,7 @@ const _updateOverlayPlayingState = ( )=> {
         onIsDisplayingSidebar={_onIsDisplayingSidebar}
         onIsMenuVisible={_onIsMenuVisible}
         onCurrentContent={_onCurrentContent}
-        onCurrentMenuPage={_onCurrentMenuPage}
-      />
+        onCurrentMenuPage={_onCurrentMenuPage} currentTime={0} videoPlaybackState={false} videoDuration={0}      />
     </SafeAreaView>
   );
 });

@@ -75,7 +75,6 @@
     "react-native": "0.72.5",
     "react-native-builder-bob": "^0.20.0",
     "react-native-keyevent": "^0.3.1",
-    "react-native-video": "6.0.0-beta.4",
     "release-it": "^15.0.0",
     "turbo": "^1.10.7",
     "typescript": "^5.0.2"
@@ -86,8 +85,7 @@
   "peerDependencies": {
     "react": "*",
     "react-native": "*",
-    "react-native-vector-icons": "*",
-    "react-native-video": "*"
+    "react-native-vector-icons": "*"
   },
   "packageManager": "yarn@3.6.1",
   "engines": {

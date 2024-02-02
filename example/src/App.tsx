@@ -2,10 +2,16 @@ import * as React from 'react';
 
 import { StyleSheet, View } from 'react-native';
 import { ITGVideoOverlay, type ITGOverlayRef } from 'itg-react-native';
-import Video from 'react-native-video';
+import Video, { type VideoRef } from 'react-native-video';
 
 export default function App() {
-  const overlayRef = React.useRef(null);
+  const overlayRef = React.useRef<ITGOverlayRef>(null);
+  const videoRef = React.useRef<VideoRef>(null);
+  const [channelVideo, setChannelVideo] = React.useState('VideoUrl')
+  const [isFullscreen, setIsFullscreen] = React.useState(false)
+  const [videoState, setVideoState] = React.useState(false)
+  const [currentTime, setCurrentTime] = React.useState(0)
+  const [videoDuration, setVideoDuration] = React.useState(0)
   return (
    <View style={{flex:1}}>
 <ITGVideoOverlay
@@ -15,9 +21,30 @@ export default function App() {
         environment={'dev'}
         paused={false}
         muted={false}
-        controls={true}/>
-      
-
+        onOverlayDidLoadChannelInfo={(videoUrl) => setChannelVideo(videoUrl)}
+        controls={true}
+        onOverlayRequestedPause={(isPaused) => isPaused ?  videoRef.current?.pause() : videoRef.current?.resume()}
+        currentTime={currentTime}
+        videoPlaybackState={videoState}
+        videoDuration={videoDuration}
+        onOverlayRequestedFullScreen={(payload) => setIsFullscreen(payload)}
+        >
+            <Video
+            controls
+            source={{
+              uri: channelVideo
+            }}
+            ref={videoRef}
+            resizeMode={isFullscreen ? 'cover' : 'contain'}
+            onLoad={(data) => {
+              setVideoDuration(data.duration)
+            }}
+            progressUpdateInterval={1000}
+            onProgress={({currentTime}) => setCurrentTime(currentTime)}
+            onPlaybackStateChanged={({isPlaying}) => setVideoState(isPlaying)}
+            onSeek={(data) => setCurrentTime(data.seekTime)}
+          />  
+          </ITGVideoOverlay>
    </View>
 
   );

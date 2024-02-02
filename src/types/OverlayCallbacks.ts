@@ -25,4 +25,5 @@ export interface OverlayCallbacks {
   onIsMenuVisible?: OverlayCallback;
   onCurrentContent?: OverlayCallback;
   onCurrentMenuPage?: OverlayCallback;
+  onOverlayRequestedFullScreen?: OverlayCallback
 }
