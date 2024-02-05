@@ -35,6 +35,11 @@ import AVFoundation
       forReactTag: node
     ) as! ITGRNOverlayView
   }
+    func getVideoView(viewID: NSNumber) -> UIView {
+      return self.bridge.uiManager.view(
+        forReactTag: viewID
+      ) as UIView
+    }
   
   @objc func openMenu(_ node: NSNumber) {
     DispatchQueue.main.async {
@@ -164,7 +169,8 @@ import AVFoundation
   
   @objc func setup(_ node: NSNumber, viewID: NSNumber) {
     DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
-      self.getOverlay(node: node).start(delegate: self)
+        let videoView = self.getVideoView(viewID: viewID)
+        self.getOverlay(node: node).start(delegate: self, videoView: videoView)
     }
   }
   

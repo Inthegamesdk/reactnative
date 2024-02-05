@@ -12,6 +12,7 @@ export default function App() {
   const [videoState, setVideoState] = React.useState(false)
   const [currentTime, setCurrentTime] = React.useState(0)
   const [videoDuration, setVideoDuration] = React.useState(0)
+  
   return (
    <View style={{flex:1}}>
 <ITGVideoOverlay
@@ -30,9 +31,10 @@ export default function App() {
         onOverlayRequestedFullScreen={(payload) => setIsFullscreen(payload)}
         >
             <Video
+
             controls
             source={{
-              uri: channelVideo
+              uri: 'https://media.inthegame.io/integration-assets/superdemo-720p.mp4'
             }}
             ref={videoRef}
             resizeMode={isFullscreen ? 'cover' : 'contain'}
