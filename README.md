@@ -1,5 +1,7 @@
 # itg-react-native
 
+# IOS, tvOS currently is not working
+
 ITGOverlay for react-native
 
 ## Installation
