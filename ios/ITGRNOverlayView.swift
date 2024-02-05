@@ -82,7 +82,7 @@ import InthegametviOS
     adsMetadata = val
   }
   
-  public func start(delegate: ITGOverlayDelegate?) {
+    public func start(delegate: ITGOverlayDelegate?, videoView: UIView) {
     if !didLoad {
       didLoad = true
       load(channelSlug: self.channelSlug,
@@ -94,7 +94,8 @@ import InthegametviOS
            foreignId: self.foreignId,
            userName: self.userName,
            userAvatar: self.userAvatar,
-           userRole: self.userIsGuest ? .guest : .user, videoView: nil)
+           userRole: self.userIsGuest ? .guest : .user,
+           videoView: videoView)
     }
   }
   

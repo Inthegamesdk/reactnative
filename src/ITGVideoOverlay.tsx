@@ -152,13 +152,37 @@ const ITGVideoOverlay = React.forwardRef((props: ITGVideoOverlayInterface, ref:R
     setLiveMode,
   }));
 
-
-
-
   useEffect(() => {
+    if (Platform.OS === 'android') {
+      _callNativeFunction($bridge.current, NativeFunctions.setup, [
+        findNodeHandle($bridge.current),
+        findNodeHandle($video.current),
+      ]);
+      KeyEvent.onKeyDownListener((keyEvent: KeyEventProps) => {
+        _callNativeFunction(
+          $bridge.current,
+          'receivedKeyEvent',
+          keyEvent.keyCode
+        );
+      });
+    } else if (Platform.OS === 'ios') {
+      _callNativeFunction($bridge.current, NativeFunctions.setup, [
+        findNodeHandle($video.current),
+      ]);
+    }
 
-    _updateOverlayPlayingState()
-  }, [videoPlaybackState, videoDuration])
+    BackHandler.addEventListener('hardwareBackPress', _backAction);
+    return () => {
+      BackHandler.removeEventListener('hardwareBackPress', _backAction);
+      KeyEvent.removeKeyDownListener();
+    };
+  }, []);
+
+
+  // useEffect(() => {
+  //   console.log('here')
+  //   _updateOverlayPlayingState()
+  // }, [videoPlaybackState, videoDuration])
   
 
 const _updateOverlayPlayingState = ()=> {
@@ -166,7 +190,7 @@ const _updateOverlayPlayingState = ()=> {
     ? NativeFunctions.videoPlaying
     : NativeFunctions.videoPaused;
   if (Platform.OS === 'ios') {
-    _callNativeFunction($bridge.current, methodName, currentTime);
+    _callNativeFunction($bridge.current, methodName, Math.round(currentTime));
   } else {
     _callNativeFunction($bridge.current, methodName, [
       currentTime,
@@ -274,6 +298,7 @@ const _updateOverlayPlayingState = ()=> {
 
 
   useEffect(() => {
+
     if(Math.round(currentTime) -  Math.round(expectedTime) > 1 ||  Math.round(expectedTime) -  Math.round(currentTime) > 1) {
       _updateOverlayPlayingState()
     }
@@ -286,31 +311,7 @@ const _updateOverlayPlayingState = ()=> {
   }, [width, height]);
 
   
-  useEffect(() => {
-    if (Platform.OS === 'android') {
-      _callNativeFunction($bridge.current, NativeFunctions.setup, [
-        findNodeHandle($bridge.current),
-        findNodeHandle($video.current),
-      ]);
-      KeyEvent.onKeyDownListener((keyEvent: KeyEventProps) => {
-        _callNativeFunction(
-          $bridge.current,
-          'receivedKeyEvent',
-          keyEvent.keyCode
-        );
-      });
-    } else if (Platform.OS === 'ios') {
-      _callNativeFunction($bridge.current, NativeFunctions.setup, [
-        findNodeHandle($bridge.current),
-      ]);
-    }
-
-    BackHandler.addEventListener('hardwareBackPress', _backAction);
-    return () => {
-      BackHandler.removeEventListener('hardwareBackPress', _backAction);
-      KeyEvent.removeKeyDownListener();
-    };
-  }, []);
+ 
 
   const clonedChild = useMemo(() => {
     return React.cloneElement(children as ReactElement, {
