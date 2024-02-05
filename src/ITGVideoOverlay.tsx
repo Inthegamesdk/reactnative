@@ -22,7 +22,7 @@ import {
   type ITGOverlayRef,
 } from './types';
 import type { StyleProp } from 'react-native';
-import Video, { type OnLoadData } from 'react-native-video';
+
 
 
 const COMPONENT_NAME = 'ITGOverlay';
