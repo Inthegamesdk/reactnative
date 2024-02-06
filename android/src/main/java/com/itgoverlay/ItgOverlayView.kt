@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.children
 import androidx.fragment.app.Fragment
+import com.itgoverlay.RNUtils.exoPlayerViewIfAny
 import com.syncedapps.inthegametv.ITGOverlayView
 import com.syncedapps.inthegametv.ITGSettings
 
@@ -39,7 +41,15 @@ class ITGOverlayFragment: Fragment() {
         view.blockSidebar = settings.blockSidebar
         val videoView : View? = tempManagerRef?.videoID?.let { requireActivity().findViewById(it) }
         videoView?.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT,)
-        view.attachVideoView(videoView)
+        view.attachVideoView(
+                if (videoView is ViewGroup) {
+                    videoView
+                            .children
+                            .toList()
+                            .firstOrNull()
+                            ?.exoPlayerViewIfAny
+                } else videoView
+        )
         overlay = view
 
         view.listener = tempManagerRef
