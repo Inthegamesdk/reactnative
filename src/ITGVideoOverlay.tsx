@@ -386,7 +386,7 @@ const _updateOverlayPlayingState = ()=> {
         onIsDisplayingSidebar={_onIsDisplayingSidebar}
         onIsMenuVisible={_onIsMenuVisible}
         onCurrentContent={_onCurrentContent}
-        onCurrentMenuPage={_onCurrentMenuPage} currentTime={0} videoPlaybackState={false} videoDuration={0}      />
+        onCurrentMenuPage={_onCurrentMenuPage} currentTime={0} videoPlaybackState={false} videoDuration={0}/>
     </View>
   );
 });
@@ -401,14 +401,14 @@ const styles = StyleSheet.create({
       width: '100%',
       height: '100%',
     flex: 1,
-    zIndex: 1,
+    zIndex: 0.5,
   },
   videoMinimal: {
     width: '100%',
     aspectRatio: 16/9,
   },
   fullOverlay: {
-    zIndex: 2,
+    zIndex: 3,
     ...StyleSheet.absoluteFillObject,
   },
   full: {width: '100%', height: '100%'}
