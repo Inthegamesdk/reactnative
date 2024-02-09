@@ -11,9 +11,9 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		14390F4F2BA02874FE04C6EA /* libPods-itgOverlayExample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D9F3FC815A04DEE2F454383B /* libPods-itgOverlayExample.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		AEFD01215D1D8043375F58B0 /* libPods-itgOverlayExample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6211EAB0E338E6A459EF248F /* libPods-itgOverlayExample.a */; };
-		B67D48A5809C5A251A16F100 /* libPods-itgOverlayExample-itgOverlayExampleTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BB87980F3332088CB175E4FC /* libPods-itgOverlayExample-itgOverlayExampleTests.a */; };
+		E28481490F37F0C217C69352 /* libPods-itgOverlayExample-itgOverlayExampleTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E2350F01E746B7F72B3CF8BA /* libPods-itgOverlayExample-itgOverlayExampleTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,19 +30,19 @@
 		00E356EE1AD99517003FC87E /* itgOverlayExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = itgOverlayExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* itgOverlayExampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = itgOverlayExampleTests.m; sourceTree = "<group>"; };
-		10B1BDC0152D8B279D56E519 /* Pods-itgOverlayExample-itgOverlayExampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-itgOverlayExample-itgOverlayExampleTests.debug.xcconfig"; path = "Target Support Files/Pods-itgOverlayExample-itgOverlayExampleTests/Pods-itgOverlayExample-itgOverlayExampleTests.debug.xcconfig"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* itgOverlayExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = itgOverlayExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = itgOverlayExample/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = itgOverlayExample/AppDelegate.mm; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = itgOverlayExample/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = itgOverlayExample/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = itgOverlayExample/main.m; sourceTree = "<group>"; };
-		1F53EF35DBF8C9E21BE3495A /* Pods-itgOverlayExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-itgOverlayExample.debug.xcconfig"; path = "Target Support Files/Pods-itgOverlayExample/Pods-itgOverlayExample.debug.xcconfig"; sourceTree = "<group>"; };
-		2BE8D91C64024E9813F5AF7B /* Pods-itgOverlayExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-itgOverlayExample.release.xcconfig"; path = "Target Support Files/Pods-itgOverlayExample/Pods-itgOverlayExample.release.xcconfig"; sourceTree = "<group>"; };
-		6211EAB0E338E6A459EF248F /* libPods-itgOverlayExample.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-itgOverlayExample.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		20342096E11128F2F1D83BCA /* Pods-itgOverlayExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-itgOverlayExample.release.xcconfig"; path = "Target Support Files/Pods-itgOverlayExample/Pods-itgOverlayExample.release.xcconfig"; sourceTree = "<group>"; };
+		460702C040DE672D39A529E7 /* Pods-itgOverlayExample-itgOverlayExampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-itgOverlayExample-itgOverlayExampleTests.debug.xcconfig"; path = "Target Support Files/Pods-itgOverlayExample-itgOverlayExampleTests/Pods-itgOverlayExample-itgOverlayExampleTests.debug.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = itgOverlayExample/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		BB87980F3332088CB175E4FC /* libPods-itgOverlayExample-itgOverlayExampleTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-itgOverlayExample-itgOverlayExampleTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D9FDC43B819EB77FC1EFB252 /* Pods-itgOverlayExample-itgOverlayExampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-itgOverlayExample-itgOverlayExampleTests.release.xcconfig"; path = "Target Support Files/Pods-itgOverlayExample-itgOverlayExampleTests/Pods-itgOverlayExample-itgOverlayExampleTests.release.xcconfig"; sourceTree = "<group>"; };
+		8C2EF81B613BA80301217081 /* Pods-itgOverlayExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-itgOverlayExample.debug.xcconfig"; path = "Target Support Files/Pods-itgOverlayExample/Pods-itgOverlayExample.debug.xcconfig"; sourceTree = "<group>"; };
+		BBD524B84A9F73F00996E4B8 /* Pods-itgOverlayExample-itgOverlayExampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-itgOverlayExample-itgOverlayExampleTests.release.xcconfig"; path = "Target Support Files/Pods-itgOverlayExample-itgOverlayExampleTests/Pods-itgOverlayExample-itgOverlayExampleTests.release.xcconfig"; sourceTree = "<group>"; };
+		D9F3FC815A04DEE2F454383B /* libPods-itgOverlayExample.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-itgOverlayExample.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E2350F01E746B7F72B3CF8BA /* libPods-itgOverlayExample-itgOverlayExampleTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-itgOverlayExample-itgOverlayExampleTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -51,7 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B67D48A5809C5A251A16F100 /* libPods-itgOverlayExample-itgOverlayExampleTests.a in Frameworks */,
+				E28481490F37F0C217C69352 /* libPods-itgOverlayExample-itgOverlayExampleTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,7 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AEFD01215D1D8043375F58B0 /* libPods-itgOverlayExample.a in Frameworks */,
+				14390F4F2BA02874FE04C6EA /* libPods-itgOverlayExample.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -100,8 +100,8 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				6211EAB0E338E6A459EF248F /* libPods-itgOverlayExample.a */,
-				BB87980F3332088CB175E4FC /* libPods-itgOverlayExample-itgOverlayExampleTests.a */,
+				D9F3FC815A04DEE2F454383B /* libPods-itgOverlayExample.a */,
+				E2350F01E746B7F72B3CF8BA /* libPods-itgOverlayExample-itgOverlayExampleTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -140,10 +140,10 @@
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				1F53EF35DBF8C9E21BE3495A /* Pods-itgOverlayExample.debug.xcconfig */,
-				2BE8D91C64024E9813F5AF7B /* Pods-itgOverlayExample.release.xcconfig */,
-				10B1BDC0152D8B279D56E519 /* Pods-itgOverlayExample-itgOverlayExampleTests.debug.xcconfig */,
-				D9FDC43B819EB77FC1EFB252 /* Pods-itgOverlayExample-itgOverlayExampleTests.release.xcconfig */,
+				8C2EF81B613BA80301217081 /* Pods-itgOverlayExample.debug.xcconfig */,
+				20342096E11128F2F1D83BCA /* Pods-itgOverlayExample.release.xcconfig */,
+				460702C040DE672D39A529E7 /* Pods-itgOverlayExample-itgOverlayExampleTests.debug.xcconfig */,
+				BBD524B84A9F73F00996E4B8 /* Pods-itgOverlayExample-itgOverlayExampleTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -155,12 +155,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "itgOverlayExampleTests" */;
 			buildPhases = (
-				8BB085612D362D5E50A8AC1A /* [CP] Check Pods Manifest.lock */,
+				5AB9FFBF92CCFC90505A5708 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				24597B596724D929E1C6D253 /* [CP] Embed Pods Frameworks */,
-				F2E7F49A8F850099C96BA69B /* [CP] Copy Pods Resources */,
+				CF19784B72610B22B385161D /* [CP] Embed Pods Frameworks */,
+				CE0F5C45DE0CEF6D033337F5 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -176,14 +176,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "itgOverlayExample" */;
 			buildPhases = (
-				68435BD8B87CF94F41AE7F01 /* [CP] Check Pods Manifest.lock */,
+				FB7A4E2D049C4A5947F64E6B /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				FEE09C654688D8EE973F62DA /* [CP] Embed Pods Frameworks */,
-				57D0E14FAFCAF0754056A414 /* [CP] Copy Pods Resources */,
+				179C772B575FCCA7A405AD04 /* [CP] Embed Pods Frameworks */,
+				53EC6E9372C74427D40A01BB /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -266,24 +266,24 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nWITH_ENVIRONMENT=\"../node_modules/react-native/scripts/xcode/with-environment.sh\"\nREACT_NATIVE_XCODE=\"../node_modules/react-native/scripts/react-native-xcode.sh\"\n\n/bin/sh -c \"$WITH_ENVIRONMENT $REACT_NATIVE_XCODE\"\n";
 		};
-		24597B596724D929E1C6D253 /* [CP] Embed Pods Frameworks */ = {
+		179C772B575FCCA7A405AD04 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-itgOverlayExample-itgOverlayExampleTests/Pods-itgOverlayExample-itgOverlayExampleTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-itgOverlayExample/Pods-itgOverlayExample-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-itgOverlayExample-itgOverlayExampleTests/Pods-itgOverlayExample-itgOverlayExampleTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-itgOverlayExample/Pods-itgOverlayExample-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-itgOverlayExample-itgOverlayExampleTests/Pods-itgOverlayExample-itgOverlayExampleTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-itgOverlayExample/Pods-itgOverlayExample-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		57D0E14FAFCAF0754056A414 /* [CP] Copy Pods Resources */ = {
+		53EC6E9372C74427D40A01BB /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -300,29 +300,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-itgOverlayExample/Pods-itgOverlayExample-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		68435BD8B87CF94F41AE7F01 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-itgOverlayExample-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		8BB085612D362D5E50A8AC1A /* [CP] Check Pods Manifest.lock */ = {
+		5AB9FFBF92CCFC90505A5708 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -344,7 +322,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F2E7F49A8F850099C96BA69B /* [CP] Copy Pods Resources */ = {
+		CE0F5C45DE0CEF6D033337F5 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -359,6 +337,45 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-itgOverlayExample-itgOverlayExampleTests/Pods-itgOverlayExample-itgOverlayExampleTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CF19784B72610B22B385161D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-itgOverlayExample-itgOverlayExampleTests/Pods-itgOverlayExample-itgOverlayExampleTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-itgOverlayExample-itgOverlayExampleTests/Pods-itgOverlayExample-itgOverlayExampleTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-itgOverlayExample-itgOverlayExampleTests/Pods-itgOverlayExample-itgOverlayExampleTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FB7A4E2D049C4A5947F64E6B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-itgOverlayExample-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {
@@ -378,23 +395,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "export RCT_METRO_PORT=\"${RCT_METRO_PORT:=8081}\"\necho \"export RCT_METRO_PORT=${RCT_METRO_PORT}\" > \"${SRCROOT}/../node_modules/react-native/scripts/.packager.env\"\nif [ -z \"${RCT_NO_LAUNCH_PACKAGER+xxx}\" ] ; then\n  if nc -w 5 -z localhost ${RCT_METRO_PORT} ; then\n    if ! curl -s \"http://localhost:${RCT_METRO_PORT}/status\" | grep -q \"packager-status:running\" ; then\n      echo \"Port ${RCT_METRO_PORT} already in use, packager is either not running or not running correctly\"\n      exit 2\n    fi\n  else\n    open \"$SRCROOT/../node_modules/react-native/scripts/launchPackager.command\" || echo \"Can't start packager automatically\"\n  fi\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		FEE09C654688D8EE973F62DA /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-itgOverlayExample/Pods-itgOverlayExample-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-itgOverlayExample/Pods-itgOverlayExample-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-itgOverlayExample/Pods-itgOverlayExample-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -430,7 +430,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 10B1BDC0152D8B279D56E519 /* Pods-itgOverlayExample-itgOverlayExampleTests.debug.xcconfig */;
+			baseConfigurationReference = 460702C040DE672D39A529E7 /* Pods-itgOverlayExample-itgOverlayExampleTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -457,7 +457,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D9FDC43B819EB77FC1EFB252 /* Pods-itgOverlayExample-itgOverlayExampleTests.release.xcconfig */;
+			baseConfigurationReference = BBD524B84A9F73F00996E4B8 /* Pods-itgOverlayExample-itgOverlayExampleTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
@@ -481,7 +481,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1F53EF35DBF8C9E21BE3495A /* Pods-itgOverlayExample.debug.xcconfig */;
+			baseConfigurationReference = 8C2EF81B613BA80301217081 /* Pods-itgOverlayExample.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -517,7 +517,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2BE8D91C64024E9813F5AF7B /* Pods-itgOverlayExample.release.xcconfig */;
+			baseConfigurationReference = 20342096E11128F2F1D83BCA /* Pods-itgOverlayExample.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;

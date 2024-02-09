@@ -179,10 +179,6 @@ const ITGVideoOverlay = React.forwardRef((props: ITGVideoOverlayInterface, ref:R
   }, []);
 
 
-  useEffect(() => {
-    _updateOverlayPlayingState()
-  }, [videoPlaybackState, videoDuration])
-  
 
 const _updateOverlayPlayingState = ()=> {
   const methodName = videoPlaybackState
@@ -306,6 +302,16 @@ const _updateOverlayPlayingState = ()=> {
   
 
   useEffect(() => {
+  _updateOverlayPlayingState()
+  }, [ videoDuration])
+
+  useEffect(() => {
+   _updateOverlayPlayingState()
+  }, [videoPlaybackState])
+  
+  
+
+  useEffect(() => {
     setIsFullscreen(width > height);
   }, [width, height]);
 
@@ -334,12 +340,12 @@ const _updateOverlayPlayingState = ()=> {
   
 
   return (
-    <SafeAreaView style={[styles.container, containerStyle && containerStyle]}>
+    <View style={[styles.container, containerStyle && containerStyle]}>
      <View ref={$video} onLayout={onLayout} style={[isFullscreen ? styles.video : styles.videoMinimal, videoStyle && videoStyle ]}>
       {clonedChild} 
      </View>
       <ITGOverlayView
-        style={[isFullscreen ? styles.fullOverlay : Platform.OS === 'android' ? androidStyles.overlay : iosStyles.overlay]}
+        style={[isFullscreen ? styles.fullOverlay : overlayStyles.overlay]}
         accountId={accountId}
         channelSlug={channelSlug}
         secondaryChannelSlug={secondaryChannelSlug}
@@ -381,7 +387,7 @@ const _updateOverlayPlayingState = ()=> {
         onIsMenuVisible={_onIsMenuVisible}
         onCurrentContent={_onCurrentContent}
         onCurrentMenuPage={_onCurrentMenuPage} currentTime={0} videoPlaybackState={false} videoDuration={0}      />
-    </SafeAreaView>
+    </View>
   );
 });
 
@@ -408,15 +414,9 @@ const styles = StyleSheet.create({
   full: {width: '100%', height: '100%'}
 });
 
-const androidStyles = StyleSheet.create({
+const overlayStyles = StyleSheet.create({
   overlay: {
     zIndex: 2,
     ...StyleSheet.absoluteFillObject,
   },
-})
-const iosStyles = StyleSheet.create({
-  overlay: {
-    zIndex: 2,
-    flex: 1,
-  }
 })

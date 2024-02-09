@@ -74,7 +74,7 @@ PODS:
     - hermes-engine/Pre-built (= 0.72.5)
   - hermes-engine/Pre-built (0.72.5)
   - Inthegametv (2.3.0)
-  - itg-react-native (0.1.14):
+  - itg-react-native (0.1.15):
     - Inthegametv
     - RCT-Folly (= 2021.07.22.00)
     - React-Core
@@ -705,7 +705,7 @@ SPEC CHECKSUMS:
   glog: 04b94705f318337d7ead9e6d17c019bd9b1f6b1b
   hermes-engine: f6cf92a471053245614d9d8097736f6337d5b86c
   Inthegametv: 04f62879ca73c5dc108e4271bb0719f1bea0edc6
-  itg-react-native: 6d75498b3b105fe6657355bfc3b3731e32bb30b4
+  itg-react-native: 77f958b990203efeb3228d7632bbc5b637fc9197
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   OpenSSL-Universal: ebc357f1e6bc71fa463ccb2fe676756aff50e88c
   PromisesObjC: c50d2056b5253dadbd6c2bea79b0674bd5a52fa4
