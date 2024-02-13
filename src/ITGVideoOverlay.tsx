@@ -302,8 +302,8 @@ const _updateOverlayPlayingState = ()=> {
   
 
   useEffect(() => {
-  _updateOverlayPlayingState()
-  }, [ videoDuration])
+  Platform.OS === 'android' && _updateOverlayPlayingState()
+  }, [videoDuration])
 
   useEffect(() => {
    _updateOverlayPlayingState()

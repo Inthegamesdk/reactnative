@@ -97,13 +97,13 @@ import AVFoundation
   
   @objc func videoPlaying(_ node: NSNumber, time: NSNumber) {
     DispatchQueue.main.async {
-      self.getOverlay(node: node).videoPlaying(time: time.doubleValue/1000)
+      self.getOverlay(node: node).videoPlaying(time: time.doubleValue)
     }
   }
   
   @objc func videoPaused(_ node: NSNumber, time: NSNumber) {
     DispatchQueue.main.async {
-      self.getOverlay(node: node).videoPaused(time: time.doubleValue/1000)
+      self.getOverlay(node: node).videoPaused(time: time.doubleValue)
     }
   }
   
