@@ -146,12 +146,12 @@ class ITGOverlayManager : ViewGroupManager<FrameLayout>, ITGOverlayView.ITGOverl
             "closeChat" -> overlayView?.closeChat()
             "closeAll" -> overlayView?.closeAll()
             "videoPlaying" -> {
-                overlayView?.videoPlaying(((args?.getInt(0)  ?: 0) * 1000).toLong())
+                overlayView?.videoPlaying(((args?.getInt(0)  ?: 0) * 1000).toLong(), initiatedBySDK = false)
                 duration = args.optDuration()
                 aspectRatio = args.optAspectRatio()
             }
             "videoPaused" -> {
-                overlayView?.videoPaused(((args?.getInt(0) ?: 0) * 1000).toLong())
+                overlayView?.videoPaused(((args?.getInt(0) ?: 0) * 1000).toLong(), initiatedBySDK = false, playWhenReady = false)
                 duration = args.optDuration()
                 aspectRatio = args.optAspectRatio()
             }
