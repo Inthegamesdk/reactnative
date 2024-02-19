@@ -12,6 +12,7 @@ export interface OverlayProps {
   userAvatar?: string;
   videoResolution?: string;
   blockMenu?: boolean;
+  blockAll?: boolean;
   blockNotifications?: boolean;
   blockSlip?: boolean;
   blockSidebar?: boolean;

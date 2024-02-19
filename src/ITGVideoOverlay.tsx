@@ -105,6 +105,7 @@ const ITGVideoOverlay = React.forwardRef((props: ITGVideoOverlayInterface, ref:R
     userAvatar,
     videoResolution,
     blockMenu,
+    blockAll,
     blockNotifications,
     blockSlip,
     blockSidebar,
@@ -345,6 +346,7 @@ const _updateOverlayPlayingState = ()=> {
       {clonedChild} 
      </View>
       <ITGOverlayView 
+        
         style={[isFullscreen ? styles.fullOverlay : overlayStyles.overlay]}
         accountId={accountId}
         channelSlug={channelSlug}
@@ -356,6 +358,7 @@ const _updateOverlayPlayingState = ()=> {
         userAvatar={userAvatar}
         videoResolution={videoResolution}
         blockMenu={blockMenu}
+        blockAll={blockAll}
         blockNotifications={blockNotifications}
         blockSlip={blockSlip}
         blockSidebar={blockSidebar}

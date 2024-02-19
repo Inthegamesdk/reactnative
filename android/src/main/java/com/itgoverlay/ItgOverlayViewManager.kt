@@ -27,6 +27,7 @@ data class ITGOverlaySettings(
     var foreignId: String? = null,
     var userName: String? = null,
     var blockMenu: Boolean = false,
+    var blockAll: Boolean = false,
     var blockNotifications: Boolean = false,
     var blockSlip: Boolean = false,
     var blockSidebar: Boolean = false,
@@ -101,6 +102,11 @@ class ITGOverlayManager : ViewGroupManager<FrameLayout>, ITGOverlayView.ITGOverl
     @ReactProp(name = "userName")
     fun setUserName(view: FrameLayout, value: String = "") {
         settings.userName = value
+    }
+
+     @ReactProp(name = "blockAll")
+    fun setBlockAll(view: FrameLayout, value: Boolean = false) {
+        settings.blockAll = value
     }
 
     @ReactProp(name = "blockMenu")

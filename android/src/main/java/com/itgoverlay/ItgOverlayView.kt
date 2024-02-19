@@ -36,6 +36,7 @@ class ITGOverlayFragment: Fragment() {
         )
 
         view.blockMenu = settings.blockMenu
+        view.blockAll = settings.blockAll
         view.blockNotifications = settings.blockNotifications
         view.blockSlip = settings.blockSlip
         view.blockSidebar = settings.blockSidebar

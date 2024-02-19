@@ -34,7 +34,7 @@ export default function App() {
 
             controls
             source={{
-              uri: 'https://media.inthegame.io/integration-assets/superdemo-720p.mp4'
+              uri: channelVideo
             }}
             ref={videoRef}
             resizeMode={isFullscreen ? 'cover' : 'contain'}

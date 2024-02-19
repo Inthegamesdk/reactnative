@@ -13,6 +13,7 @@ export interface ITGOverlayProps {
   userAvatar: string;
   videoResolution: string;
   blockMenu: boolean;
+  blockAll: boolean;
   blockNotifications: boolean;
   blockSlip: boolean;
   blockSidebar: boolean;
