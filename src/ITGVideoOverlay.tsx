@@ -344,7 +344,7 @@ const _updateOverlayPlayingState = ()=> {
      <View ref={$video} onLayout={onLayout} style={[isFullscreen ? styles.video : styles.videoMinimal, videoStyle && videoStyle ]}>
       {clonedChild} 
      </View>
-      <ITGOverlayView
+      <ITGOverlayView 
         style={[isFullscreen ? styles.fullOverlay : overlayStyles.overlay]}
         accountId={accountId}
         channelSlug={channelSlug}

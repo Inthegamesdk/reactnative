@@ -65,7 +65,10 @@ import InthegametviOS
   @objc func setBlockNotifications(_ val: Bool) {
     blockNotifications = val
   }
-  
+   @objc func setBlockAll(_ val: Bool) {
+     blockAll = val
+   }
+
   @objc func setBlockMenu(_ val: Bool) {
     blockMenu = val
   }
