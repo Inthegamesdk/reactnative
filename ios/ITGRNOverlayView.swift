@@ -89,7 +89,6 @@ import InthegametviOS
     if !didLoad {
       didLoad = true
       load(channelSlug: self.channelSlug,
-           secondaryChannelSlug: self.secondaryChannelSlug,
            accountId: self.accountId,
            environment: ITGEnvironment.init(envName: environment),
            delegate: delegate,
