@@ -1,9 +1,8 @@
 import * as React from 'react';
 
-import { StyleSheet, View } from 'react-native';
+import { SafeAreaView, StyleSheet, View } from 'react-native';
 import { ITGVideoOverlay, type ITGOverlayRef } from 'itg-react-native';
 import Video, { type VideoRef } from 'react-native-video';
-
 export default function App() {
   const overlayRef = React.useRef<ITGOverlayRef>(null);
   const videoRef = React.useRef<VideoRef>(null);
@@ -14,7 +13,7 @@ export default function App() {
   const [videoDuration, setVideoDuration] = React.useState(0)
   
   return (
-   <View style={{flex:1}}>
+   <SafeAreaView style={{flex:1}}>
 <ITGVideoOverlay
       ref={overlayRef}
         accountId={'62a73d850bcf95e08a025f82'}
@@ -45,9 +44,9 @@ export default function App() {
             onProgress={({currentTime}) => setCurrentTime(currentTime)}
             onPlaybackStateChanged={({isPlaying}) => setVideoState(isPlaying)}
             onSeek={(data) => setCurrentTime(data.seekTime)}
-          />  
+          />
           </ITGVideoOverlay>
-   </View>
+   </SafeAreaView>
 
   );
 }
