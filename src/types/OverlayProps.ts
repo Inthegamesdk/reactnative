@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import type { ViewStyle } from "react-native";
 
 export interface OverlayProps {
   children?: ReactNode
@@ -17,7 +18,4 @@ export interface OverlayProps {
   blockSlip?: boolean;
   blockSidebar?: boolean;
   injectionDelay?: number;
-  currentTime: number;
-  videoPlaybackState: boolean;
-  videoDuration: number;
 }

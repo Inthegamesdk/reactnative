@@ -1,7 +1,8 @@
+import type { ViewStyle } from 'react-native';
 import type { ITGOverlayInterface } from './ITGOverlayInterface';
 import type { ITGVideoInterface } from './ITGVideoInterface';
 
-export type ITGVideoOverlayInterface = ITGOverlayInterface & ITGVideoInterface;
+export type ITGVideoOverlayInterface = ITGOverlayInterface & ITGView;
 export interface ITGOverlayRef {
     closeMenu: () => void,
     closeAccount: () => void,
@@ -13,4 +14,12 @@ export interface ITGOverlayRef {
     openLeaderboard: () => void,
     openShop: () => void,
     setLiveMode: (enabled: boolean) => void,
+    }
+
+    export type  ITGView = {
+        videoStyle?: ViewStyle,
+        containerStyle?: ViewStyle;
+        currentTime: number;
+        videoPlaybackState: boolean
+        videoDuration:  number
     }

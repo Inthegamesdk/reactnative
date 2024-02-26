@@ -91,7 +91,7 @@ const ITGVideoOverlay = React.forwardRef((props: ITGVideoOverlayInterface, ref:R
   const { width, height } = useWindowDimensions();
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [aspectRatio, setAspectRatio] = useState(16/9)
-  const {  videoStyle, containerStyle } = props;
+  const { videoStyle, containerStyle } = props;
   const [expectedTime, setExpectedTime] = useState(1)
   const {
     children,
@@ -346,7 +346,6 @@ const _updateOverlayPlayingState = ()=> {
       {clonedChild} 
      </View>
       <ITGOverlayView 
-        
         style={[isFullscreen ? styles.fullOverlay : overlayStyles.overlay]}
         accountId={accountId}
         channelSlug={channelSlug}
@@ -389,7 +388,7 @@ const _updateOverlayPlayingState = ()=> {
         onIsDisplayingSidebar={_onIsDisplayingSidebar}
         onIsMenuVisible={_onIsMenuVisible}
         onCurrentContent={_onCurrentContent}
-        onCurrentMenuPage={_onCurrentMenuPage} currentTime={0} videoPlaybackState={false} videoDuration={0}/>
+        onCurrentMenuPage={_onCurrentMenuPage}/>
     </View>
   );
 });

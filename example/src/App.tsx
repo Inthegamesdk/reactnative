@@ -19,10 +19,7 @@ export default function App() {
         accountId={'62a73d850bcf95e08a025f82'}
         channelSlug={'rn-demo'}
         environment={'dev'}
-        paused={false}
-        muted={false}
         onOverlayDidLoadChannelInfo={(videoUrl) => setChannelVideo(videoUrl)}
-        controls={true}
         onOverlayRequestedPause={(isPaused) => isPaused ?  videoRef.current?.pause() : videoRef.current?.resume()}
         currentTime={currentTime}
         videoPlaybackState={videoState}
