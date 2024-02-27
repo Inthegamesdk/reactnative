@@ -106,27 +106,33 @@ class ITGOverlayManager : ViewGroupManager<FrameLayout>, ITGOverlayView.ITGOverl
 
      @ReactProp(name = "blockAll")
     fun setBlockAll(view: FrameLayout, value: Boolean = false) {
-        settings.blockAll = value
+         settings.blockAll = value
+         overlayView?.blockAll = value
+         overlayView?.blockSidebar = value
     }
 
     @ReactProp(name = "blockMenu")
     fun setBlockMenu(view: FrameLayout, value: Boolean = false) {
         settings.blockMenu = value
+        overlayView?.blockMenu = value
     }
 
     @ReactProp(name = "blockNotifications")
     fun setBlockNotifications(view: FrameLayout, value: Boolean = false) {
         settings.blockNotifications = value
+        overlayView?.blockNotifications = value
     }
 
     @ReactProp(name = "blockSlip")
     fun setBlockSlip(view: FrameLayout, value: Boolean = false) {
         settings.blockSlip = value
+        overlayView?.blockSlip = value
     }
 
     @ReactProp(name = "blockSidebar")
     fun setBlockSidebar(view: FrameLayout, value: Boolean = false) {
         settings.blockSidebar = value
+        overlayView?.blockSidebar = value
     }
 
     @ReactProp(name = "injectionDelay")
